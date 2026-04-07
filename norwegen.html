@@ -121,6 +121,11 @@ a.resto span{color:var(--muted)}
 
 .warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
 
+.fish-badge{background:linear-gradient(135deg,rgba(91,164,201,.15),rgba(91,164,201,.08));border:1px solid rgba(91,164,201,.3);border-radius:12px;padding:16px 20px;margin:12px 0;display:flex;gap:12px;align-items:center}
+.fish-badge .fb-icon{font-size:2rem;flex-shrink:0}
+.fish-badge .fb-text strong{color:#7cc8e8;font-size:.95rem;display:block;margin-bottom:2px}
+.fish-badge .fb-text span{color:var(--muted);font-size:.8rem;line-height:1.5}
+
 .quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
 .quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
 
@@ -207,6 +212,17 @@ footer a{color:var(--accent);text-decoration:none}
       <div class="hero-stat"><span>21</span><span>Tage</span></div>
       <div class="hero-stat"><span>2.200</span><span>Kilometer</span></div>
       <div class="hero-stat"><span>8</span><span>Stops</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- === FISHING HIGHLIGHT === -->
+<div class="container" style="padding-top:30px;padding-bottom:10px">
+  <div class="fish-badge" style="max-width:700px;margin:0 auto">
+    <span class="fb-icon">&#127907;</span>
+    <div class="fb-text">
+      <strong>Meeresangeln ist in Norwegen kostenlos!</strong>
+      <span>Kein Schein, keine Geb&uuml;hr. Einfach Angel mitnehmen und vom Fjordufer, Steg oder Boot aus angeln. Kabeljau, Makrele, Dorsch, Pollack &ndash; direkt aus dem Fjord in die Pfanne. Frischer geht's nicht.</span>
     </div>
   </div>
 </div>
@@ -301,7 +317,7 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="camp" href="https://www.google.com/maps/place/Preikestolen+Camping/" target="_blank"><strong>Preikestolen Camping</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac14;</span><div class="cd">350&ndash;500 NOK &middot; Direkt am Wanderstart &middot; Fr&uuml;h loswandern!</div></a>
           <a class="hl" href="https://www.alltrails.com/trail/norway/rogaland/preikestolen-pulpit-rock" target="_blank"><span class="ic">&#9968;</span><div><strong>Preikestolen (Pulpit Rock)</strong><br><span>8 km, mittel &middot; 604 m &uuml;ber dem Lysefjord &middot; DAS Norwegen-Foto</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Lysefjord-Cruise von Stavanger (500&ndash;700 NOK p.P.)</span>
-          <span class="chill">Tag 3: Gamla Stavanger, Sverd i fjell, Hafen bummeln</span>
+          <span class="chill">Tag 3: Gamla Stavanger, Sverd i fjell &ndash; abends vom Steg aus angeln!</span>
           <a class="resto" href="https://www.google.com/maps/place/Fisketorget+Stavanger/" target="_blank"><strong>Fisketorget Stavanger</strong> &ndash; <span>Fischmarkt am Hafen. Frischer geht's nicht.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
         </div>
       </div>
@@ -384,7 +400,7 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.flamsbana.no/" target="_blank"><span class="ic">&#128646;</span><div><strong>Fl&aring;msbana</strong><br><span>Steilste Eisenbahn der Welt &middot; 480&ndash;620 NOK p.P. &middot; 20 Tunnel, Wasserf&auml;lle</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="hl" href="https://www.google.com/maps/place/Stegastein+Viewpoint/" target="_blank"><span class="ic">&#128065;</span><div><strong>Stegastein Aussichtsplattform</strong><br><span>650 m &uuml;ber dem Aurlandsfjord &middot; 30 m &uuml;ber dem Abgrund &middot; Kostenlos</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Borgund Stabkirche (1180 n.Chr.) oder Gletscherwanderung Nigardsbreen</span>
-          <span class="chill">Tag 3: N&aelig;r&oslash;yfjord per Kajak oder Boot, abends am Fjord grillen</span>
+          <span class="chill">Tag 3: N&aelig;r&oslash;yfjord per Kajak, abends am Fjord angeln &amp; grillen &#127907;</span>
           <a class="resto" href="https://www.google.com/maps/place/%C3%86gir+BryggeriPub/" target="_blank"><strong>&AElig;gir BryggeriPub</strong> &ndash; <span>Wikinger-Brauhaus in Fl&aring;m. Fischgerichte &amp; vegetarische Pizzen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
         </div>
       </div>
@@ -425,8 +441,15 @@ footer a{color:var(--accent);text-decoration:none}
           <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">150 km &middot; 3 Std.</span></div>
           <p>8,3 km Stra&szlig;e &uuml;ber 8 Br&uuml;cken im offenen Atlantik. Die Storseisundet-Br&uuml;cke &ndash; die &bdquo;Stra&szlig;e ins Nichts&ldquo;. Plus &Aring;lesund: Jugendstil-Stadt am Meer.</p>
           <a class="camp" href="https://www.google.com/maps/place/Atlanterhavsveien+Sj%C3%B8stuer/" target="_blank"><strong>Atlanterhavsveien Sj&oslash;stuer</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac14;</span><div class="cd">350&ndash;500 NOK &middot; Direkt an der Atlantikk&uuml;ste</div></a>
-          <span class="chill">Tag 1: &Uuml;ber die Br&uuml;cken fahren, anhalten, aufs Meer schauen</span>
+          <span class="chill">Tag 1: &Uuml;ber die Br&uuml;cken fahren, von den Br&uuml;cken aus angeln! &#127907;</span>
           <span class="chill">Tag 2: &Aring;lesund erkunden, Aksla-Aussichtspunkt, Fischerdorf Bud</span>
+          <div class="fish-badge">
+            <span class="fb-icon">&#127907;</span>
+            <div class="fb-text">
+              <strong>Angeln von der Atlantic Road</strong>
+              <span>Direkt von den Br&uuml;cken ins Meer angeln &ndash; Makrele, Pollack, Dorsch. Einer der besten Angel-Spots Norwegens. Kostenlos!</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -528,7 +551,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="tips-flex">
       <div class="tip"><div class="tip-ic">&#127859;</div><div><h4>Selbst kochen!</h4><p>Norwegische Restaurants sind teuer. Rema 1000, Kiwi und Extra sind die g&uuml;nstigsten Superm&auml;rkte.</p></div></div>
       <div class="tip"><div class="tip-ic">&#127909;</div><div><h4>Bobilplass</h4><p>WoMo-Stellpl&auml;tze (150&ndash;250 NOK) statt voller Campingplatz. Apps: park4night, Campercontact.</p></div></div>
-      <div class="tip"><div class="tip-ic">&#127907;</div><div><h4>Angeln</h4><p>Im Meer angeln ist in Norwegen kostenlos! Einfache Angel mitnehmen &ndash; Kabeljau, Makrele, Dorsch.</p></div></div>
+      <div class="tip"><div class="tip-ic">&#127907;</div><div><h4>Angeln = Gratis-Essen!</h4><p>Meeresangeln ohne Schein, ohne Geb&uuml;hr. Einfache Reiseangel + K&uuml;nstliche K&ouml;der mitnehmen. Kabeljau, Makrele, Dorsch, Pollack &ndash; direkt vom Fjord in die Pfanne. Spart Restaurantkosten!</p></div></div>
       <div class="tip"><div class="tip-ic">&#128166;</div><div><h4>Leitungswasser</h4><p>Norwegisches Leitungswasser ist exzellent. Tank am Campingplatz f&uuml;llen, nie Flaschen kaufen.</p></div></div>
       <div class="tip"><div class="tip-ic">&#128663;</div><div><h4>Kompaktes WoMo</h4><p>Unter 6 m: g&uuml;nstigere F&auml;hren, einfacher auf engen Stra&szlig;en, weniger Sprit.</p></div></div>
       <div class="tip"><div class="tip-ic">&#9978;</div><div><h4>Wild stehen</h4><p>Auf Rastpl&auml;tzen eine Nacht erlaubt. Kein Camping-Verhalten (St&uuml;hle etc.). 150 m von H&auml;usern.</p></div></div>
