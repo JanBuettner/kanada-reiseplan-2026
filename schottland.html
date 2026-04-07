@@ -117,6 +117,22 @@ a.resto span{color:var(--muted)}
 
 .warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
 
+details.stop-details{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+details.stop-details summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--accent);padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+details.stop-details summary::before{content:'\25B6';font-size:.6rem;transition:transform .2s}
+details.stop-details[open] summary::before{transform:rotate(90deg)}
+details.stop-details summary:hover{opacity:.8}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.detail-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-size:.8rem}
+.detail-card h5{color:#e0e0e0;font-size:.85rem;margin-bottom:4px}
+.detail-card .dc-rating{color:var(--star);font-size:.75rem}
+.detail-card .dc-price{color:var(--accent);font-size:.75rem;font-weight:600}
+.detail-card p{color:var(--muted);font-size:.78rem;line-height:1.5;margin-top:4px}
+.detail-card .dc-quote{font-style:italic;color:rgba(255,255,255,.5);font-size:.75rem;margin-top:6px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1)}
+.detail-photos{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;border-radius:8px;overflow:hidden}
+.detail-photos img{width:100%;height:160px;object-fit:cover;display:block}
+@media(max-width:768px){.detail-grid{grid-template-columns:1fr}}
+
 .quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
 .quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
 
@@ -273,6 +289,20 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="camp" href="https://www.google.com/maps/place/Mortonhall+Caravan+Park/" target="_blank"><strong>Mortonhall Caravan Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">25&ndash;35 &pound; &middot; S&uuml;d-Edinburgh &middot; Busverbindung ins Zentrum</div></a>
           <a class="hl" href="https://www.alltrails.com/trail/scotland/edinburgh/arthurs-seat-and-holyrood-park" target="_blank"><span class="ic">&#9968;</span><div><strong>Arthur's Seat</strong><br><span>251 m &middot; 1 Std. &middot; Panoramablick &uuml;ber die Stadt</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="resto" href="https://www.google.com/maps/place/David+Bann/" target="_blank"><strong>David Bann</strong> &ndash; <span>Vegetarisches Restaurant. Kreative K&uuml;che, St Mary's Street.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in Edinburgh</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/30118135/pexels-photo-30118135.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Arthur's Seat Edinburgh" loading="lazy">
+              <img src="https://images.pexels.com/photos/30118126/pexels-photo-30118126.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Edinburgh Wanderer" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127984; Edinburgh Castle &ndash; lohnt es sich?</h5><span class="dc-rating">6/10</span> <span class="dc-price">19,50 &pound;</span><p>Ehrlich: von au&szlig;en beeindruckender als innen. Kronjuwelen und Aussicht gut, aber eher Milit&auml;rmuseum. 80% des Erlebnisses bekommt man kostenlos von der Esplanade.</p><div class="dc-quote">&bdquo;Spend the money on a distillery tour instead and admire the castle from Princes Street Gardens.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127961; Dean Village</h5><span class="dc-rating">8/10</span> <span class="dc-price">KOSTENLOS</span><p>Verstecktes Juwel! Ehemalige M&uuml;hlen am Water of Leith. Fotogen, ruhig, 10 Min. von der Princes Street. Morgens oder sp&auml;tnachmittags bestes Licht.</p></div>
+              <div class="detail-card"><h5>&#127860; The Shore (Leith, Seafood)</h5><span class="dc-rating">8/10</span> <span class="dc-price">18&ndash;30 &pound; Hauptgericht</span><p>Fisch vom selben Morgen. Cullen Skink (schottische Fischsuppe, 8&ndash;9 &pound;) und Catch of the Day bestellen. Fensterplatz am Hafen anfragen!</p></div>
+              <div class="detail-card"><h5>&#127860; Ondine (Blow-out Seafood)</h5><span class="dc-rating">9/10</span> <span class="dc-price">25&ndash;40 &pound;</span><p>DAS Seafood-Restaurant in Edinburgh. Austernbar, Hummer, Heilbutt. Sticky Toffee Pudding ist legend&auml;r. Budget 60&ndash;80 &pound; p.P. mit Wein.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -291,6 +321,16 @@ footer a{color:var(--accent);text-decoration:none}
           <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Glenmore Forest &ndash; Laybys am Loch Morlich. Kiefernwald, Bergblick, kostenlos.</span></div>
           <a class="hl" href="https://www.google.com/maps/place/Loch+an+Eilein/" target="_blank"><span class="ic">&#127794;</span><div><strong>Loch an Eilein</strong><br><span>5 km Rundweg, leicht &middot; See mit Burgruine auf Insel &middot; Eichh&ouml;rnchen!</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Rentiere besuchen, am Loch Morlich schwimmen, Whisky bei Dalwhinnie</span>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in den Cairngorms</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#129420; Cairngorm Rentiere</h5><span class="dc-rating">8/10</span> <span class="dc-price">17 &pound; (vorab buchen!)</span><p>Britanniens einzige freilebende Rentierherde. Gef&uuml;hrte Wanderung (20 Min.), dann Rentiere aus der Hand f&uuml;ttern. 11-Uhr-Tour am besten. Sommers ausgebucht!</p><div class="dc-quote">&bdquo;Unexpectedly moving. Kids and adults alike are enchanted.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127794; Rothiemurchus Wald</h5><span class="dc-rating">8/10</span> <span class="dc-price">KOSTENLOS</span><p>Uralter Kaledonischer Kiefernwald. 200+ Jahre alte B&auml;ume, Eichh&ouml;rnchen, Haubenmeisen, Baummarder m&ouml;glich. Mystisch.</p></div>
+              <div class="detail-card"><h5>&#127863; Dalwhinnie Destillerie</h5><span class="dc-rating">7/10</span> <span class="dc-price">10&ndash;15 &pound; Tour</span><p>H&ouml;chstgelegene Destillerie Schottlands. Sanfter, honigartiger Whisky. Gut f&uuml;r Einsteiger. 15 Year Old probieren!</p></div>
+              <div class="detail-card"><h5>&#9978; Wild Camping: Glen Feshie</h5><span class="dc-rating">Top-Spot!</span> <span class="dc-price">KOSTENLOS</span><p>Weites Tal s&uuml;dlich von Aviemore. Am Fluss campen, wenig Menschen. Einer der besten Wild-Camping-Spots Schottlands.</p><div class="dc-quote">&bdquo;Midge head nets: not optional, survival equipment.&ldquo;</div></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -314,6 +354,20 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.google.com/maps/place/Chanonry+Point/" target="_blank"><span class="ic">&#128044;</span><div><strong>Chanonry Point &ndash; Delfine!</strong><br><span>Black Isle &middot; Tümmler vom Strand aus &middot; Bei Flut kommen &middot; Kostenlos</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Falls of Foyers, Clava Cairns (4.000 Jahre alt), Whisky bei Tomatin</span>
           <a class="resto" href="https://www.google.com/maps/place/The+Mustard+Seed/" target="_blank"><strong>The Mustard Seed</strong> &ndash; <span>Am Fluss. Gute vegetarische Optionen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken am Loch Ness</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/29405317/pexels-photo-29405317.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Urquhart Castle Loch Ness" loading="lazy">
+              <img src="https://images.pexels.com/photos/26924190/pexels-photo-26924190.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hirsch Highlands" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128044; Chanonry Point &ndash; wie zuverl&auml;ssig?</h5><span class="dc-rating">9/10 (wenn Delfine da) / 5/10 (wenn nicht)</span> <span class="dc-price">KOSTENLOS</span><p><strong>60&ndash;70% Chance bei Flut!</strong> Gezeitentabelle checken: 1&ndash;2 Std. vor Hochwasser kommen. Morgens + Flut = beste Kombination.</p><div class="dc-quote">&bdquo;15 Delfine, &uuml;ber eine Stunde, M&uuml;tter mit K&auml;lbern, volle Spr&uuml;nge. Time it with the tide or don't bother.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127984; Urquhart Castle &ndash; lohnt es sich?</h5><span class="dc-rating">7/10</span> <span class="dc-price">14 &pound;</span><p>Setting fantastisch, Ruine solide, Film im Besucherzentrum &uuml;berraschend gut. Aber: 14 &pound; vor allem f&uuml;r die Aussicht. Historic Scotland Pass (40 &pound;/5 Tage) macht's lohnenswert.</p><div class="dc-quote">&bdquo;Skip in rain &ndash; you lose 80% of the appeal.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#128164; Clava Cairns</h5><span class="dc-rating">8/10</span> <span class="dc-price">KOSTENLOS</span><p>4.000 Jahre alte Grabh&uuml;gel unter alten Buchen. Bei Sonnenuntergang magisch. Besser als Culloden Battlefield (14 &pound;, entt&auml;uschend).</p></div>
+              <div class="detail-card"><h5>&#127860; Mustard Seed &ndash; Fr&uuml;hbucher-Tipp!</h5><span class="dc-rating">8/10</span> <span class="dc-price">Early Bird: 2 G&auml;nge 17&ndash;19 &pound; (17:30&ndash;19h)</span><p>Bestes Restaurant in Inverness. Fensterplatz am Fluss. Early-Bird-Men&uuml; = gleiche Qualit&auml;t, halber Preis!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -337,6 +391,20 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.google.com/maps/place/Smoo+Cave/" target="_blank"><span class="ic">&#127754;</span><div><strong>Smoo Cave</strong><br><span>Riesige Meerh&ouml;hle mit Wasserfall innen &middot; Kostenlos &middot; Boot 8 &pound;</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/stac-pollaidh" target="_blank"><span class="ic">&#9968;</span><div><strong>Stac Pollaidh</strong><br><span>613 m &middot; 2&ndash;3 Std. &middot; Ikonischer Gipfel &middot; Ausblick &uuml;ber Assynt</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Ceannabeinne Beach (karibisch!), Duncansby Stacks, Dunnet Head</span>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken an der NC500</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/34227217/pexels-photo-34227217.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Durness Beach" loading="lazy">
+              <img src="https://images.pexels.com/photos/13586950/pexels-photo-13586950.jpeg?auto=compress&cs=tinysrgb&w=600" alt="H&ouml;hle" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127754; Smoo Cave</h5><span class="dc-rating">8/10</span> <span class="dc-price">Frei / Boot 8 &pound;</span><p>Kathedralenhafte Meerh&ouml;hle mit Wasserfall von oben. Bootstour in die innere H&ouml;hle lohnt sich! Danach: Cocoa Mountain nebenan (beste hei&szlig;e Schokolade Schottlands).</p></div>
+              <div class="detail-card"><h5>&#9968; Duncansby Stacks</h5><span class="dc-rating">9/10</span> <span class="dc-price">KOSTENLOS</span><p>Besser als John o'Groats (das ist Touristenfalle!). 20 Min. Klippenwanderung, 60 m hohe Felsnadeln, Papageientaucher. Weltklasse-K&uuml;ste, fast niemand hier.</p></div>
+              <div class="detail-card"><h5>&#127958; Sango Bay Camping</h5><span class="dc-rating">Lage 10/10, Ausstattung 6/10</span> <span class="dc-price">15&ndash;20 &pound;</span><p>Zelt auf Klippenkante &uuml;ber goldenem Strand. Sonnenuntergang &uuml;ber dem Atlantik. Nicht luxuri&ouml;s, aber die Location ist unschlagbar.</p></div>
+              <div class="detail-card"><h5>&#127958; Achmelvich Beach</h5><span class="dc-rating">9/10</span> <span class="dc-price">Parking 3&ndash;4 &pound;</span><p>Wei&szlig;er Sand, t&uuml;rkises Wasser: &bdquo;That's SCOTLAND?&ldquo; Wasser 12&deg;C, trotzdem schwimmen alle. Hermit's Castle (Mini-Burg) kurzer Spaziergang n&ouml;rdlich.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -392,7 +460,23 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/quiraing-circuit" target="_blank"><span class="ic">&#127956;</span><div><strong>Quiraing</strong><br><span>7 km Rundweg, 2&ndash;3 Std. &middot; Spektakul&auml;rste Wanderung auf Skye</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 3: Fairy Pools, Neist Point Lighthouse bei Sonnenuntergang</span>
           <a class="resto" href="https://www.google.com/maps/place/Cafe+Arriba/" target="_blank"><strong>Caf&eacute; Arriba, Portree</strong> &ndash; <span>Vegane/vegetarische Optionen. Lokal beliebt.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
-          <div class="warn"><strong>Talisker Distillery (Carbost):</strong> Skyes einzige Destillerie. Torfiger Whisky. Tour ab 12 &pound;.</div>
+          <div class="warn"><strong>Talisker Distillery (Carbost):</strong> Skyes einzige Destillerie. Torfiger Whisky. Tour ab 15 &pound;.</div>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken auf Skye</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/29476859/pexels-photo-29476859.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wanderer am Old Man of Storr" loading="lazy">
+              <img src="https://images.pexels.com/photos/31230399/pexels-photo-31230399.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Quiraing Landschaft" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127754; Fairy Pools &ndash; ehrliche Einsch&auml;tzung</h5><span class="dc-rating">7/10 (wegen Massen)</span> <span class="dc-price">Parking 5 &pound;</span><p>Wundersch&ouml;n, ABER: im August Hunderte Menschen auf engem Pfad. <strong>Vor 8 Uhr: magisch. 10&ndash;17 Uhr: Albtraum.</strong> Wildschwimmen in den Pools (8&ndash;10&deg;C).</p><div class="dc-quote">&bdquo;We went at 7:30am &ndash; lovely. By 10am the car park was gridlocked.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127756; Neist Point &ndash; Sonnenuntergang!</h5><span class="dc-rating">8/10</span> <span class="dc-price">KOSTENLOS</span><p>Westlichster Punkt Skyes. Leuchtturm auf dramatischen Klippen. DER Sunset-Spot &ndash; aber nur bei klarem Wetter. Delfine und Riesenhaie m&ouml;glich!</p><div class="dc-quote">&bdquo;We tried 3 times before getting a clear evening. Worth every failed attempt.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127860; Three Chimneys &ndash; lohnt es sich?</h5><span class="dc-rating">9/10</span> <span class="dc-price">Tasting 95&ndash;130 &pound;</span><p><strong>F&uuml;r Foodies: unbedingt.</strong> Weltklasse in einem Bauernhaus. Langustinen aus dem Loch nebenan, Skye Lamm, Hot Marmalade Pudding. F&uuml;r Casual Diners: lieber 3 gute Pub-Mahlzeiten + Destillerie-Tour.</p><div class="dc-quote">&bdquo;One of the ten best meals you'll eat in Britain.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#9888; August Parking-Strategie</h5><span class="dc-rating">WICHTIG!</span> <span class="dc-price"></span><p>Storr, Quiraing, Fairy Pools: Parkplatz voll ab 9 Uhr. <strong>Vor 8 Uhr oder nach 17 Uhr.</strong> Mittags: Destillerie, Restaurant, Portree. Kein Mittelweg!</p></div>
+              <div class="detail-card"><h5>&#9978; Wild Camping: Coral Beach</h5><span class="dc-rating">Top-Spot</span> <span class="dc-price">KOSTENLOS</span><p>30 Min. Wanderung zur Korallenbucht bei Claigan. Hinter dem Strand campen. Sonnenuntergang &uuml;ber den &Auml;u&szlig;eren Hebriden. Ruhig und magisch.</p></div>
+              <div class="detail-card"><h5>&#127863; Talisker &ndash; Premium-Tour</h5><span class="dc-rating">8/10</span> <span class="dc-price">35 &pound; (Made by the Sea)</span><p>Besser als die Standard-Tour. Rare Expressionen verkosten. Talisker 10 (Rauch, Meersalz, schwarzer Pfeffer) ist der Klassiker.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -415,6 +499,20 @@ footer a{color:var(--accent);text-decoration:none}
           <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Glen Etive &ndash; 20 km Singletrack ins Nirgendwo. Bester Wild-Camping-Spot Schottlands.</span></div>
           <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/steall-falls" target="_blank"><span class="ic">&#127754;</span><div><strong>Steall Falls</strong><br><span>120 m Wasserfall &middot; 2 Std. Hin &amp; R&uuml;ck &middot; Durch die Nevis-Schlucht</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Glenfinnan Viadukt (Zug ca. 10:30 &amp; 15:00), Clachaig Inn (Wanderer-Pub)</span>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in Glen Coe</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/13764164/pexels-photo-13764164.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glen Coe" loading="lazy">
+              <img src="https://images.pexels.com/photos/31840829/pexels-photo-31840829.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glenfinnan Viadukt Zug" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#9978; Glen Etive &ndash; Wild Camping</h5><span class="dc-rating">10/10 Camping-Spot</span> <span class="dc-price">KOSTENLOS</span><p>20 km Singletrack ins Nirgendwo (James Bond Skyfall!). Am Fluss stehen, absolute Wildnis. <strong>BESTER Wild-Camping-Spot Schottlands.</strong></p><div class="dc-quote">&bdquo;We parked by the river, cooked dinner watching deer on the hillside. Nobody else for miles.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#9968; Ben Nevis &ndash; ehrliche Einsch&auml;tzung</h5><span class="dc-rating">5/10 als Erlebnis</span> <span class="dc-price">KOSTENLOS</span><p>UK's h&ouml;chster Berg (1.345 m), 7&ndash;9 Std. Ehrlich: der Touristenweg ist lang, steinig und oben oft null Sicht. Steall Falls (2 Std.) ist das bessere Erlebnis.</p></div>
+              <div class="detail-card"><h5>&#128646; Glenfinnan Viadukt (Harry Potter!)</h5><span class="dc-rating">8/10</span> <span class="dc-price">KOSTENLOS (Aussichtspunkt)</span><p>Jacobite Steam Train: ~10:30 &amp; ~15:00 Uhr. Vom Wanderweg aus zusehen. 15 Min. vorher Position einnehmen!</p></div>
+              <div class="detail-card"><h5>&#127866; Clachaig Inn</h5><span class="dc-rating">8/10</span> <span class="dc-price">12&ndash;16 &pound;</span><p>Legend&auml;rer Wanderer-Pub seit 1740. Deftig, ehrlich, gro&szlig;e Portionen. 300+ Whiskys. &bdquo;No Campbells&ldquo; Schild an der T&uuml;r (Massaker-Geschichte).</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -433,6 +531,16 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="camp" href="https://www.google.com/maps/place/Oban+Caravan+%26+Camping+Park/" target="_blank"><strong>Oban Caravan Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">20&ndash;28 &pound; &middot; Fu&szlig;l&auml;ufig zur Stadt</div></a>
           <a class="resto" href="https://www.google.com/maps/place/Oban+Seafood+Hut/" target="_blank"><strong>Oban Seafood Hut</strong> &ndash; <span>Gr&uuml;ne H&uuml;tte am Pier. Legend&auml;rer Hummer &amp; Krabben.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
           <div class="warn"><strong>Oban Distillery:</strong> Eine der &auml;ltesten Destillerien. Mitten im Ort. Tour ab 12 &pound;.</div>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in Oban</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#129438; Seafood Hut &ndash; was bestellen?</h5><span class="dc-rating">9/10</span> <span class="dc-price">8&ndash;15 &pound;</span><p>Gr&uuml;ne H&uuml;tte am Railway Pier. <strong>Hummer (wenn verf&uuml;gbar!), Krabben, Muscheln.</strong> Kein Schnickschnack, einfach bester Fisch. Mittags gehen, nachmittags ausverkauft!</p></div>
+              <div class="detail-card"><h5>&#127860; Ee-usk</h5><span class="dc-rating">8/10</span> <span class="dc-price">16&ndash;22 &pound;</span><p>Seafood-Restaurant am Pier mit Panoramafenstern. T&auml;glich frischer Fang. Heilbutt und Langustinen besonders gut.</p></div>
+              <div class="detail-card"><h5>&#9973; Tagesausflug Mull &amp; Iona</h5><span class="dc-rating">8/10</span> <span class="dc-price">F&auml;hre 6&ndash;8 &pound; (Fu&szlig;g&auml;nger)</span><p>WoMo in Oban lassen! CalMac nach Craignure (45 Min.), Bus nach Fionnphort, F&auml;hre nach Iona. Abtei, Str&auml;nde, autofreie Insel. Staffa (Fingal's Cave) per Boot m&ouml;glich (35&ndash;50 &pound;).</p></div>
+              <div class="detail-card"><h5>&#127863; Oban Distillery</h5><span class="dc-rating">8/10</span> <span class="dc-price">12&ndash;15 &pound;</span><p>Eine der &auml;ltesten (1794). Mitten im Ort. Oban 14 Year Old: k&uuml;stennah, ausgewogen, hervorragend. Besser als Dalwhinnie als Tour-Erlebnis.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -451,6 +559,16 @@ footer a{color:var(--accent);text-decoration:none}
           <div class="warn"><strong>Achtung:</strong> Loch Lomond &amp; Trossachs hat Camping-Zonen M&auml;rz&ndash;September. Permit n&ouml;tig (~3&ndash;4 &pound;/Nacht).</div>
           <a class="camp" href="https://www.google.com/maps/place/Cashel+Campsite/" target="_blank"><strong>Cashel Campsite</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">15&ndash;22 &pound; &middot; Am See &middot; Wundersch&ouml;n</div></a>
           <a class="resto" href="https://www.google.com/maps/place/Crabshakk/" target="_blank"><strong>Crabshakk, Glasgow</strong> &ndash; <span>Legend&auml;res Seafood in Finnieston.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken an Loch Lomond &amp; Glasgow</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127961; Kelvingrove Art Gallery</h5><span class="dc-rating">9/10</span> <span class="dc-price">KOSTENLOS</span><p>Glasgows bestes Museum. Pr&auml;chtiges Geb&auml;ude, fantastische Sammlung. Orgel-Konzert t&auml;glich 13 Uhr (kostenlos, magisch).</p></div>
+              <div class="detail-card"><h5>&#127860; The 78 (vegan, Glasgow)</h5><span class="dc-rating">8/10</span> <span class="dc-price">9&ndash;13 &pound;</span><p>Vegane Bar &amp; K&uuml;che in Finnieston. Kreativ, ehrlich, g&uuml;nstig. Live-Musik abends.</p></div>
+              <div class="detail-card"><h5>&#9978; Loch Lomond &ndash; Permit!</h5><span class="dc-rating">Pflicht M&auml;rz&ndash;Sept!</span> <span class="dc-price">3&ndash;4 &pound;/Nacht</span><p>Camping Management Zones: Permit online buchen. Westufer (A82) weniger eingeschr&auml;nkt als Ostufer. Balquhidder (Loch Voil) als Alternative ohne Permit.</p></div>
+              <div class="detail-card"><h5>&#128663; Finnieston (Glasgow)</h5><span class="dc-rating">Foodie-Viertel</span> <span class="dc-price"></span><p>Argyle Street: Crabshakk, The Gannet, The 78 auf 200 m. Glasgows bestes Food-Viertel. Halber Tag lohnt sich!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
