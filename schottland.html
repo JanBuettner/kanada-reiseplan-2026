@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schottland Roadtrip 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#0a0a0a;--warm:#0e100a;--accent:#7a9e6d;--accent2:#5c7d4f;
+  --cream:#141612;--sand:#1c1e18;--text:#dddad2;--muted:#8a8a7a;
+  --card:#1a1c16;--radius:14px;--star:#e2b04a;
+}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+.trip-switch{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;gap:4px;padding:10px 20px}
+.trip-switch a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:20px;transition:all .2s}
+.trip-switch a:hover{color:#fff}
+.trip-switch a.active{background:var(--accent);color:#fff;font-weight:600}
+.trip-switch .sep{color:rgba(255,255,255,.2);font-size:.7rem}
+
+.hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:flex-end;color:#fff}
+.hero-bg{position:absolute;inset:0;background:url('https://images.pexels.com/photos/31240291/pexels-photo-31240291.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover;z-index:0}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.15) 100%)}
+.hero-inner{position:relative;z-index:1;padding:0 40px 80px;max-width:900px}
+.hero-tag{display:inline-block;border:1px solid rgba(255,255,255,.4);padding:6px 18px;border-radius:30px;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:800;line-height:1;margin-bottom:12px}
+.hero .sub{font-size:1.15rem;font-weight:300;opacity:.85;max-width:520px;line-height:1.6;margin-bottom:40px}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap}
+.hero-stat span:first-child{display:block;font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700}
+.hero-stat span:last-child{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;opacity:.6}
+
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.wide{max-width:1400px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+.sec-label{font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:16px;color:#fff;line-height:1.15}
+.sec-sub{font-size:1rem;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:50px}
+
+.bleed{width:100%;position:relative;overflow:hidden}
+.bleed img{width:100%;display:block;object-fit:cover}
+.bleed-tall img{height:70vh;min-height:400px}
+.bleed-medium img{height:50vh;min-height:300px}
+.bleed .overlay-text{position:absolute;bottom:0;left:0;right:0;padding:60px 40px 40px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);color:#fff}
+.bleed .overlay-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.5rem);margin-bottom:6px}
+.bleed .overlay-text p{font-size:.9rem;opacity:.8;max-width:500px}
+
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:6px}
+.grid-3 img,.grid-2-1 img{width:100%;height:300px;object-fit:cover;display:block;border-radius:4px}
+
+.route-bar{background:var(--dark);padding:50px 0;overflow-x:auto}
+.route-flow{display:flex;align-items:center;justify-content:center;gap:0;padding:30px 20px;min-width:max-content;margin:0 auto}
+.rdot{text-align:center;width:90px;position:relative;flex-shrink:0}
+.rdot::after{content:'';position:absolute;top:12px;left:60%;width:calc(100% - 16px);height:1px;background:var(--accent);opacity:.4}
+.rdot:last-child::after{display:none}
+.rdot .d{width:26px;height:26px;background:var(--accent);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#fff;position:relative;z-index:1}
+.rdot .rn{display:block;font-size:.65rem;font-weight:500;margin-top:6px;color:#fff}
+.rdot .rni{font-size:.6rem;color:rgba(255,255,255,.4)}
+
+.stop{margin-bottom:80px}
+.stop-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.stop-grid.reverse{direction:rtl}
+.stop-grid.reverse>*{direction:ltr}
+.stop-photos{display:grid;gap:6px;border-radius:var(--radius);overflow:hidden}
+.stop-photos.layout-2{grid-template-columns:1fr 1fr}
+.stop-photos.layout-1{grid-template-columns:1fr}
+.stop-photos.layout-1-2{grid-template-columns:1fr;grid-template-rows:auto auto}
+.stop-photos img{width:100%;height:260px;object-fit:cover;display:block}
+.stop-photos.layout-1 img{height:400px}
+.stop-photos.layout-1-2 img:first-child{height:280px}
+.stop-photos.layout-1-2 .sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stop-photos.layout-1-2 .sub-grid img{height:180px}
+
+.stop-info{padding:10px 0}
+.stop-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:800;color:var(--accent);line-height:1;opacity:.6}
+.stop-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:4px}
+.stop-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stop-meta .sm{font-size:.72rem;color:var(--muted);background:var(--sand);padding:3px 10px;border-radius:12px}
+.stop-info>p{font-size:.9rem;line-height:1.7;color:var(--muted);margin-bottom:16px}
+
+a.camp{display:block;text-decoration:none;background:var(--sand);border-radius:10px;padding:14px 16px;margin-bottom:12px;position:relative;transition:transform .15s,box-shadow .15s}
+a.camp:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+a.camp::after{content:'\2197';position:absolute;top:8px;right:8px;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
+a.camp:hover::after{opacity:1}
+a.camp strong{color:#e0e0e0;font-size:.9rem;border-bottom:1px dotted var(--accent)}
+a.camp:hover strong{border-bottom-style:solid}
+.camp .stars{color:var(--star);font-size:.8rem;margin-left:4px}
+.camp .cd{font-size:.8rem;color:var(--muted);margin-top:2px}
+
+.free-camp{display:block;background:rgba(122,158,109,.1);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 10px 10px 0;margin-bottom:10px;font-size:.82rem}
+.free-camp strong{color:var(--accent)}
+.free-camp span{color:var(--muted)}
+
+a.hl{display:flex;gap:8px;align-items:flex-start;margin:8px 0;font-size:.85rem;text-decoration:none;position:relative;transition:transform .15s}
+a.hl:hover{transform:translateX(4px);box-shadow:-3px 0 0 var(--accent)}
+a.hl::after{content:'\2197';position:absolute;top:2px;right:0;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
+a.hl:hover::after{opacity:1}
+a.hl strong{color:#ddd;border-bottom:1px dotted var(--accent)}
+a.hl:hover strong{border-bottom-style:solid}
+.hl .ic{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.hl span{color:var(--muted)}
+.hl .st{color:var(--star);font-size:.78rem}
+
+.chill{display:inline-block;background:rgba(122,158,109,.12);color:var(--accent);padding:6px 14px;border-radius:20px;font-size:.76rem;font-weight:500;margin-top:6px}
+
+a.resto{display:block;text-decoration:none;background:rgba(122,158,109,.08);border-left:3px solid var(--accent2);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:10px;font-size:.82rem;position:relative;transition:transform .15s,box-shadow .15s}
+a.resto:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+a.resto::after{content:'\2197';position:absolute;top:8px;right:8px;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
+a.resto:hover::after{opacity:1}
+a.resto strong{color:#e0e0e0;border-bottom:1px dotted var(--accent)}
+a.resto:hover strong{border-bottom-style:solid}
+a.resto span{color:var(--muted)}
+
+.warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
+
+.quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
+.quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
+
+.map-section{background:var(--warm);padding:80px 0 0}
+.map-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3);margin-top:30px}
+#map{height:550px;width:100%;z-index:0}
+.map-legend{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;padding:20px 0 50px}
+.map-legend span{font-size:.75rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px}
+.ldot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+.budget-section{background:var(--dark);padding:100px 0}
+.budget-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.bcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:30px 24px;text-align:center}
+.bcard.feat{border-color:var(--accent);background:rgba(122,158,109,.06)}
+.bcard h4{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
+.bcard .price{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--accent);margin:10px 0}
+.bcard .ps{font-size:.75rem;color:rgba(255,255,255,.4)}
+.bcard ul{list-style:none;text-align:left;margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.5)}
+.bcard ul li{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.bcard ul li::before{content:'\2713  ';color:var(--accent)}
+
+.tips-flex{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.tip{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.1);display:flex;gap:14px;align-items:flex-start}
+.tip-ic{width:42px;height:42px;background:var(--sand);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.tip h4{font-size:.88rem;color:#e0e0e0;margin-bottom:3px}
+.tip p{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+.warn-section{background:#12140e;padding:60px 0}
+.warn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.wcard{background:var(--card);border:1px solid #2a2e22;border-radius:12px;padding:20px}
+.wcard h4{font-size:.9rem;color:var(--accent);margin-bottom:4px}
+.wcard p{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--accent)}
+.tl-i{position:relative;margin-bottom:18px;padding-left:18px}
+.tl-i::before{content:'';position:absolute;left:-25px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.tl-w{font-size:.72rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px}
+.tl-t{font-size:.85rem;color:var(--muted)}
+
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px}
+.chk{font-size:.85rem;padding:8px 12px;background:var(--card);border-radius:8px;display:flex;align-items:center;gap:8px}
+.chk::before{content:'';width:14px;height:14px;border:2px solid var(--accent);border-radius:3px;flex-shrink:0}
+
+footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;padding:50px 20px;font-size:.75rem}
+footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:768px){
+  .stop-grid,.grid-2-1{grid-template-columns:1fr}
+  .stop-grid.reverse{direction:ltr}
+  .budget-cards{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .hero-inner{padding:0 20px 50px}
+  section{padding:60px 0}
+  .stop-photos img,.stop-photos.layout-1 img{height:220px}
+  .trip-switch{padding:8px 10px}
+  .trip-switch a{font-size:.65rem;padding:5px 12px}
+}
+</style>
+</head>
+<body>
+
+<div class="trip-switch">
+  <a href="index.html">Kanada West</a>
+  <span class="sep">|</span>
+  <a href="norwegen.html">Norwegen</a>
+  <span class="sep">|</span>
+  <a href="schottland.html" class="active">Schottland</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <span class="hero-tag">August &ndash; September 2026</span>
+    <h1>Wild<br>Scotland</h1>
+    <p class="sub">Drei Wochen. Ein Wohnmobil. Highlands, Inseln, Lochs. Wildcamping ist hier legal.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span>23</span><span>Tage</span></div>
+      <div class="hero-stat"><span>3.500</span><span>Kilometer</span></div>
+      <div class="hero-stat"><span>10</span><span>Stops</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MOOD GRID -->
+<div class="wide" style="padding-top:6px">
+  <div class="grid-3">
+    <img src="https://images.pexels.com/photos/30682770/pexels-photo-30682770.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Eilean Donan Castle" loading="lazy">
+    <img src="https://images.pexels.com/photos/28792024/pexels-photo-28792024.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Highland Cow" loading="lazy">
+    <img src="https://images.pexels.com/photos/29279445/pexels-photo-29279445.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fairy Pools Skye" loading="lazy">
+  </div>
+</div>
+
+<!-- ROUTE -->
+<div class="route-bar">
+  <div class="container" style="text-align:center">
+    <p class="sec-label" style="color:var(--accent)">Die Route</p>
+    <h2 class="sec-title" style="color:#fff">Frankfurt &rarr; Highlands &rarr; Frankfurt</h2>
+  </div>
+  <div style="overflow-x:auto">
+    <div class="route-flow">
+      <div class="rdot"><span class="d">&#9992;</span><span class="rn">Frankfurt</span><span class="rni">Start</span></div>
+      <div class="rdot"><span class="d">1</span><span class="rn">Edinburgh</span><span class="rni">2N</span></div>
+      <div class="rdot"><span class="d">2</span><span class="rn">Cairngorms</span><span class="rni">2N</span></div>
+      <div class="rdot"><span class="d">3</span><span class="rn">Inverness</span><span class="rni">2N</span></div>
+      <div class="rdot"><span class="d">4</span><span class="rn">NC500 Nord</span><span class="rni">3N</span></div>
+      <div class="rdot"><span class="d">5</span><span class="rn">Ullapool</span><span class="rni">1N</span></div>
+      <div class="rdot"><span class="d">6</span><span class="rn">Isle of Skye</span><span class="rni">3N</span></div>
+      <div class="rdot"><span class="d">7</span><span class="rn">Glen Coe</span><span class="rni">2N</span></div>
+      <div class="rdot"><span class="d">8</span><span class="rn">Oban</span><span class="rni">2N</span></div>
+      <div class="rdot"><span class="d">9</span><span class="rn">Loch Lomond</span><span class="rni">1N</span></div>
+      <div class="rdot"><span class="d">&#9992;</span><span class="rn">Frankfurt</span><span class="rni">&larr;</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<section class="map-section" style="padding-bottom:0">
+  <div class="container">
+    <p class="sec-label" style="color:var(--accent)">Karte</p>
+    <h2 class="sec-title" style="color:#fff">Die Strecke</h2>
+    <div class="map-wrap"><div id="map"></div></div>
+    <div class="map-legend">
+      <span><span class="ldot" style="background:#7a9e6d"></span> &Uuml;bernachtung</span>
+      <span><span class="ldot" style="background:#ff6b6b"></span> Transit</span>
+      <span style="opacity:.3">Wild Camping = &#9733;</span>
+    </div>
+  </div>
+</section>
+
+<!-- STOPS -->
+<section>
+  <div class="container">
+    <p class="sec-label">Tag f&uuml;r Tag</p>
+    <h2 class="sec-title">Die Stops</h2>
+    <p class="sec-sub">Wild Camping ist in Schottland legal. Parken am Loch, aufwachen mit Bergblick &ndash; kostenlos. Die besten Pl&auml;tze stehen unten.</p>
+
+    <!-- STOP 1: Anreise + Edinburgh -->
+    <div class="stop">
+      <div class="stop-grid">
+        <div class="stop-photos layout-1-2">
+          <img src="https://images.pexels.com/photos/28776205/pexels-photo-28776205.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Edinburgh Castle" loading="lazy">
+          <div class="sub-grid">
+            <img src="https://images.pexels.com/photos/28086723/pexels-photo-28086723.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Edinburgh" loading="lazy">
+            <img src="https://images.pexels.com/photos/5013608/pexels-photo-5013608.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Inverness Fluss" loading="lazy">
+          </div>
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">01</div>
+          <h3>Frankfurt &rarr; Edinburgh</h3>
+          <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">Tag 1&ndash;2: Anreise</span></div>
+          <p>Option A: Frankfurt &rarr; Calais (580 km) &rarr; Eurotunnel &rarr; Edinburgh (660 km). Option B: Frankfurt &rarr; Amsterdam &rarr; DFDS Nachtf&auml;hre &rarr; Newcastle &rarr; Edinburgh. WoMo dort mieten.</p>
+          <a class="camp" href="https://www.google.com/maps/place/Mortonhall+Caravan+Park/" target="_blank"><strong>Mortonhall Caravan Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">25&ndash;35 &pound; &middot; S&uuml;d-Edinburgh &middot; Busverbindung ins Zentrum</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/scotland/edinburgh/arthurs-seat-and-holyrood-park" target="_blank"><span class="ic">&#9968;</span><div><strong>Arthur's Seat</strong><br><span>251 m &middot; 1 Std. &middot; Panoramablick &uuml;ber die Stadt</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <a class="resto" href="https://www.google.com/maps/place/David+Bann/" target="_blank"><strong>David Bann</strong> &ndash; <span>Vegetarisches Restaurant. Kreative K&uuml;che, St Mary's Street.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 2: Cairngorms -->
+    <div class="stop">
+      <div class="stop-grid reverse">
+        <div class="stop-photos layout-1">
+          <img src="https://images.pexels.com/photos/35134780/pexels-photo-35134780.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Scottish Highlands" loading="lazy">
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">02</div>
+          <h3>Cairngorms</h3>
+          <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">130 km &middot; 2 Std.</span></div>
+          <p>Schottlands gr&ouml;&szlig;ter Nationalpark. Uralte Kaledonische Kiefernw&auml;lder, rote Eichh&ouml;rnchen, Rentiere. Loch Morlich hat sogar einen Sandstrand.</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Glenmore Forest &ndash; Laybys am Loch Morlich. Kiefernwald, Bergblick, kostenlos.</span></div>
+          <a class="hl" href="https://www.google.com/maps/place/Loch+an+Eilein/" target="_blank"><span class="ic">&#127794;</span><div><strong>Loch an Eilein</strong><br><span>5 km Rundweg, leicht &middot; See mit Burgruine auf Insel &middot; Eichh&ouml;rnchen!</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <span class="chill">Rentiere besuchen, am Loch Morlich schwimmen, Whisky bei Dalwhinnie</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 3: Inverness & Loch Ness -->
+    <div class="stop">
+      <div class="stop-grid">
+        <div class="stop-photos layout-1-2">
+          <img src="https://images.pexels.com/photos/32641897/pexels-photo-32641897.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Loch Ness" loading="lazy">
+          <div class="sub-grid">
+            <img src="https://images.pexels.com/photos/29405317/pexels-photo-29405317.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Urquhart Castle Loch Ness" loading="lazy">
+            <img src="https://images.pexels.com/photos/26924190/pexels-photo-26924190.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hirsch in den Highlands" loading="lazy">
+          </div>
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">03</div>
+          <h3>Inverness &amp; Loch Ness</h3>
+          <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">60 km &middot; 1 Std.</span></div>
+          <p>37 km lang, 230 m tief. Die S&uuml;dseite (B862) ist ruhiger und sch&ouml;ner als die Hauptstra&szlig;e. Chanonry Point: Delfine fast garantiert!</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>S&uuml;dufer Loch Ness (B862) &ndash; Laybys bei Foyers. Loch-Blick, Stille, kostenlos.</span></div>
+          <a class="hl" href="https://www.google.com/maps/place/Chanonry+Point/" target="_blank"><span class="ic">&#128044;</span><div><strong>Chanonry Point &ndash; Delfine!</strong><br><span>Black Isle &middot; Tümmler vom Strand aus &middot; Bei Flut kommen &middot; Kostenlos</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <span class="chill">Falls of Foyers, Clava Cairns (4.000 Jahre alt), Whisky bei Tomatin</span>
+          <a class="resto" href="https://www.google.com/maps/place/The+Mustard+Seed/" target="_blank"><strong>The Mustard Seed</strong> &ndash; <span>Am Fluss. Gute vegetarische Optionen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 4: NC500 North Coast -->
+    <div class="stop">
+      <div class="stop-grid reverse">
+        <div class="stop-photos layout-1-2">
+          <img src="https://images.pexels.com/photos/34227217/pexels-photo-34227217.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Durness Beach Schottland" loading="lazy">
+          <div class="sub-grid">
+            <img src="https://images.pexels.com/photos/34160394/pexels-photo-34160394.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Schottische K&uuml;ste" loading="lazy">
+            <img src="https://images.pexels.com/photos/34650769/pexels-photo-34650769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Neist Point Lighthouse" loading="lazy">
+          </div>
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">04</div>
+          <h3>NC500 &ndash; Nordk&uuml;ste</h3>
+          <div class="stop-meta"><span class="sm">3 N&auml;chte</span><span class="sm">~500 km Rundkurs</span></div>
+          <p>Die North Coast 500. Schottlands Antwort auf die Route 66. Dramatische K&uuml;sten, wei&szlig;e Str&auml;nde, absolute Einsamkeit. Drei Tage, nicht hetzen.</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Sango Bay (Durness), Loch Eriboll, Achmelvich Beach &ndash; &uuml;berall grandiose Laybys, kostenlos.</span></div>
+          <a class="hl" href="https://www.google.com/maps/place/Smoo+Cave/" target="_blank"><span class="ic">&#127754;</span><div><strong>Smoo Cave</strong><br><span>Riesige Meerh&ouml;hle mit Wasserfall innen &middot; Kostenlos &middot; Boot 8 &pound;</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/stac-pollaidh" target="_blank"><span class="ic">&#9968;</span><div><strong>Stac Pollaidh</strong><br><span>613 m &middot; 2&ndash;3 Std. &middot; Ikonischer Gipfel &middot; Ausblick &uuml;ber Assynt</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <span class="chill">Ceannabeinne Beach (karibisch!), Duncansby Stacks, Dunnet Head</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLEED: Highlands -->
+<div class="bleed bleed-tall">
+  <img src="https://images.pexels.com/photos/31083549/pexels-photo-31083549.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Glen Coe Nebel" loading="lazy">
+  <div class="overlay-text">
+    <h2>Die Highlands</h2>
+    <p>Wo die Stra&szlig;en einspurig werden und die Stille anf&auml;ngt.</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+
+    <!-- STOP 5: Ullapool & Wester Ross -->
+    <div class="stop">
+      <div class="stop-grid">
+        <div class="stop-photos layout-1">
+          <img src="https://images.pexels.com/photos/31656850/pexels-photo-31656850.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Schottische K&uuml;ste Klippen" loading="lazy">
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">05</div>
+          <h3>Ullapool &amp; Wester Ross</h3>
+          <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">160 km &middot; halber Tag</span></div>
+          <p>Wei&szlig;e H&auml;user am Loch Broom. Das dramatischste St&uuml;ck der NC500. Torridon-Berge, Suilven, uralte Kiefern.</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Ardmair Bay &ndash; Kiesstrand, Meerblick, 5 km n&ouml;rdlich von Ullapool.</span></div>
+          <a class="resto" href="https://www.google.com/maps/place/The+Seafood+Shack/" target="_blank"><strong>The Seafood Shack</strong> &ndash; <span>Fisch &amp; Chips am Wasser. Frischer geht's nicht.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 6: Isle of Skye -->
+    <div class="stop">
+      <div class="stop-grid reverse">
+        <div class="stop-photos layout-1-2">
+          <img src="https://images.pexels.com/photos/31230395/pexels-photo-31230395.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Quiraing Isle of Skye" loading="lazy">
+          <div class="sub-grid">
+            <img src="https://images.pexels.com/photos/29279445/pexels-photo-29279445.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fairy Pools Skye" loading="lazy">
+            <img src="https://images.pexels.com/photos/10691827/pexels-photo-10691827.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Old Man of Storr" loading="lazy">
+          </div>
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">06</div>
+          <h3>Isle of Skye</h3>
+          <div class="stop-meta"><span class="sm">3 N&auml;chte</span><span class="sm">180 km von Ullapool</span></div>
+          <p>Skye ist der Grund warum man nach Schottland f&auml;hrt. Quiraing, Old Man of Storr, Fairy Pools. Br&uuml;cke ist mautfrei. Fr&uuml;h aufstehen &ndash; im August wird es voll.</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Staffin (Nordskye) &ndash; Laybys entlang Trotternish Ridge. Elgol Road f&uuml;r Cuillin-Blick.</span></div>
+          <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/the-old-man-of-storr" target="_blank"><span class="ic">&#9968;</span><div><strong>Old Man of Storr</strong><br><span>4 km, 1,5 Std. &middot; Ikonische Felsnadel &middot; Fr&uuml;h gehen!</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/quiraing-circuit" target="_blank"><span class="ic">&#127956;</span><div><strong>Quiraing</strong><br><span>7 km Rundweg, 2&ndash;3 Std. &middot; Spektakul&auml;rste Wanderung auf Skye</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <span class="chill">Tag 3: Fairy Pools, Neist Point Lighthouse bei Sonnenuntergang</span>
+          <a class="resto" href="https://www.google.com/maps/place/Cafe+Arriba/" target="_blank"><strong>Caf&eacute; Arriba, Portree</strong> &ndash; <span>Vegane/vegetarische Optionen. Lokal beliebt.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+          <div class="warn"><strong>Talisker Distillery (Carbost):</strong> Skyes einzige Destillerie. Torfiger Whisky. Tour ab 12 &pound;.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 7: Glen Coe & Fort William -->
+    <div class="stop">
+      <div class="stop-grid">
+        <div class="stop-photos layout-1-2">
+          <img src="https://images.pexels.com/photos/9260249/pexels-photo-9260249.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Glen Coe" loading="lazy">
+          <div class="sub-grid">
+            <img src="https://images.pexels.com/photos/23856944/pexels-photo-23856944.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Glenfinnan Viaduct" loading="lazy">
+            <img src="https://images.pexels.com/photos/31707431/pexels-photo-31707431.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hirsch in den Highlands" loading="lazy">
+          </div>
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">07</div>
+          <h3>Glen Coe &amp; Fort William</h3>
+          <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">110 km &middot; 2,5 Std.</span></div>
+          <p>Schottlands ber&uuml;hmtestes Tal. Die Three Sisters, Glen Etive (James Bond!), Glenfinnan Viadukt (Harry Potter). An jedem Layby anhalten.</p>
+          <div class="free-camp"><strong>&#9978; Wild Camping:</strong> <span>Glen Etive &ndash; 20 km Singletrack ins Nirgendwo. Bester Wild-Camping-Spot Schottlands.</span></div>
+          <a class="hl" href="https://www.alltrails.com/trail/scotland/highland/steall-falls" target="_blank"><span class="ic">&#127754;</span><div><strong>Steall Falls</strong><br><span>120 m Wasserfall &middot; 2 Std. Hin &amp; R&uuml;ck &middot; Durch die Nevis-Schlucht</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <span class="chill">Glenfinnan Viadukt (Zug ca. 10:30 &amp; 15:00), Clachaig Inn (Wanderer-Pub)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 8: Oban -->
+    <div class="stop">
+      <div class="stop-grid reverse">
+        <div class="stop-photos layout-1">
+          <img src="https://images.pexels.com/photos/31656865/pexels-photo-31656865.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Oban Bay" loading="lazy">
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">08</div>
+          <h3>Oban &amp; Westk&uuml;ste</h3>
+          <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">70 km &middot; 1,5 Std.</span></div>
+          <p>Seafood Capital of Scotland. Fischerboote, F&auml;hren, McCaig's Tower. Tagesausflug nach Mull &amp; Iona m&ouml;glich.</p>
+          <a class="camp" href="https://www.google.com/maps/place/Oban+Caravan+%26+Camping+Park/" target="_blank"><strong>Oban Caravan Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">20&ndash;28 &pound; &middot; Fu&szlig;l&auml;ufig zur Stadt</div></a>
+          <a class="resto" href="https://www.google.com/maps/place/Oban+Seafood+Hut/" target="_blank"><strong>Oban Seafood Hut</strong> &ndash; <span>Gr&uuml;ne H&uuml;tte am Pier. Legend&auml;rer Hummer &amp; Krabben.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+          <div class="warn"><strong>Oban Distillery:</strong> Eine der &auml;ltesten Destillerien. Mitten im Ort. Tour ab 12 &pound;.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 9: Loch Lomond -->
+    <div class="stop">
+      <div class="stop-grid">
+        <div class="stop-photos layout-1">
+          <img src="https://images.pexels.com/photos/15199786/pexels-photo-15199786.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Schottische Landschaft" loading="lazy">
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">09</div>
+          <h3>Loch Lomond &amp; Glasgow</h3>
+          <div class="stop-meta"><span class="sm">1&ndash;2 N&auml;chte</span><span class="sm">120 km &middot; 2 Std.</span></div>
+          <p>&bdquo;Highlands im Kleinformat.&ldquo; Loch Katrine, Ben Lomond, Rob Roy's Grab. Glasgow lohnt einen halben Tag.</p>
+          <div class="warn"><strong>Achtung:</strong> Loch Lomond &amp; Trossachs hat Camping-Zonen M&auml;rz&ndash;September. Permit n&ouml;tig (~3&ndash;4 &pound;/Nacht).</div>
+          <a class="camp" href="https://www.google.com/maps/place/Cashel+Campsite/" target="_blank"><strong>Cashel Campsite</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">15&ndash;22 &pound; &middot; Am See &middot; Wundersch&ouml;n</div></a>
+          <a class="resto" href="https://www.google.com/maps/place/Crabshakk/" target="_blank"><strong>Crabshakk, Glasgow</strong> &ndash; <span>Legend&auml;res Seafood in Finnieston.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 10: Return -->
+    <div class="stop">
+      <div class="stop-grid reverse">
+        <div class="stop-photos layout-1">
+          <img src="https://images.pexels.com/photos/34654891/pexels-photo-34654891.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Glenfinnan Viaduct Herbst" loading="lazy">
+        </div>
+        <div class="stop-info">
+          <div class="stop-num">10</div>
+          <h3>R&uuml;ckreise</h3>
+          <div class="stop-meta"><span class="sm">1&ndash;2 Tage</span><span class="sm">~1.200 km</span></div>
+          <p>Glasgow/Edinburgh &rarr; S&uuml;dengland &rarr; Eurotunnel Folkestone &rarr; Calais &rarr; Frankfurt. Oder: DFDS Newcastle &rarr; Amsterdam &rarr; Frankfurt. WoMo abgeben, fertig.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WILDLIFE GALLERY -->
+<div class="wide" style="padding:6px 24px 0">
+  <div class="grid-3">
+    <img src="https://images.pexels.com/photos/28943200/pexels-photo-28943200.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Highland Cow" loading="lazy">
+    <img src="https://images.pexels.com/photos/36154753/pexels-photo-36154753.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hirsch in den Highlands" loading="lazy">
+    <img src="https://images.pexels.com/photos/30928872/pexels-photo-30928872.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eilean Donan Castle" loading="lazy">
+  </div>
+</div>
+
+<!-- BUDGET -->
+<section class="budget-section">
+  <div class="container">
+    <p class="sec-label" style="color:var(--accent)">Budget</p>
+    <h2 class="sec-title" style="color:#fff">Was kostet's?</h2>
+    <p style="color:rgba(255,255,255,.4);margin-bottom:30px;font-size:.85rem">2 Personen &middot; 21 Tage &middot; 1 &pound; &asymp; 1,16 &euro; &middot; Wild Camping = kostenlos!</p>
+    <div class="budget-cards">
+      <div class="bcard feat">
+        <h4>Wild Camper</h4>
+        <div class="price">2.100 &euro;</div>
+        <div class="ps">pro Person &middot; fast alles gratis campen</div>
+        <ul>
+          <li>Anreise (Tunnel+Sprit): 500 &euro;</li><li>WoMo: 2.400 &euro;</li><li>Sprit (Schottland): 450 &euro;</li>
+          <li>Camping: 70 &euro; (3 N&auml;chte bezahlt)</li><li>Essen: 500 &euro; (Selbstversorgung)</li>
+          <li>Aktivit&auml;ten: 200 &euro;</li>
+        </ul>
+      </div>
+      <div class="bcard">
+        <h4>Mittelklasse</h4>
+        <div class="price">3.350 &euro;</div>
+        <div class="ps">pro Person &middot; Mix wild + Campingplatz</div>
+        <ul>
+          <li>Anreise: 500 &euro;</li><li>WoMo: 3.200 &euro;</li><li>Sprit: 500 &euro;</li>
+          <li>Camping: 320 &euro;</li><li>Essen: 1.000 &euro; (Mix)</li>
+          <li>Aktivit&auml;ten: 350 &euro;</li>
+        </ul>
+      </div>
+      <div class="bcard">
+        <h4>Komfort</h4>
+        <div class="price">4.500 &euro;</div>
+        <div class="ps">pro Person</div>
+        <ul>
+          <li>Anreise: 600 &euro;</li><li>WoMo: 4.000 &euro;</li><li>Sprit: 500 &euro;</li>
+          <li>Camping: 550 &euro;</li><li>Essen: 1.500 &euro;</li>
+          <li>Aktivit&auml;ten: 500 &euro; (Three Chimneys!)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLEED: Night -->
+<div class="bleed bleed-medium">
+  <img src="https://images.pexels.com/photos/17146488/pexels-photo-17146488.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Callanish Stones" loading="lazy">
+  <div class="overlay-text">
+    <h2>5.000 Jahre Geschichte</h2>
+    <p>Steinkreise, Burgruinen, Wikinger-Spuren. Schottland ist uralt.</p>
+  </div>
+</div>
+
+<!-- TIPS -->
+<section>
+  <div class="container">
+    <p class="sec-label">Tipps</p>
+    <h2 class="sec-title">Gut zu wissen</h2>
+    <div class="tips-flex">
+      <div class="tip"><div class="tip-ic">&#9978;</div><div><h4>Wild Camping = legal!</h4><p>Scottish Outdoor Access Code. 1&ndash;2 N&auml;chte, Leave No Trace, nicht in Passing Places parken. Kostenlos!</p></div></div>
+      <div class="tip"><div class="tip-ic">&#129439;</div><div><h4>Midges!</h4><p>Winzige Bei&szlig;fliegen, Jul&ndash;Sept. Smidge Spray + Kopfnetz kaufen. Wind hilft. September = weniger Midges.</p></div></div>
+      <div class="tip"><div class="tip-ic">&#128663;</div><div><h4>Singletrack Roads</h4><p>Passing Places nutzen! Links ranfahren f&uuml;r Gegenverkehr. Nie in Passing Places parken. WoMo unter 6 m ideal.</p></div></div>
+      <div class="tip"><div class="tip-ic">&#127863;</div><div><h4>Whisky Trail</h4><p>Dalwhinnie, Tomatin, Talisker (Skye), Oban, Glengoyne. Touren ab 8&ndash;15 &pound;.</p></div></div>
+      <div class="tip"><div class="tip-ic">&#127783;</div><div><h4>Wetter</h4><p>15&ndash;18&deg;C Aug, 12&ndash;16&deg;C Sept. Regen ~50% der Tage. Regenjacke immer dabei. Westk&uuml;ste nasser.</p></div></div>
+      <div class="tip"><div class="tip-ic">&#128176;</div><div><h4>G&uuml;nstig!</h4><p>Wild Camping spart 400&ndash;600 &euro;. Lidl/Aldi/Co-op f&uuml;r Einkauf. Leitungswasser exzellent.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WARNINGS -->
+<section class="warn-section">
+  <div class="container">
+    <p class="sec-label">Wichtig</p>
+    <h2 class="sec-title">Darauf achten</h2>
+    <div class="warn-grid">
+      <div class="wcard"><h4>&#129439; Midges!!!</h4><p>Peak Jul&ndash;Aug. Smidge Spray &amp; Avon Skin So Soft (Kult!). Kopfnetz 5&ndash;8 &pound;. Windige Pl&auml;tze w&auml;hlen. smidgeup.com f&uuml;r Midge-Vorhersage.</p></div>
+      <div class="wcard"><h4>&#128656; Enge Stra&szlig;en</h4><p>NC500 &amp; Skye: oft einspurig. WoMo unter 6 m ideal. Applecross Pass: extrem steil &ndash; nicht f&uuml;r gro&szlig;e WoMos!</p></div>
+      <div class="wcard"><h4>&#9978; Loch Lomond Permit</h4><p>M&auml;rz&ndash;September: Camping-Zonen brauchen Permit (~3&ndash;4 &pound;/Nacht). lochlomond-trossachs.org</p></div>
+      <div class="wcard"><h4>&#9970; Linksverkehr!</h4><p>In UK wird links gefahren. Am Anfang konzentriert bleiben, besonders an Kreuzungen und Kreisverkehren.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section>
+  <div class="container">
+    <p class="sec-label">Planung</p>
+    <h2 class="sec-title">Wann buchen?</h2>
+    <div class="tl">
+      <div class="tl-i"><div class="tl-w">Okt&ndash;Dez 2025</div><div class="tl-t">WoMo buchen (Bunk Campers Edinburgh, Just Go, Wild Horizon)</div></div>
+      <div class="tl-i"><div class="tl-w">Dez 2025</div><div class="tl-t">Eurotunnel oder DFDS F&auml;hre buchen (g&uuml;nstiger bei Fr&uuml;hbuchung)</div></div>
+      <div class="tl-i"><div class="tl-w">Fr&uuml;hjahr 2026</div><div class="tl-t">Three Chimneys (Skye) reservieren, Staffa-Bootstour (Papageientaucher)</div></div>
+      <div class="tl-i"><div class="tl-w">Fr&uuml;hjahr 2026</div><div class="tl-t">Loch Lomond Camping-Permit f&uuml;r Reisedaten</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section style="background:#12140e;padding:60px 0">
+  <div class="container">
+    <p class="sec-label">Vorbereitung</p>
+    <h2 class="sec-title">Packliste</h2>
+    <div class="checks">
+      <div class="chk">Personalausweis/Reisepass</div>
+      <div class="chk">F&uuml;hrerschein (int. nicht n&ouml;tig)</div>
+      <div class="chk">Wise-Karte (GBP)</div>
+      <div class="chk">Regenjacke + Regenhose (!)</div>
+      <div class="chk">Wanderschuhe (wasserdicht!)</div>
+      <div class="chk">Warme Schichten (Fleece, Merino)</div>
+      <div class="chk">Smidge Spray + Kopfnetz (!!!)</div>
+      <div class="chk">Avon Skin So Soft (Midge-Kult)</div>
+      <div class="chk">Fernglas (Adler, Delfine, Robben)</div>
+      <div class="chk">Offline-Karten (kein Netz in Highlands)</div>
+      <div class="chk">Campingstuhl + Decke</div>
+      <div class="chk">Stirnlampe</div>
+      <div class="chk">Erste-Hilfe-Set</div>
+      <div class="chk">Wasserbeh&auml;lter (zum Auff&uuml;llen)</div>
+      <div class="chk">Gutes Buch (f&uuml;r Regentage)</div>
+      <div class="chk">Whisky-Gl&auml;ser &#127867;</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<div class="bleed bleed-medium">
+  <img src="https://images.pexels.com/photos/34208462/pexels-photo-34208462.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Luskentyre Beach Harris" loading="lazy">
+  <div class="overlay-text">
+    <h2>Euer Abenteuer wartet</h2>
+    <p>Drei Wochen. Lochs, Berge, Whisky. Und nachts: nur Stille (und Midges).</p>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:12px"><a href="https://www.visitscotland.com/" target="_blank">Visit Scotland</a> &middot; <a href="https://www.eurotunnel.com/" target="_blank">Eurotunnel</a> &middot; <a href="https://www.dfds.com/" target="_blank">DFDS F&auml;hre</a> &middot; <a href="https://www.walkhighlands.co.uk/" target="_blank">Walk Highlands</a></p>
+  <p>Erstellt April 2026 &middot; Alle Angaben ohne Gew&auml;hr &middot; Sl&agrave;inte mhath! &#127988;&#917607;&#917602;&#917619;&#917603;&#917621;&#917631;</p>
+</footer>
+
+<script>
+(function(){
+  var map=L.map('map',{scrollWheelZoom:false}).setView([57,-4],6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap | OSRM',maxZoom:15}).addTo(map);
+
+  var stops=[
+    {lat:50.1109,lng:8.6821,name:'Frankfurt',nights:'Start',type:'start',desc:'WoMo mieten / losfahren'},
+    {lat:55.9533,lng:-3.1883,name:'Edinburgh',nights:'2 N\u00e4chte',type:'stop',desc:"Arthur's Seat, David Bann"},
+    {lat:57.0479,lng:-3.5990,name:'Cairngorms',nights:'2 N\u00e4chte',type:'stop',desc:'Loch Morlich, Rentiere, Kiefernwald'},
+    {lat:57.4778,lng:-4.2247,name:'Inverness',nights:'2 N\u00e4chte',type:'stop',desc:'Loch Ness, Delfine, Falls of Foyers'},
+    {lat:58.5670,lng:-4.7400,name:'Durness (NC500)',nights:'3 N\u00e4chte',type:'stop',desc:'Smoo Cave, Stac Pollaidh, Str\u00e4nde'},
+    {lat:57.8951,lng:-5.1612,name:'Ullapool',nights:'1 Nacht',type:'stop',desc:'Wester Ross, Seafood Shack'},
+    {lat:57.3340,lng:-6.2560,name:'Isle of Skye',nights:'3 N\u00e4chte',type:'stop',desc:'Old Man of Storr, Quiraing, Fairy Pools'},
+    {lat:56.6825,lng:-5.1024,name:'Glen Coe',nights:'2 N\u00e4chte',type:'stop',desc:'Three Sisters, Glen Etive, Glenfinnan'},
+    {lat:56.4120,lng:-5.4714,name:'Oban',nights:'2 N\u00e4chte',type:'stop',desc:'Seafood Hut, Mull, Destillerie'},
+    {lat:56.0907,lng:-4.5830,name:'Loch Lomond',nights:'1 Nacht',type:'stop',desc:'Trossachs, Ben Lomond'},
+    {lat:50.1109,lng:8.6821,name:'Frankfurt',nights:'R\u00fcckkehr',type:'end',desc:'Via Eurotunnel/F\u00e4hre zur\u00fcck'}
+  ];
+
+  var coords=stops.map(function(s){return s.lng+','+s.lat}).join(';');
+  fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson')
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.code==='Ok'&&d.routes.length){
+        var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
+        L.polyline(ll,{color:'#7a9e6d',weight:4,opacity:.85}).addTo(map);
+        map.fitBounds(ll,{padding:[50,50]});
+      }else{fb()}
+    }).catch(fb);
+
+  function fb(){
+    var ll=stops.map(function(s){return[s.lat,s.lng]});
+    L.polyline(ll,{color:'#7a9e6d',weight:3,opacity:.8,dashArray:'8,8'}).addTo(map);
+    map.fitBounds(ll,{padding:[40,40]});
+  }
+
+  stops.forEach(function(s,i){
+    var c=(s.type==='transit')?'#ff6b6b':'#7a9e6d';
+    var r=(s.type==='start'||s.type==='end')?10:7;
+    L.circleMarker([s.lat,s.lng],{radius:r,fillColor:c,color:'#fff',weight:2,fillOpacity:.9}).addTo(map)
+      .bindPopup('<div style="font-family:Inter,sans-serif;min-width:150px"><div style="font-size:.65rem;color:#7a9e6d;font-weight:600">STOP '+(i<9?'0'+(i+1):''+(i+1))+'</div><div style="font-size:1rem;font-weight:600;margin:2px 0">'+s.name+'</div><div style="font-size:.78rem;color:#777">'+s.nights+'</div><div style="font-size:.78rem;color:#999;margin-top:3px">'+s.desc+'</div></div>');
+    if(i>0&&i<10){L.marker([s.lat,s.lng],{icon:L.divIcon({className:'',html:'<div style="background:'+c+';color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:700;font-family:Inter;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)">'+i+'</div>',iconSize:[20,20],iconAnchor:[10,-5]})}).addTo(map)}
+  });
+
+  map.fitBounds(stops.map(function(s){return[s.lat,s.lng]}),{padding:[40,40]});
+  map.on('click',function(){map.scrollWheelZoom.enable()});
+  map.on('mouseout',function(){map.scrollWheelZoom.disable()});
+})();
+</script>
+</body>
+</html>
