@@ -121,6 +121,25 @@ a.resto span{color:var(--muted)}
 
 .warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
 
+/* === EXPANDABLE DETAILS === */
+details.stop-details{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+details.stop-details summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--accent);padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+details.stop-details summary::before{content:'\25B6';font-size:.6rem;transition:transform .2s}
+details.stop-details[open] summary::before{transform:rotate(90deg)}
+details.stop-details summary:hover{opacity:.8}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.detail-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-size:.8rem}
+.detail-card h5{color:#e0e0e0;font-size:.85rem;margin-bottom:4px}
+.detail-card .dc-rating{color:var(--star);font-size:.75rem}
+.detail-card .dc-price{color:var(--accent);font-size:.75rem;font-weight:600}
+.detail-card p{color:var(--muted);font-size:.78rem;line-height:1.5;margin-top:4px}
+.detail-card .dc-quote{font-style:italic;color:rgba(255,255,255,.5);font-size:.75rem;margin-top:6px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1)}
+.detail-photos{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;border-radius:8px;overflow:hidden}
+.detail-photos img{width:100%;height:160px;object-fit:cover;display:block}
+.detail-single{margin-top:10px}
+.detail-single img{width:100%;height:200px;object-fit:cover;border-radius:8px}
+@media(max-width:768px){.detail-grid{grid-template-columns:1fr}}
+
 .fish-badge{background:linear-gradient(135deg,rgba(91,164,201,.15),rgba(91,164,201,.08));border:1px solid rgba(91,164,201,.3);border-radius:12px;padding:16px 20px;margin:12px 0;display:flex;gap:12px;align-items:center}
 .fish-badge .fb-icon{font-size:2rem;flex-shrink:0}
 .fish-badge .fb-text strong{color:#7cc8e8;font-size:.95rem;display:block;margin-bottom:2px}
@@ -295,6 +314,17 @@ footer a{color:var(--accent);text-decoration:none}
           <p>Morgens fliegen, mittags WoMo &uuml;bernehmen (Touring Cars, Indie Campers, McRent &ndash; alle nahe Gardermoen). Bei Rema 1000 eindecken. Am Oslofjord spazieren. Fertig.</p>
           <a class="camp" href="https://www.google.com/maps/place/Bogstad+Camping/" target="_blank"><strong>Bogstad Camping</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">380&ndash;480 NOK &middot; Am Bogstadvannet See &middot; 8 km zum Zentrum</div></a>
           <a class="resto" href="https://www.google.com/maps/place/Fiskeriet+Youngstorget/" target="_blank"><strong>Fiskeriet</strong> &ndash; <span>Exzellentes Fisch-Restaurant. Mehrere Standorte in Oslo.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in Oslo</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>Munch Museum</h5><span class="dc-rating">&#9733; 4.5/5 TripAdvisor</span> <span class="dc-price">180 NOK (Mi abends gratis!)</span><p>Alle Versionen von &bdquo;Der Schrei&ldquo;. Aussicht von Etage 11&ndash;12 &uuml;ber den Hafen.</p><div class="dc-quote">&bdquo;Excellent museum in terms of building structure and value for money.&ldquo;</div></div>
+              <div class="detail-card"><h5>Vigeland Skulpturenpark</h5><span class="dc-rating">&#9733; 4.5/5 (20.000+ Reviews)</span> <span class="dc-price">KOSTENLOS, 24/7</span><p>212 Skulpturen eines K&uuml;nstlers. Der zornige Junge &amp; der Monolith. Fr&uuml;hmorgens oder bei Sonnenuntergang.</p></div>
+              <div class="detail-card"><h5>Opernhaus &ndash; aufs Dach laufen</h5><span class="dc-rating">&#9733; 4.5/5</span> <span class="dc-price">KOSTENLOS</span><p>Auf dem geneigten Marmordach spazieren. Panoramablick &uuml;ber den Hafen.</p></div>
+              <div class="detail-card"><h5>&#127859; Nordvegan (vegetarisch)</h5><span class="dc-rating">&#9733; 4.6/5 Google</span> <span class="dc-price">300&ndash;500 NOK p.P.</span><p>Preisgekr&ouml;nte nordische vegane K&uuml;che. T&auml;glich wechselnde Karte.</p><div class="dc-quote">&bdquo;Delicious food, generous portions, great value.&ldquo;</div></div>
+            </div>
+            <p style="font-size:.75rem;color:var(--muted);margin-top:10px">&#9888; Superm&auml;rkte sonntags geschlossen! Samstag eindecken bei Rema 1000 oder Kiwi.</p>
+          </details>
         </div>
       </div>
     </div>
@@ -319,6 +349,23 @@ footer a{color:var(--accent);text-decoration:none}
           <span class="chill">Tag 2: Lysefjord-Cruise von Stavanger (500&ndash;700 NOK p.P.)</span>
           <span class="chill">Tag 3: Gamla Stavanger, Sverd i fjell &ndash; abends vom Steg aus angeln!</span>
           <a class="resto" href="https://www.google.com/maps/place/Fisketorget+Stavanger/" target="_blank"><strong>Fisketorget Stavanger</strong> &ndash; <span>Fischmarkt am Hafen. Frischer geht's nicht.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken rund um Stavanger</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/20755026/pexels-photo-20755026.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wanderer am Preikestolen" loading="lazy">
+              <img src="https://images.pexels.com/photos/25036885/pexels-photo-25036885.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stavanger Hafen" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#9968; Preikestolen &ndash; Details</h5><span class="dc-rating">&#9733; 4.8/5 AllTrails (4.738 Reviews)</span> <span class="dc-price">Parking WoMo: 800 NOK</span><p>8 km, 350 Hm, 3&ndash;5 Std. Bis zu 5.000 Wanderer/Tag im Sommer! <strong>Vor 7 Uhr starten</strong> oder nach 15 Uhr. &Uuml;bernachten im Parkplatz verboten!</p><div class="dc-quote">&bdquo;Still one of our favourite hikes we've ever done.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#128674; Lysefjord-Cruise</h5><span class="dc-rating">&#9733; 4.5/5 TripAdvisor</span> <span class="dc-price">Ab 930 NOK p.P.</span><p>R&oslash;dne Fjord Cruise, 3&ndash;3,5 Std. Elektro-Schiff. Preikestolen von unten sehen! Waffeln &amp; Kaffee an Bord.</p><div class="dc-quote">&bdquo;Spacious boat, awesome crew &ndash; well worth the cost.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#129406; Kjeragbolten (optional)</h5><span class="dc-rating">&#9733; 4.7/5 AllTrails (1.229 Reviews)</span> <span class="dc-price">Parking 300 NOK</span><p>9,8 km, 5&ndash;6 Std., SCHWER. Nur bei trockenem Wetter! 3 steile Aufstiege. Auf den Felsen stehen ist optional (und furchteinfl&ouml;&szlig;end).</p><div class="dc-quote">&bdquo;Not easy but the views are absolutely spectacular.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#128161; Geheimtipp: Florli 4.444 Stufen</h5><span class="dc-rating">Wenige Touristen!</span> <span class="dc-price">F&auml;hre ab Stavanger</span><p>Die l&auml;ngste Holztreppe der Welt. Per Lysefjord-F&auml;hre erreichbar. Fast niemand kennt das.</p></div>
+              <div class="detail-card"><h5>&#127860; Nick &amp; Johnnies</h5><span class="dc-rating">&#9733; 4.5/5 TripAdvisor</span> <span class="dc-price">$$$</span><p>Verstecktes Juwel in der Altstadt. Ziegenk&auml;se-Flatbread, Forellen-Sashimi.</p><div class="dc-quote">&bdquo;Food is very good to excellent. Reservations highly recommended.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127860; Sol (vegetarisch)</h5><span class="dc-rating">Michelin-Fokus</span> <span class="dc-price">$$$$</span><p>Stavangers aufregendste K&uuml;che. Nachhaltiges vegetarisches Tasting-Men&uuml;. Perfekt f&uuml;r einen besonderen Abend.</p></div>
+            </div>
+            <p style="font-size:.75rem;color:var(--muted);margin-top:10px">Gamla Stavanger: 173 wei&szlig;e Holzh&auml;user, &auml;lteste Kathedrale Norwegens (1125), Streetart vom Nuart Festival</p>
+          </details>
         </div>
       </div>
     </div>
@@ -342,6 +389,22 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.alltrails.com/trail/norway/vestland/trolltunga" target="_blank"><span class="ic">&#129406;</span><div><strong>Trolltunga (optional, 10&ndash;12 Std!)</strong><br><span>28 km, schwer &middot; 700 m &uuml;ber dem See &middot; Fr&uuml;h starten, Proviant mitnehmen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="hl" href="https://www.google.com/maps/place/V%C3%B8ringsfossen/" target="_blank"><span class="ic">&#127754;</span><div><strong>V&ouml;ringsfossen Wasserfall</strong><br><span>182 m Fallh&ouml;he &middot; Aussichtsplattform kostenlos &middot; Bei Eidfjord</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></a>
           <span class="chill">Tag 3: Obst am Stra&szlig;enrand kaufen, am Fjord sitzen, Steindalsfossen (hinter dem Wasserfall laufen!)</span>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken am Hardangerfjord</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/29755686/pexels-photo-29755686.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Person auf Trolltunga" loading="lazy">
+              <img src="https://images.pexels.com/photos/21563153/pexels-photo-21563153.jpeg?auto=compress&cs=tinysrgb&w=600" alt="V&ouml;ringsfossen Wasserfall" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#129406; Trolltunga &ndash; Ehrliche Einsch&auml;tzung</h5><span class="dc-rating">&#9733; 4.8/5 AllTrails</span> <span class="dc-price">Parking P1: 300 NOK + 220 NOK Maut</span><p>28 km, 10&ndash;14 Std. realistisch! <strong>Kein Guide n&ouml;tig Jun&ndash;Sep</strong>, aber Fitness und Vorbereitung essentiell. Stirnlampe, 2L Wasser, warme Kleidung, viel Essen mitnehmen.</p><div class="dc-quote">&bdquo;The hardest but most rewarding hike I've ever done.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127754; V&ouml;ringsfossen &ndash; Neue Plattform!</h5><span class="dc-rating">&#9733; 4.6/5 Google</span> <span class="dc-price">KOSTENLOS</span><p>182 m Fallh&ouml;he. Neue Aussichtsbr&uuml;cke &amp; Treppen (2024 fertig). Spektakul&auml;rer Blick in die Schlucht. Bei Eidfjord.</p></div>
+              <div class="detail-card"><h5>&#127754; Steindalsfossen</h5><span class="dc-rating">&#9733; 4.5/5</span> <span class="dc-price">KOSTENLOS</span><p>Hinter dem Wasserfall herlaufen! Kurzer Weg vom Parkplatz. Einzigartig.</p></div>
+              <div class="detail-card"><h5>&#127822; Fruktveien (Obststra&szlig;e)</h5><span class="dc-rating">Lokaler Geheimtipp</span> <span class="dc-price">&Auml;pfel ab 30 NOK/kg</span><p>August: &Auml;pfel, Pflaumen, Birnen. September: sp&auml;te &Auml;pfel, Cidre. Direkt am Stra&szlig;enrand kaufen!</p></div>
+              <div class="detail-card"><h5>&#127956; Hardangervidda Nationalpark</h5><span class="dc-rating">Norwegens gr&ouml;&szlig;ter NP</span> <span class="dc-price">Besucherzentrum 130 NOK</span><p>Europas gr&ouml;&szlig;te Hochebene. Wilde Rentiere! Tageswanderungen ab Rv7.</p></div>
+              <div class="detail-card"><h5>&#129482; Folgefonna Gletscher</h5><span class="dc-rating">&#9733; 4.8/5</span> <span class="dc-price">Gef&uuml;hrte Tour ab 700 NOK</span><p>Gletscherwanderung mit Folgefonni Glacier Team. Blaues Eis, Steigeisen, unvergesslich.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -362,6 +425,21 @@ footer a{color:var(--accent);text-decoration:none}
           <span class="chill">Tag 2: Bryggen bummeln, Fischsuppe am Fischmarkt, Caf&eacute;s</span>
           <a class="resto" href="https://www.google.com/maps/place/Pingvinen/" target="_blank"><strong>Pingvinen</strong> &ndash; <span>Traditionell norwegisch, gute vegetarische Optionen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
           <a class="resto" href="https://www.google.com/maps/place/Bergen+Fish+Market/" target="_blank"><strong>Fisketorget Bergen</strong> &ndash; <span>Die legend&auml;re Fischsuppe. Pflichtbesuch.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken in Bergen</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/34617313/pexels-photo-34617313.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bryggen Holzh&auml;user" loading="lazy">
+              <img src="https://images.pexels.com/photos/28583376/pexels-photo-28583376.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bryggen Wharf Bergen" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128750; Fl&oslash;yen vs. Ulriken?</h5><span class="dc-rating">Beide &#9733; 4.7+</span> <span class="dc-price">Fl&oslash;yen 100 NOK / Ulriken 195 NOK</span><p><strong>Fl&oslash;yen</strong>: Besser bei Wolken (niedriger), g&uuml;nstiger, mehr Wanderwege oben. <strong>Ulriken</strong>: H&ouml;her (643 m), bessere Fernsicht bei klarem Wetter. Tipp: zwischen beiden wandern (4&ndash;5 Std)!</p></div>
+              <div class="detail-card"><h5>&#127843; Fischmarkt &ndash; ehrliche Meinung</h5><span class="dc-rating">&#9733; 3.5/5 TripAdvisor</span> <span class="dc-price">&Uuml;berteuert</span><p>Touristisch und teuer, ABER: einmal Fischsuppe probieren lohnt sich. F&uuml;r echtes Seafood besser zu Enhjorningen oder Pingvinen gehen.</p><div class="dc-quote">&bdquo;Worth a quick visit but don't eat a full meal here.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127960; Bryggen &ndash; was genau anschauen?</h5><span class="dc-rating">UNESCO Welterbe</span> <span class="dc-price">KOSTENLOS (Museum 120 NOK)</span><p>Hinter die Fassaden gehen! Enge G&auml;nge zwischen den Holzh&auml;usern. Hanseatisches Museum. Sch&oslash;tstuene (historische Versammlungsr&auml;ume).</p></div>
+              <div class="detail-card"><h5>&#127860; Lysverket</h5><span class="dc-rating">&#9733; 4.6/5</span> <span class="dc-price">$$$$</span><p>Modern nordisch, herausragendes vegetarisches Tasting-Men&uuml;. Im KODE Kunstmuseum.</p></div>
+            </div>
+            <p style="font-size:.75rem;color:var(--muted);margin-top:10px">WoMo-Tipp: In Bergen NICHT ins Zentrum fahren! Am Campingplatz stehen lassen, Bus/Bahn nehmen.</p>
+          </details>
         </div>
       </div>
     </div>
@@ -402,6 +480,22 @@ footer a{color:var(--accent);text-decoration:none}
           <span class="chill">Tag 2: Borgund Stabkirche (1180 n.Chr.) oder Gletscherwanderung Nigardsbreen</span>
           <span class="chill">Tag 3: N&aelig;r&oslash;yfjord per Kajak, abends am Fjord angeln &amp; grillen &#127907;</span>
           <a class="resto" href="https://www.google.com/maps/place/%C3%86gir+BryggeriPub/" target="_blank"><strong>&AElig;gir BryggeriPub</strong> &ndash; <span>Wikinger-Brauhaus in Fl&aring;m. Fischgerichte &amp; vegetarische Pizzen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken am Sognefjord</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/35106810/pexels-photo-35106810.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tourist am Stegastein" loading="lazy">
+              <img src="https://images.pexels.com/photos/36084790/pexels-photo-36084790.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kajaks am Fjord" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128646; Fl&aring;msbana &ndash; Tipps</h5><span class="dc-rating">&#9733; 4.7/5 TripAdvisor</span> <span class="dc-price">370&ndash;530 NOK p.P.</span><p><strong>Rechte Seite f&uuml;r Wasserfall-Blick!</strong> 15&ndash;30 Min. fr&uuml;her da sein. 20 Tunnel, 863 Hm. Stop am Kjosfossen-Wasserfall.</p><div class="dc-quote">&bdquo;One of the most scenic train rides in the world.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#128758; N&aelig;r&oslash;yfjord: Boot vs. Kajak</h5><span class="dc-rating">Beides &#9733;&#9733;&#9733;&#9733;&#9733;</span> <span class="dc-price">Boot 625 NOK / Kajak ab 565 NOK</span><p><strong>Boot</strong>: Entspannt, UNESCO-Fjord, 250 m eng. <strong>Kajak</strong> (Njord, &#9733; 4.9): Intensiver, n&auml;her am Wasser, k&ouml;rperlich. Kajak bei gutem Wetter!</p></div>
+              <div class="detail-card"><h5>&#128065; Stegastein</h5><span class="dc-rating">&#9733; 4.8/5</span> <span class="dc-price">KOSTENLOS</span><p>30 m Plattform, 650 m &uuml;ber dem Aurlandsfjord. Fr&uuml;hmorgens fast allein. Bestes Licht bei Sonnenuntergang.</p></div>
+              <div class="detail-card"><h5>&#9962; Borgund Stabkirche</h5><span class="dc-rating">&#9733; 4.6/5</span> <span class="dc-price">130 NOK</span><p>Besterhaltene Stabkirche Norwegens (ca. 1180). Bei L&aelig;rdal. Drachenk&ouml;pfe auf dem Dach.</p></div>
+              <div class="detail-card"><h5>&#129482; Jostedalsbreen Gletscher</h5><span class="dc-rating">&#9733; 4.9/5 (ICETroll)</span> <span class="dc-price">Ab 600 NOK p.P.</span><p>Europas gr&ouml;&szlig;ter Festlandsgletscher. Gef&uuml;hrte Wanderung zum Nigardsbreen-Arm. Blaues Eis! 45 Min. Fahrt ab Sogndal.</p></div>
+              <div class="detail-card"><h5>&#128739; Sognefjellsvegen (Rv55)</h5><span class="dc-rating">Nationale Touristenstra&szlig;e</span> <span class="dc-price">KOSTENLOS</span><p>H&ouml;chster Gebirgspass Nordeuropas (1.434 m). Verbindet Sognefjord mit Lom. Schnee auch im August m&ouml;glich!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -425,6 +519,22 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.google.com/maps/place/Dalsnibba/" target="_blank"><span class="ic">&#127956;</span><div><strong>Dalsnibba Aussichtspunkt</strong><br><span>1.500 m &uuml;ber dem Meer &middot; Mautstra&szlig;e 150&ndash;200 NOK &middot; Atemberaubend</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="hl" href="https://www.google.com/maps/place/Trollstigen/" target="_blank"><span class="ic">&#128656;</span><div><strong>Trollstigen</strong><br><span>11 Haarnadelkurven &middot; WoMo unter 12,4 m OK &middot; Aussichtsplattform oben</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <div class="warn"><strong>F&auml;hre Geiranger&ndash;Hellesylt:</strong> 250&ndash;400 NOK f&uuml;r WoMo. Unbedingt fahren &ndash; die sch&ouml;nste Stunde der Reise!</div>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken am Geirangerfjord</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/33692808/pexels-photo-33692808.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kreuzfahrtschiff im Geirangerfjord" loading="lazy">
+              <img src="https://images.pexels.com/photos/33622102/pexels-photo-33622102.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Trollstigen Aussichtsplattform" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128674; Geiranger&ndash;Hellesylt F&auml;hre</h5><span class="dc-rating">&#9733; 4.7/5</span> <span class="dc-price">~1.069 NOK (Auto+2 Pers.)</span><p><strong>Oberdeck, linke Seite f&uuml;r Seven Sisters Wasserfall!</strong> 1 Stunde. Sieben Schwestern, Freier, Brautschleier.</p></div>
+              <div class="detail-card"><h5>&#127956; Dalsnibba Skywalk</h5><span class="dc-rating">&#9733; 4.5/5 TripAdvisor</span> <span class="dc-price">330 NOK Mautstra&szlig;e</span><p>1.500 m &uuml;ber dem Meer. Geirangerfjord von ganz oben. Schnee auch im August! Nur bei klarem Wetter lohnenswert.</p></div>
+              <div class="detail-card"><h5>&#128656; Trollstigen &ndash; f&uuml;r WoMo-Fahrer</h5><span class="dc-rating">&#9733; 4.8/5</span> <span class="dc-price">KOSTENLOS</span><p>Max. L&auml;nge 12,4 m. Von &Aring;ndalsnes HOCH fahren (einfacher). Langsam, Ausweichstellen nutzen. Aussichtsplattform oben ist spektakul&auml;r.</p><div class="dc-quote">&bdquo;Nerve-wracking in a motorhome but so worth it.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#129406; Romsdalseggen Gratwanderung</h5><span class="dc-rating">&#9733; 4.9/5 AllTrails</span> <span class="dc-price">Bus 100 NOK</span><p>10 km, 6&ndash;8 Std. ab &Aring;ndalsnes. Norwegens beste Gratwanderung. Nur f&uuml;r erfahrene Wanderer! Bus zum Start.</p></div>
+              <div class="detail-card"><h5>&#127956; &Oslash;rnevegen (Adlerstra&szlig;e)</h5><span class="dc-rating">&#9733; 4.6/5</span> <span class="dc-price">KOSTENLOS</span><p>11 Haarnadelkurven &uuml;ber Geiranger. Aussichtspunkt &Oslash;rnesvingen oben. Dramatisch!</p></div>
+              <div class="detail-card"><h5>&#127860; Westeras Gard</h5><span class="dc-rating">Lokaler Geheimtipp</span> <span class="dc-price">$$</span><p>Bergbauernhof &uuml;ber Geiranger. Waffeln mit Blick &uuml;ber den Fjord. Hinwandern (30 Min.) oder fahren.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -450,6 +560,20 @@ footer a{color:var(--accent);text-decoration:none}
               <span>Direkt von den Br&uuml;cken ins Meer angeln &ndash; Makrele, Pollack, Dorsch. Einer der besten Angel-Spots Norwegens. Kostenlos!</span>
             </div>
           </div>
+
+          <details class="stop-details">
+            <summary>Mehr entdecken an der Atlantic Road &amp; &Aring;lesund</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/36917173/pexels-photo-36917173.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Atlantic Road von oben" loading="lazy">
+              <img src="https://images.pexels.com/photos/36797389/pexels-photo-36797389.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Campervan an der K&uuml;ste" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128739; Atlantic Road &ndash; Tipps</h5><span class="dc-rating">&#9733; 4.8/5</span> <span class="dc-price">KOSTENLOS</span><p><strong>Beste Zeit: 6&ndash;9 Uhr morgens</strong> (kein Verkehr, bestes Licht). Bei Sturm am dramatischsten! Myrbaarholm-Br&uuml;cke = bester Angelspot.</p></div>
+              <div class="detail-card"><h5>&#127961; &Aring;lesund Jugendstil-Stadt</h5><span class="dc-rating">&#9733; 4.5/5</span> <span class="dc-price">Museum 120 NOK</span><p>Nach Brand 1904 komplett im Jugendstil wiederaufgebaut. Jugendstilsenteret Museum. Zu Fu&szlig; erkundbar.</p></div>
+              <div class="detail-card"><h5>&#9968; Aksla &ndash; 418 Stufen</h5><span class="dc-rating">&#9733; Nr. 1 in &Aring;lesund</span> <span class="dc-price">KOSTENLOS</span><p>418 Stufen vom Stadtpark. Panoramablick &uuml;ber &Aring;lesund, Inseln und Berge. Sonnenuntergang!</p></div>
+              <div class="detail-card"><h5>&#127860; XL Diner, &Aring;lesund</h5><span class="dc-rating">&#9733; 4.4/5</span> <span class="dc-price">$$</span><p>Bester Klippfisch (Bacalhau) der Stadt. Lokale Spezialit&auml;t!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
