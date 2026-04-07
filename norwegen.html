@@ -724,12 +724,20 @@ footer a{color:var(--accent);text-decoration:none}
     // === RÜCKWEG (orange, andere Route!) ===
     // Lofoten → Bodø (FÄHRE zurück)
     {coords: '13.6150,68.0990;14.4049,67.2804', color: '#e8925a', ferry: true},
-    // Bodø → Trondheim → Oslo (E6 Inland - ANDERER Weg als hin!)
-    {coords: '14.4049,67.2804;10.3951,63.4305;10.7522,59.9139', color: '#e8925a', ferry: false},
+    // Bodø → Mo i Rana (E6 süd, kürzeres Segment)
+    {coords: '14.4049,67.2804;14.1430,66.3130', color: '#e8925a', ferry: false},
+    // Mo i Rana → Trondheim (E6 süd)
+    {coords: '14.1430,66.3130;10.3951,63.4305', color: '#e8925a', ferry: false},
+    // Trondheim → Lillehammer (E6 süd)
+    {coords: '10.3951,63.4305;10.4662,61.1153', color: '#e8925a', ferry: false},
+    // Lillehammer → Oslo (E6 süd)
+    {coords: '10.4662,61.1153;10.7522,59.9139', color: '#e8925a', ferry: false},
     // Oslo → Kiel (FÄHRE zurück)
     {coords: '10.7522,59.9139;10.1228,54.3233', color: '#e8925a', ferry: true},
-    // Kiel → Frankfurt (Straße)
-    {coords: '10.1228,54.3233;8.6821,50.1109', color: '#e8925a', ferry: false}
+    // Kiel → Hamburg (Straße)
+    {coords: '10.1228,54.3233;9.9937,53.5511', color: '#e8925a', ferry: false},
+    // Hamburg → Frankfurt (Straße)
+    {coords: '9.9937,53.5511;8.6821,50.1109', color: '#e8925a', ferry: false}
   ];
 
   var loaded = 0;
@@ -750,8 +758,15 @@ footer a{color:var(--accent);text-decoration:none}
           if(d.code==='Ok'&&d.routes.length){
             var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
             L.polyline(ll,{color:seg.color,weight:4,opacity:.85}).addTo(map);
+          } else {
+            // Fallback: gerade Linie wenn OSRM fehlschlägt
+            var pts=seg.coords.split(';').map(function(c){var p=c.split(',');return[parseFloat(p[1]),parseFloat(p[0])]});
+            L.polyline(pts,{color:seg.color,weight:3,opacity:.6,dashArray:'6,6'}).addTo(map);
           }
-        }).catch(function(){})
+        }).catch(function(){
+          var pts=seg.coords.split(';').map(function(c){var p=c.split(',');return[parseFloat(p[1]),parseFloat(p[0])]});
+          L.polyline(pts,{color:seg.color,weight:3,opacity:.6,dashArray:'6,6'}).addTo(map);
+        })
         .finally(function(){
           loaded++;
           if(loaded===roadSegments.length) map.fitBounds(allBounds,{padding:[50,50]});
