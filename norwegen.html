@@ -10,9 +10,9 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --dark:#111;--warm:#101a1a;--accent:#5ba4c9;--accent2:#3d8ab0;
-  --cream:#f6f9fa;--sand:#e8eff2;--text:#2a2a2a;--muted:#777;
-  --card:#fff;--radius:14px;--star:#e2b04a;
+  --dark:#0a0a0a;--warm:#0a1214;--accent:#5ba4c9;--accent2:#3d8ab0;
+  --cream:#1a1e20;--sand:#242a2d;--text:#e0e0e0;--muted:#8a9099;
+  --card:#1e2224;--radius:14px;--star:#e2b04a;
 }
 body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
 
@@ -25,7 +25,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);ov
 
 /* === HERO === */
 .hero{height:100vh;min-height:700px;position:relative;display:flex;align-items:flex-end;color:#fff}
-.hero-bg{position:absolute;inset:0;background:url('https://images.pexels.com/photos/1559825/pexels-photo-1559825.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover;z-index:0}
+.hero-bg{position:absolute;inset:0;background:url('https://images.pexels.com/photos/15029484/pexels-photo-15029484.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover;z-index:0}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.15) 100%)}
 .hero-inner{position:relative;z-index:1;padding:0 40px 80px;max-width:900px}
 .hero-tag{display:inline-block;border:1px solid rgba(255,255,255,.4);padding:6px 18px;border-radius:30px;font-size:.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px}
@@ -40,7 +40,7 @@ body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);ov
 .wide{max-width:1400px;margin:0 auto;padding:0 24px}
 section{padding:100px 0}
 .sec-label{font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}
-.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:16px;color:var(--dark);line-height:1.15}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:16px;color:#fff;line-height:1.15}
 .sec-sub{font-size:1rem;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:50px}
 
 /* === FULL BLEED === */
@@ -85,7 +85,7 @@ section{padding:100px 0}
 
 .stop-info{padding:10px 0}
 .stop-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:800;color:var(--accent);line-height:1;opacity:.6}
-.stop-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--dark);margin-bottom:4px}
+.stop-info h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;margin-bottom:4px}
 .stop-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .stop-meta .sm{font-size:.72rem;color:var(--muted);background:var(--sand);padding:3px 10px;border-radius:12px}
 .stop-info>p{font-size:.9rem;line-height:1.7;color:var(--muted);margin-bottom:16px}
@@ -94,7 +94,7 @@ a.camp{display:block;text-decoration:none;background:var(--sand);border-radius:1
 a.camp:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
 a.camp::after{content:'\2197';position:absolute;top:8px;right:8px;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
 a.camp:hover::after{opacity:1}
-a.camp strong{color:var(--dark);font-size:.9rem;border-bottom:1px dotted var(--accent)}
+a.camp strong{color:#e0e0e0;font-size:.9rem;border-bottom:1px dotted var(--accent)}
 a.camp:hover strong{border-bottom-style:solid}
 .camp .stars{color:var(--star);font-size:.8rem;margin-left:4px}
 .camp .cd{font-size:.8rem;color:var(--muted);margin-top:2px}
@@ -109,17 +109,17 @@ a.hl:hover strong{border-bottom-style:solid}
 .hl span{color:var(--muted)}
 .hl .st{color:var(--star);font-size:.78rem}
 
-.chill{display:inline-block;background:linear-gradient(135deg,#dbeafe,#e0f2fe);color:#2563eb;padding:6px 14px;border-radius:20px;font-size:.76rem;font-weight:500;margin-top:6px}
+.chill{display:inline-block;background:rgba(91,164,201,.15);color:#7cc4e8;padding:6px 14px;border-radius:20px;font-size:.76rem;font-weight:500;margin-top:6px}
 
-a.resto{display:block;text-decoration:none;background:#f0f7fb;border-left:3px solid var(--accent2);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:10px;font-size:.82rem;position:relative;transition:transform .15s,box-shadow .15s}
+a.resto{display:block;text-decoration:none;background:rgba(91,164,201,.08);border-left:3px solid var(--accent2);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:10px;font-size:.82rem;position:relative;transition:transform .15s,box-shadow .15s}
 a.resto:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
 a.resto::after{content:'\2197';position:absolute;top:8px;right:8px;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
 a.resto:hover::after{opacity:1}
-a.resto strong{color:var(--dark);border-bottom:1px dotted var(--accent)}
+a.resto strong{color:#e0e0e0;border-bottom:1px dotted var(--accent)}
 a.resto:hover strong{border-bottom-style:solid}
 a.resto span{color:var(--muted)}
 
-.warn{background:#fef3e2;border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#92400e}
+.warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
 
 .quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
 .quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
@@ -148,14 +148,14 @@ a.resto span{color:var(--muted)}
 .tips-flex{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .tip{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.05);display:flex;gap:14px;align-items:flex-start}
 .tip-ic{width:42px;height:42px;background:var(--sand);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.tip h4{font-size:.88rem;color:var(--dark);margin-bottom:3px}
+.tip h4{font-size:.88rem;color:#e0e0e0;margin-bottom:3px}
 .tip p{font-size:.8rem;color:var(--muted);line-height:1.5}
 
-.warn-section{background:#f0f7fb;padding:60px 0}
+.warn-section{background:#151a1c;padding:60px 0}
 .warn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.wcard{background:#fff;border:1px solid #bde0f0;border-radius:12px;padding:20px}
-.wcard h4{font-size:.9rem;color:#1e6b8a;margin-bottom:4px}
-.wcard p{font-size:.8rem;color:#357a97;line-height:1.5}
+.wcard{background:#1e2527;border:1px solid #2a3a40;border-radius:12px;padding:20px}
+.wcard h4{font-size:.9rem;color:#7cc4e8;margin-bottom:4px}
+.wcard p{font-size:.8rem;color:#8a9099;line-height:1.5}
 
 .tl{position:relative;padding-left:28px}
 .tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--accent)}
@@ -212,9 +212,9 @@ footer a{color:var(--accent);text-decoration:none}
 <!-- === MOOD GRID === -->
 <div class="wide" style="padding-top:6px">
   <div class="grid-3">
-    <img src="https://images.pexels.com/photos/2531237/pexels-photo-2531237.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fjordlandschaft" loading="lazy">
-    <img src="https://images.pexels.com/photos/1660995/pexels-photo-1660995.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nordisches Licht" loading="lazy">
-    <img src="https://images.pexels.com/photos/1009136/pexels-photo-1009136.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Norwegen K&uuml;ste" loading="lazy">
+    <img src="https://images.pexels.com/photos/19012463/pexels-photo-19012463.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fjordlandschaft" loading="lazy">
+    <img src="https://images.pexels.com/photos/1933320/pexels-photo-1933320.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nordisches Licht" loading="lazy">
+    <img src="https://images.pexels.com/photos/18307722/pexels-photo-18307722.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Norwegen K&uuml;ste" loading="lazy">
   </div>
 </div>
 
@@ -266,10 +266,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/3330118/pexels-photo-3330118.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Autobahn Deutschland" loading="lazy">
+          <img src="https://images.pexels.com/photos/31390896/pexels-photo-31390896.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Autobahn Deutschland" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/2440024/pexels-photo-2440024.jpeg?auto=compress&cs=tinysrgb&w=600" alt="F&auml;hre" loading="lazy">
-            <img src="https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Meer" loading="lazy">
+            <img src="https://images.pexels.com/photos/13650588/pexels-photo-13650588.jpeg?auto=compress&cs=tinysrgb&w=600" alt="F&auml;hre" loading="lazy">
+            <img src="https://images.pexels.com/photos/26200488/pexels-photo-26200488.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Meer" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -290,7 +290,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1">
-          <img src="https://images.pexels.com/photos/1590549/pexels-photo-1590549.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Oslo" loading="lazy">
+          <img src="https://images.pexels.com/photos/8547967/pexels-photo-8547967.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Oslo" loading="lazy">
         </div>
         <div class="stop-info">
           <div class="stop-num">02</div>
@@ -307,10 +307,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/1483024/pexels-photo-1483024.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Preikestolen" loading="lazy">
+          <img src="https://images.pexels.com/photos/10643915/pexels-photo-10643915.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Preikestolen" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/2070485/pexels-photo-2070485.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fjord-Dorf" loading="lazy">
-            <img src="https://images.pexels.com/photos/2649403/pexels-photo-2649403.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wandern Norwegen" loading="lazy">
+            <img src="https://images.pexels.com/photos/12411061/pexels-photo-12411061.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fjord-Dorf" loading="lazy">
+            <img src="https://images.pexels.com/photos/1647962/pexels-photo-1647962.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wandern Norwegen" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -330,10 +330,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/2113566/pexels-photo-2113566.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fjord" loading="lazy">
+          <img src="https://images.pexels.com/photos/33564876/pexels-photo-33564876.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fjord" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/3617500/pexels-photo-3617500.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wasserfall" loading="lazy">
-            <img src="https://images.pexels.com/photos/1592461/pexels-photo-1592461.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergweg" loading="lazy">
+            <img src="https://images.pexels.com/photos/18660898/pexels-photo-18660898.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wasserfall" loading="lazy">
+            <img src="https://images.pexels.com/photos/18307737/pexels-photo-18307737.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergweg" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -353,7 +353,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1">
-          <img src="https://images.pexels.com/photos/1660996/pexels-photo-1660996.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Bergen Bryggen" loading="lazy">
+          <img src="https://images.pexels.com/photos/28583376/pexels-photo-28583376.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Bergen Bryggen" loading="lazy">
         </div>
         <div class="stop-info">
           <div class="stop-num">05</div>
@@ -373,7 +373,7 @@ footer a{color:var(--accent);text-decoration:none}
 
 <!-- === BLEED: Fjorde === -->
 <div class="bleed bleed-tall">
-  <img src="https://images.pexels.com/photos/2525899/pexels-photo-2525899.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Norwegischer Fjord" loading="lazy">
+  <img src="https://images.pexels.com/photos/15979078/pexels-photo-15979078.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Norwegischer Fjord" loading="lazy">
   <div class="overlay-text">
     <h2>Die Fjorde werden tiefer</h2>
     <p>Sognefjord: 204 km lang, 1.308 m tief. Der K&ouml;nig unter den Fjorden.</p>
@@ -388,10 +388,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fjord mit Boot" loading="lazy">
+          <img src="https://images.pexels.com/photos/15979078/pexels-photo-15979078.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fjord mit Boot" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stabkirche" loading="lazy">
-            <img src="https://images.pexels.com/photos/2878019/pexels-photo-2878019.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergsee" loading="lazy">
+            <img src="https://images.pexels.com/photos/19593820/pexels-photo-19593820.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Stabkirche" loading="lazy">
+            <img src="https://images.pexels.com/photos/18307737/pexels-photo-18307737.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergsee" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -412,10 +412,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/1721522/pexels-photo-1721522.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Geirangerfjord" loading="lazy">
+          <img src="https://images.pexels.com/photos/15029484/pexels-photo-15029484.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Geirangerfjord" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/4064432/pexels-photo-4064432.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergstra&szlig;e" loading="lazy">
-            <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fjord von oben" loading="lazy">
+            <img src="https://images.pexels.com/photos/4119150/pexels-photo-4119150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Bergstra&szlig;e" loading="lazy">
+            <img src="https://images.pexels.com/photos/35106819/pexels-photo-35106819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fjord von oben" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -435,7 +435,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid">
         <div class="stop-photos layout-1">
-          <img src="https://images.pexels.com/photos/1743165/pexels-photo-1743165.jpeg?auto=compress&cs=tinysrgb&w=900" alt="K&uuml;stenstra&szlig;e" loading="lazy">
+          <img src="https://images.pexels.com/photos/28429518/pexels-photo-28429518.jpeg?auto=compress&cs=tinysrgb&w=900" alt="K&uuml;stenstra&szlig;e" loading="lazy">
         </div>
         <div class="stop-info">
           <div class="stop-num">08</div>
@@ -458,8 +458,8 @@ footer a{color:var(--accent);text-decoration:none}
 <!-- === MOOD GRID === -->
 <div class="wide" style="padding-top:6px">
   <div class="grid-2-1">
-    <img src="https://images.pexels.com/photos/2792601/pexels-photo-2792601.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Nordnorwegen" loading="lazy" style="height:400px">
-    <img src="https://images.pexels.com/photos/1694621/pexels-photo-1694621.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Nordlichter" loading="lazy" style="height:400px">
+    <img src="https://images.pexels.com/photos/20022123/pexels-photo-20022123.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="Nordnorwegen" loading="lazy" style="height:400px">
+    <img src="https://images.pexels.com/photos/3855633/pexels-photo-3855633.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Nordlichter" loading="lazy" style="height:400px">
   </div>
 </div>
 
@@ -471,7 +471,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1">
-          <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Nordische Stadt" loading="lazy">
+          <img src="https://images.pexels.com/photos/17044633/pexels-photo-17044633.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Nordische Stadt" loading="lazy">
         </div>
         <div class="stop-info">
           <div class="stop-num">09</div>
@@ -488,10 +488,10 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid">
         <div class="stop-photos layout-1-2">
-          <img src="https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lofoten Rorbuer" loading="lazy">
+          <img src="https://images.pexels.com/photos/27245725/pexels-photo-27245725.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lofoten Rorbuer" loading="lazy">
           <div class="sub-grid">
-            <img src="https://images.pexels.com/photos/4286966/pexels-photo-4286966.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lofoten Strand" loading="lazy">
-            <img src="https://images.pexels.com/photos/3889843/pexels-photo-3889843.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fischerdorf" loading="lazy">
+            <img src="https://images.pexels.com/photos/12118245/pexels-photo-12118245.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Lofoten Strand" loading="lazy">
+            <img src="https://images.pexels.com/photos/33628272/pexels-photo-33628272.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fischerdorf" loading="lazy">
           </div>
         </div>
         <div class="stop-info">
@@ -514,7 +514,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="stop">
       <div class="stop-grid reverse">
         <div class="stop-photos layout-1">
-          <img src="https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Norwegische Stra&szlig;e" loading="lazy">
+          <img src="https://images.pexels.com/photos/29823041/pexels-photo-29823041.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Norwegische Stra&szlig;e" loading="lazy">
         </div>
         <div class="stop-info">
           <div class="stop-num">11</div>
@@ -544,9 +544,9 @@ footer a{color:var(--accent);text-decoration:none}
 <!-- === WILDLIFE GALLERY === -->
 <div class="wide" style="padding:6px 24px 0">
   <div class="grid-3">
-    <img src="https://images.pexels.com/photos/2886284/pexels-photo-2886284.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Seeadler" loading="lazy">
-    <img src="https://images.pexels.com/photos/726298/pexels-photo-726298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rentier" loading="lazy">
-    <img src="https://images.pexels.com/photos/5064660/pexels-photo-5064660.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Norwegische K&uuml;ste" loading="lazy">
+    <img src="https://images.pexels.com/photos/18944810/pexels-photo-18944810.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Seeadler" loading="lazy">
+    <img src="https://images.pexels.com/photos/18012704/pexels-photo-18012704.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Rentier" loading="lazy">
+    <img src="https://images.pexels.com/photos/811034/pexels-photo-811034.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Norwegische K&uuml;ste" loading="lazy">
   </div>
 </div>
 
@@ -636,7 +636,7 @@ footer a{color:var(--accent);text-decoration:none}
 </section>
 
 <!-- === PACKLISTE === -->
-<section style="background:#fff;padding:60px 0">
+<section style="background:#151a1c;padding:60px 0">
   <div class="container">
     <p class="sec-label">Vorbereitung</p>
     <h2 class="sec-title">Packliste</h2>
@@ -663,7 +663,7 @@ footer a{color:var(--accent);text-decoration:none}
 
 <!-- === FINAL === -->
 <div class="bleed bleed-medium">
-  <img src="https://images.pexels.com/photos/4577791/pexels-photo-4577791.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="WoMo in Norwegen" loading="lazy">
+  <img src="https://images.pexels.com/photos/17684827/pexels-photo-17684827.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="WoMo in Norwegen" loading="lazy">
   <div class="overlay-text">
     <h2>Euer Abenteuer wartet</h2>
     <p>Drei Wochen. Fjorde, Berge, Nordlichter. Und ganz viel Stille.</p>
