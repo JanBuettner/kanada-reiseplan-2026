@@ -105,6 +105,16 @@ section{padding:100px 0}
 
 .warn{background:#fef3e2;border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#92400e}
 
+a.hl,a.camp,a.resto{text-decoration:none;display:block;transition:transform .15s,box-shadow .15s;position:relative}
+a.hl{display:flex}
+a.hl:hover,a.camp:hover,a.resto:hover{transform:translateX(4px);box-shadow:-3px 0 0 var(--accent)}
+a.camp:hover,a.resto:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+a.hl::after,a.camp::after,a.resto::after{content:'\2197';position:absolute;top:8px;right:8px;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .15s}
+a.hl::after{top:2px;right:0}
+a.hl:hover::after,a.camp:hover::after,a.resto:hover::after{opacity:1}
+a.hl strong,a.camp strong,a.resto strong{border-bottom:1px dotted var(--accent)}
+a.hl:hover strong,a.camp:hover strong,a.resto:hover strong{border-bottom-style:solid}
+
 /* === QUOTE BREAK === */
 .quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
 .quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
@@ -257,8 +267,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Vancouver</h3>
           <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">Ankunft &amp; Wohnmobil</span></div>
           <p>Ankommen, durchatmen. Wohnmobil &uuml;bernehmen, im Supermarkt f&uuml;r die ersten Tage eindecken. Den Abend einfach genie&szlig;en.</p>
-          <div class="camp"><strong>Capilano River RV Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">North Vancouver &middot; 55&ndash;75 CAD &middot; Full Hookups</div></div>
-          <div class="resto"><strong>The Acorn</strong> &ndash; <span>Eines der besten vegetarischen Restaurants Kanadas. Main Street. Reservierung empfohlen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+          <a class="camp" href="https://www.google.com/maps/place/Capilano+River+RV+Park/" target="_blank"><strong>Capilano River RV Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">North Vancouver &middot; 55&ndash;75 CAD &middot; Full Hookups</div></a>
+          <a class="resto" href="https://www.theacornrestaurant.ca/" target="_blank"><strong>The Acorn</strong> &ndash; <span>Eines der besten vegetarischen Restaurants Kanadas. Main Street. Reservierung empfohlen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
         </div>
       </div>
     </div>
@@ -278,8 +288,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Whistler</h3>
           <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">125 km &middot; 1,5 Std.</span></div>
           <p>Der Sea-to-Sky Highway ist schon das erste Highlight. Spontan an Shannon Falls oder Brandywine Falls halten. Zwei Tage &ndash; einen f&uuml;r eine Wanderung, einen zum Nichtstun.</p>
-          <div class="camp"><strong>Nairn Falls Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">22&ndash;35 CAD &middot; Waldlage mit Wasserfall &middot; DiscoverCamping.ca</div></div>
-          <div class="hl"><span class="ic">&#128142;</span><div><strong>Joffre Lakes</strong><br><span>10 km, mittel &middot; Drei unw&uuml;rklich t&uuml;rkise Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://bcparks.ca/nairn-falls-park/" target="_blank"><strong>Nairn Falls Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">22&ndash;35 CAD &middot; Waldlage mit Wasserfall &middot; DiscoverCamping.ca</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/british-columbia/joffre-lakes" target="_blank"><span class="ic">&#128142;</span><div><strong>Joffre Lakes</strong><br><span>10 km, mittel &middot; Drei unw&uuml;rklich t&uuml;rkise Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Freier Tag &ndash; See, Dorf, einfach sein</span>
         </div>
       </div>
@@ -296,7 +306,7 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Kamloops</h3>
           <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">290 km &middot; 3,5 Std.</span><span class="sm">Transit</span></div>
           <p>Fahrtag &uuml;ber die spektakul&auml;re Duffy Lake Road. Abends am See ankommen, schwimmen, grillen, Sonnenuntergang.</p>
-          <div class="camp"><strong>Paul Lake Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">22&ndash;35 CAD &middot; Badesee &middot; DiscoverCamping.ca</div></div>
+          <a class="camp" href="https://bcparks.ca/paul-lake-park/" target="_blank"><strong>Paul Lake Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">22&ndash;35 CAD &middot; Badesee &middot; DiscoverCamping.ca</div></a>
           <span class="chill">Ankunftstag &ndash; Schwimmen, Grillen, Sterne gucken</span>
         </div>
       </div>
@@ -313,8 +323,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Mount Robson</h3>
           <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">340 km &middot; 3,5 Std.</span></div>
           <p>Der h&ouml;chste Berg der kanadischen Rockies. 3.954 Meter. Der Blick vom Campground allein ist die Fahrt wert.</p>
-          <div class="camp"><strong>Robson Meadows Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">28&ndash;38 CAD &middot; 125 Pl&auml;tze &middot; DiscoverCamping.ca</div></div>
-          <div class="hl"><span class="ic">&#129406;</span><div><strong>Kinney Lake Trail</strong><br><span>9,4 km, leicht-mittel &middot; T&uuml;rkiser See am Fu&szlig; des Berges</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://bcparks.ca/mount-robson-park/" target="_blank"><strong>Robson Meadows Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">28&ndash;38 CAD &middot; 125 Pl&auml;tze &middot; DiscoverCamping.ca</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/british-columbia/kinney-lake" target="_blank"><span class="ic">&#129406;</span><div><strong>Kinney Lake Trail</strong><br><span>9,4 km, leicht-mittel &middot; T&uuml;rkiser See am Fu&szlig; des Berges</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
         </div>
       </div>
     </div>
@@ -350,11 +360,11 @@ footer a{color:var(--accent);text-decoration:none}
           <div class="stop-meta"><span class="sm">3 N&auml;chte</span><span class="sm">85 km &middot; 1 Std.</span></div>
           <p>Drei Tage in einem der wildesten Parks Kanadas. Elche, B&auml;ren, Wapitis. Nicht hetzen &ndash; ein Highlight pro Tag, den Rest einfach da sein.</p>
           <div class="warn"><strong>Parks Canada Discovery Pass</strong> &ndash; 145 CAD (~99 &euro;) f&uuml;r die Gruppe. Gilt f&uuml;r alle Nationalparks.</div>
-          <div class="camp"><strong>Whistlers Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Strom &middot; reservation.pc.gc.ca</div></div>
-          <div class="hl"><span class="ic">&#128674;</span><div><strong>Tag 1: Spirit Island Bootstour</strong><br><span>Maligne Lake, ca. 75 CAD &middot; Die ikonischste Ansicht Kanadas</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></div>
-          <div class="hl"><span class="ic">&#129420;</span><div><strong>Tag 2: Valley of the Five Lakes</strong><br><span>4,6 km, leicht &middot; F&uuml;nf juwelenbunte Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://reservation.pc.gc.ca/Jasper" target="_blank"><strong>Whistlers Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Strom &middot; reservation.pc.gc.ca</div></a>
+          <a class="hl" href="https://www.banffjaspercollection.com/attractions/maligne-lake-cruise/" target="_blank"><span class="ic">&#128674;</span><div><strong>Tag 1: Spirit Island Bootstour</strong><br><span>Maligne Lake, ca. 75 CAD &middot; Die ikonischste Ansicht Kanadas</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/alberta/valley-of-the-five-lakes" target="_blank"><span class="ic">&#129420;</span><div><strong>Tag 2: Valley of the Five Lakes</strong><br><span>4,6 km, leicht &middot; F&uuml;nf juwelenbunte Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 3: Ruhetag &ndash; Pyramid Lake, Miette Hot Springs, einfach Jasper</span>
-          <div class="resto"><strong>Syrahs of Jasper</strong> &ndash; <span>Wild-Lachs, Arctic Char, vegetarische Optionen. Saisonal &amp; lokal.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div>
+          <a class="resto" href="https://www.google.com/maps/place/Syrahs+of+Jasper/" target="_blank"><strong>Syrahs of Jasper</strong> &ndash; <span>Wild-Lachs, Arctic Char, vegetarische Optionen. Saisonal &amp; lokal.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
         </div>
       </div>
     </div>
@@ -374,8 +384,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Icefields Parkway</h3>
           <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">130 km &middot; ganzer Tag</span></div>
           <p>Eine der sch&ouml;nsten Stra&szlig;en der Welt. Langsam fahren, anhalten wo es gef&auml;llt. Athabasca Falls, Sunwapta Falls, Peyto Lake. Der Weg ist das Ziel.</p>
-          <div class="camp"><strong>Wilcox Creek Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">22&ndash;28 CAD &middot; First Come First Served &middot; Vor 13 Uhr!</div></div>
-          <div class="hl"><span class="ic">&#129482;</span><div><strong>Columbia Icefield</strong><br><span>Gletscher-Tour ~95 CAD &middot; Skywalk ~40 CAD</span> <span class="st">&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://parks.canada.ca/pn-np/ab/jasper/activ/camping" target="_blank"><strong>Wilcox Creek Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">22&ndash;28 CAD &middot; First Come First Served &middot; Vor 13 Uhr!</div></a>
+          <a class="hl" href="https://www.banffjaspercollection.com/attractions/columbia-icefield/" target="_blank"><span class="ic">&#129482;</span><div><strong>Columbia Icefield</strong><br><span>Gletscher-Tour ~95 CAD &middot; Skywalk ~40 CAD</span> <span class="st">&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <div class="warn"><strong>Tanken in Jasper!</strong> Nur eine Tankstelle auf der gesamten Strecke.</div>
         </div>
       </div>
@@ -415,9 +425,9 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Lake Louise</h3>
           <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">130 km &middot; 1,5 Std.</span></div>
           <p>Unterwegs am Peyto Lake stoppen. Dann zwei der ber&uuml;hmtesten Seen der Welt &ndash; in Ruhe, nicht im Galopp.</p>
-          <div class="camp"><strong>Lake Louise Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Strom &middot; Monate vorher buchen!</div></div>
-          <div class="hl"><span class="ic">&#128142;</span><div><strong>Tag 1: Lakeshore Trail</strong><br><span>4 km, leicht &middot; Der ikonische t&uuml;rkise See</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
-          <div class="hl"><span class="ic">&#128247;</span><div><strong>Tag 2: Moraine Lake</strong><br><span>Shuttlebus (WoMo nicht erlaubt!) &middot; Am See sitzen, staunen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://reservation.pc.gc.ca/" target="_blank"><strong>Lake Louise Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Strom &middot; Monate vorher buchen!</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/alberta/lake-louise-lakeshore" target="_blank"><span class="ic">&#128142;</span><div><strong>Tag 1: Lakeshore Trail</strong><br><span>4 km, leicht &middot; Der ikonische t&uuml;rkise See</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <a class="hl" href="https://parks.canada.ca/pn-np/ab/banff/visit/parkbus/moraine" target="_blank"><span class="ic">&#128247;</span><div><strong>Tag 2: Moraine Lake</strong><br><span>Shuttlebus (WoMo nicht erlaubt!) &middot; Am See sitzen, staunen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <div class="warn"><strong>Moraine Lake:</strong> Shuttle-Reservierung n&ouml;tig. Keine Privatfahrzeuge seit 2023.</div>
         </div>
       </div>
@@ -438,11 +448,11 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Banff</h3>
           <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">58 km &middot; 40 Min.</span></div>
           <p>Das Bergst&auml;dtchen mit hei&szlig;en Quellen, kleinen L&auml;den und einer Handvoll richtig guter Restaurants. Zwei entspannte Tage.</p>
-          <div class="camp"><strong>Tunnel Mountain Village II</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">44&ndash;55 CAD &middot; Full Hookups &middot; 15 Min. ins Zentrum</div></div>
-          <div class="hl"><span class="ic">&#127956;&#65039;</span><div><strong>Tag 1: Johnston Canyon</strong><br><span>5,4 km, leicht &middot; Stege durch Kalkstein-Schlucht &middot; Fr&uuml;h los!</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></div>
+          <a class="camp" href="https://reservation.pc.gc.ca/" target="_blank"><strong>Tunnel Mountain Village II</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">44&ndash;55 CAD &middot; Full Hookups &middot; 15 Min. ins Zentrum</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/alberta/johnston-canyon" target="_blank"><span class="ic">&#127956;&#65039;</span><div><strong>Tag 1: Johnston Canyon</strong><br><span>5,4 km, leicht &middot; Stege durch Kalkstein-Schlucht &middot; Fr&uuml;h los!</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></a>
           <span class="chill">Tag 2: Hot Springs (10 CAD), Vermilion Lakes bei Sonnenuntergang, bummeln</span>
-          <div class="resto"><strong>Nourish Bistro</strong> &ndash; <span>100% vegetarisch/vegan. Kreative Bowls.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div>
-          <div class="resto"><strong>The Bison</strong> &ndash; <span>Wild-Lachs &amp; Farm-to-Table. Bear Street.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div>
+          <a class="resto" href="https://www.nourishbistro.com/" target="_blank"><strong>Nourish Bistro</strong> &ndash; <span>100% vegetarisch/vegan. Kreative Bowls.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+          <a class="resto" href="https://www.thebison.ca/" target="_blank"><strong>The Bison</strong> &ndash; <span>Wild-Lachs &amp; Farm-to-Table. Bear Street.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
         </div>
       </div>
     </div>
@@ -458,8 +468,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Yoho National Park</h3>
           <div class="stop-meta"><span class="sm">2 N&auml;chte</span><span class="sm">85 km &middot; 1 Std.</span></div>
           <p>Der ruhige Bruder von Banff. Weniger Touristen, genauso spektakul&auml;r. Perfekt zum Durchatmen nach dem Trubel.</p>
-          <div class="camp"><strong>Kicking Horse Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">28&ndash;33 CAD &middot; Bei Field &middot; reservation.pc.gc.ca</div></div>
-          <div class="hl"><span class="ic">&#128758;</span><div><strong>Tag 1: Emerald Lake</strong><br><span>5,2 km Rundweg, leicht &middot; Kanu mieten oder Stille genie&szlig;en</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
+          <a class="camp" href="https://reservation.pc.gc.ca/" target="_blank"><strong>Kicking Horse Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">28&ndash;33 CAD &middot; Bei Field &middot; reservation.pc.gc.ca</div></a>
+          <a class="hl" href="https://www.alltrails.com/trail/canada/british-columbia/emerald-lake-loop" target="_blank"><span class="ic">&#128758;</span><div><strong>Tag 1: Emerald Lake</strong><br><span>5,2 km Rundweg, leicht &middot; Kanu mieten oder Stille genie&szlig;en</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Wapta Falls (4,4 km), dann Camp, Buch, Ruhe</span>
           <div class="warn"><strong>Takakkaw Falls:</strong> Enge Serpentinen &ndash; WoMo &uuml;ber 7&ndash;8 m kommen nicht durch!</div>
         </div>
@@ -492,8 +502,8 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Revelstoke</h3>
           <div class="stop-meta"><span class="sm">1 Nacht</span><span class="sm">150 km &middot; 1,5 Std.</span><span class="sm">Transit</span></div>
           <p>Durch den Rogers Pass und Glacier NP. Kurzer Stopp bei den Giant Cedars &ndash; 500 Meter, die sich anf&uuml;hlen wie eine andere Welt.</p>
-          <div class="camp"><strong>Williamson Lake Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Full Hookups &middot; Badesee</div></div>
-          <div class="hl"><span class="ic">&#127794;</span><div><strong>Giant Cedars Boardwalk</strong><br><span>500 m &middot; 500+ Jahre alte Zedern &middot; Kostenlos</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></div>
+          <a class="camp" href="https://www.google.com/maps/place/Williamson+Lake+Campground/" target="_blank"><strong>Williamson Lake Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">40&ndash;50 CAD &middot; Full Hookups &middot; Badesee</div></a>
+          <a class="hl" href="https://www.google.com/maps/place/Giant+Cedars+Boardwalk+Trail/" target="_blank"><span class="ic">&#127794;</span><div><strong>Giant Cedars Boardwalk</strong><br><span>500 m &middot; 500+ Jahre alte Zedern &middot; Kostenlos</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&frac12;</span></div></a>
         </div>
       </div>
     </div>
@@ -513,11 +523,11 @@ footer a{color:var(--accent);text-decoration:none}
           <h3>Okanagan Valley</h3>
           <div class="stop-meta"><span class="sm">3 N&auml;chte</span><span class="sm">280 km &middot; 3 Std.</span></div>
           <p>Kontrastprogramm: Kanadas Weinregion. Warme Seen, Obstplantagen, Weing&uuml;ter. Drei Tage Seele baumeln lassen.</p>
-          <div class="camp"><strong>Bear Creek Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">22&ndash;35 CAD &middot; Sandstrand am Okanagan Lake &middot; DiscoverCamping.ca</div></div>
-          <div class="hl"><span class="ic">&#127863;</span><div><strong>Tag 1: Weing&uuml;ter &amp; See</strong><br><span>Mission Hill, Quails' Gate &middot; Nachmittags am See &middot; Obst am Stra&szlig;enrand</span></div></div>
+          <a class="camp" href="https://bcparks.ca/bear-creek-park/" target="_blank"><strong>Bear Creek Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">22&ndash;35 CAD &middot; Sandstrand am Okanagan Lake &middot; DiscoverCamping.ca</div></a>
+          <a class="hl" href="https://www.missionhillwinery.com/" target="_blank"><span class="ic">&#127863;</span><div><strong>Tag 1: Weing&uuml;ter &amp; See</strong><br><span>Mission Hill, Quails' Gate &middot; Nachmittags am See &middot; Obst am Stra&szlig;enrand</span></div></a>
           <span class="chill">Tag 2: Freier Tag &ndash; Strand, Schwimmen, Eis, Sonnenuntergang</span>
-          <div class="hl"><span class="ic">&#127964;&#65039;</span><div><strong>Tag 3: Kalamalka Lake</strong><br><span>Der &bdquo;See der tausend Farben&ldquo; bei Vernon</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></div>
-          <div class="resto"><strong>Raudz Regional Table</strong> &ndash; <span>Kelowna. Okanagan-Forelle, Pazifik-Lachs, vegetarische Teller.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+          <a class="hl" href="https://www.alltrails.com/parks/canada/british-columbia/kalamalka-lake-provincial-park" target="_blank"><span class="ic">&#127964;&#65039;</span><div><strong>Tag 3: Kalamalka Lake</strong><br><span>Der &bdquo;See der tausend Farben&ldquo; bei Vernon</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
+          <a class="resto" href="https://www.rfrg.ca/raudz/" target="_blank"><strong>Raudz Regional Table</strong> &ndash; <span>Kelowna. Okanagan-Forelle, Pazifik-Lachs, vegetarische Teller.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
         </div>
       </div>
     </div>
