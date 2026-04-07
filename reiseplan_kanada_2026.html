@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Westkanada Roadtrip 2026 – Wohnmobil-Rundreise</title>
+<style>
+  :root {
+    --forest: #2d5016;
+    --forest-light: #4a7c29;
+    --lake: #1a6b8a;
+    --lake-light: #2a9bc5;
+    --earth: #8b6914;
+    --earth-light: #c4a035;
+    --snow: #f5f5f0;
+    --rock: #4a4a4a;
+    --rock-light: #6b6b6b;
+    --sand: #f0e8d8;
+    --card-bg: #ffffff;
+    --shadow: rgba(0,0,0,0.08);
+    --star: #e8a317;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--snow);
+    color: var(--rock);
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--forest) 0%, var(--lake) 50%, var(--forest-light) 100%);
+    color: white;
+    padding: 60px 20px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🏔️';
+    position: absolute;
+    font-size: 200px;
+    opacity: 0.08;
+    top: -20px;
+    right: -20px;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .hero h1 strong { font-weight: 700; }
+  .hero .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .num {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+  }
+  .hero-stat .lbl {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* SECTION */
+  section {
+    margin: 40px 0;
+  }
+  section h2 {
+    font-size: 1.6rem;
+    color: var(--forest);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--earth-light);
+    display: inline-block;
+  }
+
+  /* ROUTE OVERVIEW */
+  .route-overview {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 12px var(--shadow);
+    overflow-x: auto;
+  }
+  .route-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: max-content;
+    padding: 10px 0;
+  }
+  .route-stop-mini {
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .route-stop-mini .name {
+    font-weight: 600;
+    color: var(--forest);
+    font-size: 0.8rem;
+  }
+  .route-stop-mini .nights {
+    color: var(--lake);
+    font-size: 0.7rem;
+  }
+  .route-arrow {
+    color: var(--earth-light);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  /* STOP CARDS */
+  .stop-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px var(--shadow);
+    margin-bottom: 25px;
+    overflow: hidden;
+    border-left: 5px solid var(--forest);
+  }
+  .stop-card.chill { border-left-color: var(--lake-light); }
+  .stop-card.transit { border-left-color: var(--earth); }
+
+  .stop-header {
+    padding: 20px 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .stop-header h3 {
+    font-size: 1.3rem;
+    color: var(--forest);
+  }
+  .stop-header h3 .stop-num {
+    display: inline-block;
+    background: var(--forest);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.8rem;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .stop-meta {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .meta-badge {
+    background: var(--sand);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--rock-light);
+  }
+
+  .stop-body {
+    padding: 0 25px 20px;
+  }
+  .stop-body p {
+    margin-bottom: 12px;
+    color: var(--rock-light);
+    font-size: 0.95rem;
+  }
+
+  /* CAMPGROUND */
+  .campground {
+    background: var(--sand);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+  }
+  .campground .cg-name {
+    font-weight: 600;
+    color: var(--forest);
+  }
+  .campground .cg-stars {
+    color: var(--star);
+    margin-left: 6px;
+  }
+  .campground .cg-details {
+    font-size: 0.85rem;
+    color: var(--rock-light);
+    margin-top: 4px;
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .highlight:last-child { border-bottom: none; }
+  .highlight .h-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .highlight .h-text .h-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--rock);
+  }
+  .highlight .h-text .h-desc {
+    font-size: 0.85rem;
+    color: var(--rock-light);
+  }
+  .highlight .h-text .h-rating {
+    font-size: 0.8rem;
+    color: var(--star);
+  }
+
+  /* CHILL TAG */
+  .chill-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--lake-light), var(--lake));
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 8px 0;
+  }
+
+  /* RESTAURANT */
+  .restaurant {
+    background: #fdf6e8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-left: 3px solid var(--earth-light);
+  }
+  .restaurant .r-name {
+    font-weight: 600;
+    color: var(--earth);
+  }
+  .restaurant .r-desc {
+    font-size: 0.85rem;
+    color: var(--rock-light);
+  }
+
+  /* WARNING */
+  .warning-box {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .warning-box strong { color: #e65100; }
+
+  /* BUDGET TABLE */
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.9rem;
+  }
+  .budget-table th {
+    background: var(--forest);
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+  }
+  .budget-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+  }
+  .budget-table tr:nth-child(even) { background: var(--sand); }
+  .budget-table .total-row {
+    font-weight: 700;
+    background: #e8f5e9 !important;
+    color: var(--forest);
+  }
+
+  /* TIPS */
+  .tip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  .tip-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .tip-card .tip-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .tip-card h4 { color: var(--forest); margin-bottom: 6px; font-size: 0.95rem; }
+  .tip-card p { font-size: 0.85rem; color: var(--rock-light); }
+
+  /* BOOKING TIMELINE */
+  .booking-list {
+    list-style: none;
+  }
+  .booking-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+  }
+  .booking-list .b-when {
+    background: var(--forest);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    columns: 2;
+    column-gap: 30px;
+    list-style: none;
+  }
+  .checklist li {
+    padding: 4px 0;
+    font-size: 0.9rem;
+    break-inside: avoid;
+  }
+  .checklist li::before {
+    content: '☐ ';
+    color: var(--forest);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--rock-light);
+    font-size: 0.8rem;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 15px 35px; }
+    .hero-stats { gap: 15px; }
+    .stop-header { padding: 15px 18px 10px; }
+    .stop-body { padding: 0 18px 15px; }
+    .checklist { columns: 1; }
+    .route-flow { gap: 0; }
+  }
+
+  /* PRINT */
+  @media print {
+    .hero { background: var(--forest) !important; -webkit-print-color-adjust: exact; }
+    .stop-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1><strong>Westkanada</strong> Roadtrip</h1>
+  <p class="subtitle">Wohnmobil-Rundreise durch British Columbia &amp; Alberta · August/September 2026</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="num">21</span><span class="lbl">Tage</span></div>
+    <div class="hero-stat"><span class="num">~2.800</span><span class="lbl">Kilometer</span></div>
+    <div class="hero-stat"><span class="num">12</span><span class="lbl">Stops</span></div>
+    <div class="hero-stat"><span class="num">5</span><span class="lbl">Nationalparks</span></div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ROUTE OVERVIEW -->
+<section>
+  <h2>Route auf einen Blick</h2>
+  <div class="route-overview">
+    <div class="route-flow">
+      <div class="route-stop-mini"><span class="name">Vancouver</span><br><span class="nights">1 Nacht</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Whistler</span><br><span class="nights">2 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Kamloops</span><br><span class="nights">1 Nacht</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Mt. Robson</span><br><span class="nights">1 Nacht</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Jasper</span><br><span class="nights">3 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Icefields Pkwy</span><br><span class="nights">1 Nacht</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Lake Louise</span><br><span class="nights">2 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Banff</span><br><span class="nights">2 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Yoho</span><br><span class="nights">2 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Revelstoke</span><br><span class="nights">1 Nacht</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Okanagan</span><br><span class="nights">3 Nächte</span></div>
+      <span class="route-arrow">→</span>
+      <div class="route-stop-mini"><span class="name">Vancouver</span><br><span class="nights">Rückgabe</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STOPS -->
+<section>
+  <h2>Die Route im Detail</h2>
+
+  <!-- STOP 1: Vancouver -->
+  <div class="stop-card transit">
+    <div class="stop-header">
+      <h3><span class="stop-num">1</span> Vancouver</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">1 Nacht</span>
+        <span class="meta-badge">Wohnmobil-Übernahme</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Ankunft, Wohnmobil übernehmen und im Supermarkt eindecken. Den ersten Abend entspannt ankommen lassen.</p>
+
+      <div class="campground">
+        <span class="cg-name">Capilano River RV Park</span>
+        <span class="cg-stars">★★★★</span>
+        <div class="cg-details">North Vancouver · ca. 55–75 CAD/Nacht · Full Hookups · Nah an der Autobahn für den Aufbruch am nächsten Morgen</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🛒</span>
+        <div class="h-text">
+          <span class="h-title">Großeinkauf bei Real Canadian Superstore</span>
+          <span class="h-desc">Hier sind Lebensmittel deutlich günstiger als in den Bergen. Für mehrere Tage eindecken!</span>
+        </div>
+      </div>
+
+      <div class="restaurant">
+        <span class="r-name">The Acorn – Vegetarisches Fine Dining</span>
+        <div class="r-desc">Main Street. Eines der besten vegetarischen Restaurants Kanadas. Saisonale, kreative Küche. Reservierung empfohlen. ★★★★★ auf Google</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 2: Whistler -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">2</span> Whistler</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">2 Nächte</span>
+        <span class="meta-badge">125 km · ~1,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Die Fahrt über den Sea-to-Sky Highway ist schon das erste Highlight. Unterwegs spontan an Shannon Falls oder Brandywine Falls halten.</p>
+
+      <div class="campground">
+        <span class="cg-name">Nairn Falls Provincial Park</span>
+        <span class="cg-stars">★★★★½</span>
+        <div class="cg-details">28 km nördlich von Whistler · ca. 22–35 CAD/Nacht · Keine Hookups · Wunderschöne Waldlage mit Wasserfall direkt vom Camp aus · Buchen via DiscoverCamping.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🥾</span>
+        <div class="h-text">
+          <span class="h-title">Joffre Lakes</span>
+          <span class="h-desc">10 km Rundweg, mittel. Drei unwirklich türkise Seen. Tagespass vorab über BC Parks buchen!</span>
+          <span class="h-rating">★★★★★ · AllTrails 4.8/5</span>
+        </div>
+      </div>
+
+      <span class="chill-tag">☀️ Tag 2: Freier Tag – See, Dorf erkunden, oder einfach nichts tun</span>
+    </div>
+  </div>
+
+  <!-- STOP 3: Kamloops -->
+  <div class="stop-card transit">
+    <div class="stop-header">
+      <h3><span class="stop-num">3</span> Kamloops</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">1 Nacht</span>
+        <span class="meta-badge">290 km · ~3,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Fahrtag durch die Duffy Lake Road – spektakuläre, kurvige Strecke durch Lillooet. Abends am See entspannen.</p>
+
+      <div class="campground">
+        <span class="cg-name">Paul Lake Provincial Park</span>
+        <span class="cg-stars">★★★★⅓</span>
+        <div class="cg-details">25 km nordöstlich von Kamloops · ca. 22–35 CAD/Nacht · Schöner See zum Schwimmen · Buchen via DiscoverCamping.ca</div>
+      </div>
+
+      <span class="chill-tag">🌅 Ankunftstag – Schwimmen, Grillen, Sonnenuntergang am See</span>
+    </div>
+  </div>
+
+  <!-- STOP 4: Mount Robson -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">4</span> Mount Robson</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">1 Nacht</span>
+        <span class="meta-badge">340 km · ~3,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Auf dem Yellowhead Highway (Hwy 5) durch das North Thompson Valley. Blick auf den höchsten Berg der kanadischen Rockies (3.954 m).</p>
+
+      <div class="campground">
+        <span class="cg-name">Robson Meadows Campground</span>
+        <span class="cg-stars">★★★★½</span>
+        <div class="cg-details">Mount Robson Provincial Park · ca. 28–38 CAD/Nacht · 125 Stellplätze · Atemberaubender Blick auf Mount Robson · Buchen via DiscoverCamping.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🏔️</span>
+        <div class="h-text">
+          <span class="h-title">Kinney Lake Trail</span>
+          <span class="h-desc">9,4 km Hin &amp; Rück, leicht bis mittel. Türkiser See am Fuße des Mount Robson.</span>
+          <span class="h-rating">★★★★★ · AllTrails 4.7/5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 5: Jasper -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">5</span> Jasper National Park</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">3 Nächte</span>
+        <span class="meta-badge">85 km · ~1 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Drei Tage in einem der wildesten Nationalparks Kanadas. Elche, Bären und Wapitis sind hier zu Hause. Nicht alles abarbeiten – ein Highlight pro Tag reicht.</p>
+
+      <div class="warning-box">
+        <strong>Parks Canada Discovery Pass</strong> – unbedingt kaufen! 145 CAD (~99 €) für die Gruppe, gilt für Jasper, Banff, Yoho und alle weiteren Nationalparks.
+      </div>
+
+      <div class="campground">
+        <span class="cg-name">Whistlers Campground</span>
+        <span class="cg-stars">★★★★⅕</span>
+        <div class="cg-details">3 km südlich von Jasper · ca. 40–50 CAD/Nacht · 781 Stellplätze · Strom (30A), Duschen, Toiletten · Reservieren via reservation.pc.gc.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🚤</span>
+        <div class="h-text">
+          <span class="h-title">Tag 1: Spirit Island Bootstour – Maligne Lake</span>
+          <span class="h-desc">Ikonischste Ansicht Kanadas. Bootstour ca. 75 CAD. Unterwegs Stopp an der Maligne Canyon Schlucht.</span>
+          <span class="h-rating">★★★★½ · TripAdvisor 4.5/5</span>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🦌</span>
+        <div class="h-text">
+          <span class="h-title">Tag 2: Valley of the Five Lakes</span>
+          <span class="h-desc">4,6 km Rundweg, leicht. Fünf juwelenbunte Seen. Perfekt zum Entspannen. Morgens/abends Wildtiere am Hwy 16 beobachten.</span>
+          <span class="h-rating">★★★★★ · AllTrails 4.8/5</span>
+        </div>
+      </div>
+
+      <span class="chill-tag">🌲 Tag 3: Ruhetag – Pyramid Lake, Miette Hot Springs (7 CAD), oder einfach durch Jasper schlendern</span>
+
+      <div class="restaurant">
+        <span class="r-name">Syrahs of Jasper</span>
+        <div class="r-desc">Lokale, saisonale Küche mit exzellenten Fischgerichten (Wild-Lachs, Arctic Char). Gemütliche Atmosphäre. Vegetarische Optionen vorhanden. ★★★★½</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 6: Icefields Parkway -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">6</span> Icefields Parkway</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">1 Nacht</span>
+        <span class="meta-badge">130 km · ~2 Std. (mit Stops)</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Eine der schönsten Straßen der Welt. Langsam fahren, anhalten wo es schön ist. Kein Hetzen – der Weg ist das Ziel.</p>
+
+      <div class="warning-box">
+        <strong>Tanken in Jasper!</strong> Auf der gesamten Strecke gibt es nur eine Tankstelle (Saskatchewan River Crossing) – und die ist teuer.
+      </div>
+
+      <div class="campground">
+        <span class="cg-name">Wilcox Creek Campground</span>
+        <span class="cg-stars">★★★★</span>
+        <div class="cg-details">2 km südlich des Columbia Icefield Centre · ca. 22–28 CAD/Nacht · 46 Plätze · Keine Reservierung – First Come First Served! Vor 13–14 Uhr da sein.</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🧊</span>
+        <div class="h-text">
+          <span class="h-title">Columbia Icefield</span>
+          <span class="h-desc">Ice Explorer Tour auf den Athabasca-Gletscher (~95 CAD) oder Glacier Skywalk (~40 CAD). Kombi-Ticket ~120 CAD. Vorab buchen!</span>
+          <span class="h-rating">★★★★ · TripAdvisor 4.3/5</span>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🥾</span>
+        <div class="h-text">
+          <span class="h-title">Wilcox Pass Trail</span>
+          <span class="h-desc">8 km Hin &amp; Rück, mittel. Startet direkt am Campground. Panoramablick auf das Columbia Icefield von oben – einer der besten Wanderungen am gesamten Parkway.</span>
+          <span class="h-rating">★★★★★ · AllTrails 4.9/5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 7: Lake Louise -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">7</span> Lake Louise</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">2 Nächte</span>
+        <span class="meta-badge">130 km · ~1,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Unterwegs Stopp am Peyto Lake (berühmter „Fuchskopf"-See) und Bow Lake. Zwei Tage für zwei der berühmtesten Seen der Welt.</p>
+
+      <div class="campground">
+        <span class="cg-name">Lake Louise Campground</span>
+        <span class="cg-stars">★★★★⅓</span>
+        <div class="cg-details">189 Stellplätze · Strom (30A) · ca. 40–50 CAD/Nacht · Nur hartschalige Fahrzeuge (Wohnmobil OK) · Unbedingt Monate vorher reservieren via reservation.pc.gc.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">💎</span>
+        <div class="h-text">
+          <span class="h-title">Tag 1: Lake Louise – Lakeshore Trail</span>
+          <span class="h-desc">4 km Hin &amp; Rück, leicht. Der ikonische türkise See. Optional weiter zum Plain of Six Glaciers Teahouse (14 km, anspruchsvoll).</span>
+          <span class="h-rating">★★★★★ · AllTrails 4.7/5</span>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">📸</span>
+        <div class="h-text">
+          <span class="h-title">Tag 2: Moraine Lake</span>
+          <span class="h-desc">Das vielleicht meistfotografierte Motiv Kanadas. Shuttlebus nehmen (Wohnmobile nicht erlaubt!). Einfach am See sitzen und staunen.</span>
+          <span class="h-rating">★★★★★ · Google 4.9/5</span>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <strong>Moraine Lake:</strong> Privatfahrzeuge/Wohnmobile sind seit 2023 nicht mehr erlaubt. Parks Canada Shuttle nutzen (kostenlos mit Pass, aber Reservierung nötig).
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 8: Banff -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">8</span> Banff</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">2 Nächte</span>
+        <span class="meta-badge">58 km · ~40 Min.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Die „Hauptstadt" der kanadischen Rockies. Ein lebhaftes Bergstädtchen mit Restaurants, Shops und heißen Quellen. Zwei entspannte Tage.</p>
+
+      <div class="campground">
+        <span class="cg-name">Tunnel Mountain Village II</span>
+        <span class="cg-stars">★★★★</span>
+        <div class="cg-details">Full Hookups (Strom, Wasser, Abwasser) · ca. 44–55 CAD/Nacht · 15 Min. zu Fuß ins Zentrum · Reservieren via reservation.pc.gc.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🏞️</span>
+        <div class="h-text">
+          <span class="h-title">Tag 1: Johnston Canyon</span>
+          <span class="h-desc">5,4 km Hin &amp; Rück zu den Upper Falls, leicht-mittel. Stege durch eine Kalkstein-Schlucht. Vor 8 Uhr gehen, um Massen zu vermeiden!</span>
+          <span class="h-rating">★★★★½ · AllTrails 4.6/5</span>
+        </div>
+      </div>
+
+      <span class="chill-tag">♨️ Tag 2: Banff Upper Hot Springs (10 CAD), Vermilion Lakes bei Sonnenuntergang, durch die Stadt bummeln</span>
+
+      <div class="restaurant">
+        <span class="r-name">Nourish Bistro</span>
+        <div class="r-desc">100% vegetarisches/veganes Bistro in Banff. Kreative Bowl-Gerichte, lokale Zutaten, gemütlich. Top-bewertet bei Vegetariern. ★★★★½</div>
+      </div>
+
+      <div class="restaurant">
+        <span class="r-name">The Bison – Wild-Lachs &amp; regionale Küche</span>
+        <div class="r-desc">Bear Street. Bekannt für exzellenten Wildlachs und Farm-to-Table-Küche. Auch gute vegetarische Optionen. ★★★★½</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 9: Yoho -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">9</span> Yoho National Park</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">2 Nächte</span>
+        <span class="meta-badge">85 km · ~1 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Der kleine, ruhige Bruder von Banff. Weniger Touristen, genauso spektakulär. Perfekt zum Durchatmen nach dem Trubel.</p>
+
+      <div class="campground">
+        <span class="cg-name">Kicking Horse Campground</span>
+        <span class="cg-stars">★★★★⅕</span>
+        <div class="cg-details">Bei Field · ca. 28–33 CAD/Nacht · 86 Stellplätze · Keine Hookups · Reservieren via reservation.pc.gc.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🛶</span>
+        <div class="h-text">
+          <span class="h-title">Tag 1: Emerald Lake</span>
+          <span class="h-desc">5,2 km leichter Rundweg um einen smaragdgrünen See. Kanu mieten (~80 CAD/Std.) oder einfach die Stille genießen. Dazu: Natural Bridge besichtigen.</span>
+          <span class="h-rating">★★★★★ · Google 4.8/5</span>
+        </div>
+      </div>
+
+      <span class="chill-tag">🌿 Tag 2: Freier Tag – Wapta Falls (leichte Wanderung, 4,4 km), danach im Camp lesen &amp; entspannen</span>
+
+      <div class="warning-box">
+        <strong>Takakkaw Falls:</strong> Die Zufahrtsstraße hat extrem enge Serpentinen – Wohnmobile über ~7–8 m Länge kommen nicht durch! Vorher informieren.
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 10: Revelstoke -->
+  <div class="stop-card transit">
+    <div class="stop-header">
+      <h3><span class="stop-num">10</span> Revelstoke</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">1 Nacht</span>
+        <span class="meta-badge">150 km · ~1,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Durch den Rogers Pass und den Glacier National Park – beeindruckende Bergstraße. Kurzer Stopp bei den Giant Cedars.</p>
+
+      <div class="campground">
+        <span class="cg-name">Williamson Lake Campground</span>
+        <span class="cg-stars">★★★★⅓</span>
+        <div class="cg-details">6 km von Revelstoke · ca. 40–50 CAD/Nacht · Full Hookups · Kleiner See zum Schwimmen</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🌲</span>
+        <div class="h-text">
+          <span class="h-title">Giant Cedars Boardwalk</span>
+          <span class="h-desc">500 m Spaziergang zwischen uralten Zedern (500+ Jahre). Direkt am Highway, kostenlos. Magische Atmosphäre.</span>
+          <span class="h-rating">★★★★½ · Google 4.6/5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 11: Okanagan -->
+  <div class="stop-card">
+    <div class="stop-header">
+      <h3><span class="stop-num">11</span> Okanagan Valley</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">3 Nächte</span>
+        <span class="meta-badge">280 km · ~3 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Kontrastprogramm: Kanadas Weinregion mit warmen Seen, Obstplantagen und Wüstenlandschaft. Drei Tage Seele baumeln lassen.</p>
+
+      <div class="campground">
+        <span class="cg-name">Bear Creek Provincial Park</span>
+        <span class="cg-stars">★★★★⅖</span>
+        <div class="cg-details">9 km westlich von Kelowna · ca. 22–35 CAD/Nacht · Sandstrand am Okanagan Lake, Wasserfall-Trail · Buchen via DiscoverCamping.ca</div>
+      </div>
+
+      <div class="highlight">
+        <span class="h-icon">🍷</span>
+        <div class="h-text">
+          <span class="h-title">Tag 1: Weingüter &amp; See</span>
+          <span class="h-desc">Mission Hill, Quails' Gate oder Summerhill besuchen. Nachmittags am Okanagan Lake baden. Frisches Obst am Straßenrand kaufen (Pfirsiche, Kirschen!).</span>
+        </div>
+      </div>
+
+      <span class="chill-tag">☀️ Tag 2: Freier Tag – Strand, Schwimmen, Eis essen, Sonnenuntergang</span>
+
+      <div class="highlight">
+        <span class="h-icon">🏜️</span>
+        <div class="h-text">
+          <span class="h-title">Tag 3: Kalamalka Lake</span>
+          <span class="h-desc">Der „See der tausend Farben" bei Vernon. Cosens Bay Trail wandern, im kristallklaren Wasser schwimmen.</span>
+          <span class="h-rating">★★★★★ · Google 4.8/5</span>
+        </div>
+      </div>
+
+      <div class="restaurant">
+        <span class="r-name">Raudz Regional Table – Kelowna</span>
+        <div class="r-desc">Farm-to-Table mit exzellentem frischem Fisch (Okanagan Forelle, Pazifik-Lachs). Hervorragende vegetarische Teller. Lokale Weine. ★★★★★</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STOP 12: Return -->
+  <div class="stop-card transit">
+    <div class="stop-header">
+      <h3><span class="stop-num">12</span> Zurück nach Vancouver</h3>
+      <div class="stop-meta">
+        <span class="meta-badge">Rückgabetag</span>
+        <span class="meta-badge">390 km · ~4,5 Std.</span>
+      </div>
+    </div>
+    <div class="stop-body">
+      <p>Über den Coquihalla Highway (Hwy 5) – schnelle, gut ausgebaute und trotzdem schöne Strecke. Wohnmobil abgeben, fertig!</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- BUDGET -->
+<section>
+  <h2>Kostenübersicht</h2>
+  <p style="margin-bottom:15px; color: var(--rock-light);">Alle Preise für 2 Personen, 21 Tage. Umrechnung: 1 CAD ≈ 0,68 €</p>
+
+  <table class="budget-table">
+    <thead>
+      <tr>
+        <th>Posten</th>
+        <th>Budget</th>
+        <th>Mittelklasse</th>
+        <th>Komfort</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Flüge (FRA/MUC → YVR, 2 Pers.)</td>
+        <td>1.200 €</td>
+        <td>1.500 €</td>
+        <td>2.000 €</td>
+      </tr>
+      <tr>
+        <td>Wohnmobil-Miete (21 Tage, inkl. Versicherung)</td>
+        <td>3.100 €</td>
+        <td>3.800 €</td>
+        <td>4.800 €</td>
+      </tr>
+      <tr>
+        <td>Sprit (~2.800 km)</td>
+        <td>480 €</td>
+        <td>550 €</td>
+        <td>680 €</td>
+      </tr>
+      <tr>
+        <td>Campingplätze (21 Nächte)</td>
+        <td>400 €</td>
+        <td>570 €</td>
+        <td>750 €</td>
+      </tr>
+      <tr>
+        <td>Parks Canada Discovery Pass</td>
+        <td>99 €</td>
+        <td>99 €</td>
+        <td>99 €</td>
+      </tr>
+      <tr>
+        <td>Lebensmittel &amp; Essen gehen</td>
+        <td>680 €</td>
+        <td>1.000 €</td>
+        <td>1.400 €</td>
+      </tr>
+      <tr>
+        <td>Aktivitäten &amp; Touren</td>
+        <td>200 €</td>
+        <td>400 €</td>
+        <td>600 €</td>
+      </tr>
+      <tr>
+        <td>Sonstiges (Wein, Souvenirs, Wäsche)</td>
+        <td>150 €</td>
+        <td>280 €</td>
+        <td>450 €</td>
+      </tr>
+      <tr class="total-row">
+        <td>Gesamt (2 Personen)</td>
+        <td>~6.300 €</td>
+        <td>~8.200 €</td>
+        <td>~10.800 €</td>
+      </tr>
+      <tr class="total-row">
+        <td>Pro Person</td>
+        <td>~3.150 €</td>
+        <td>~4.100 €</td>
+        <td>~5.400 €</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SPARTIPPS -->
+<section>
+  <h2>Spartipps</h2>
+  <div class="tip-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📅</div>
+      <h4>Frühbucher-Rabatt</h4>
+      <p>Wohnmobil zwischen Oktober und Dezember 2025 buchen → 10–15 % Rabatt. Fraserway und CanaDream sind oft günstiger als Cruise Canada.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏕️</div>
+      <h4>Gratis Campen</h4>
+      <p>BC Recreation Sites (sitesandtrailsbc.ca) und Crown Land bieten kostenloses Camping in der Wildnis. Perfekt für Zwischenstopps!</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🛒</div>
+      <h4>Einkaufen in der Stadt</h4>
+      <p>Lebensmittel in Vancouver, Kamloops und Kelowna kaufen. In Banff/Jasper zahlt ihr 30–50 % mehr!</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💳</div>
+      <h4>Wise-Karte nutzen</h4>
+      <p>Minimale Gebühren beim Bezahlen in CAD. Deutlich günstiger als Kreditkarten-Wechselkurse der Hausbank.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⛽</div>
+      <h4>Tanken in Alberta</h4>
+      <p>Sprit in Alberta ist deutlich günstiger als in BC. Volltanken vor der Rückfahrt!</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🍷</div>
+      <h4>Harvest Hosts</h4>
+      <p>Mitgliedschaft (~99 USD/Jahr): Gratis-Übernachtung bei Weingütern im Okanagan. Perfekt für Weinliebhaber!</p>
+    </div>
+  </div>
+</section>
+
+<!-- WARNUNGEN -->
+<section>
+  <h2>Wichtige Hinweise</h2>
+
+  <div class="warning-box">
+    <strong>🔥 Waldbrandrauch (August/September)</strong><br>
+    Das größte Risiko für die Reise. Rauch kann tagelang die Bergaussicht komplett verdecken. Flexibel bleiben und firesmoke.ca checken. September nach Labour Day ist oft besser.
+  </div>
+
+  <div class="warning-box">
+    <strong>🚐 Wohnmobil-Größe: Max. 7–8 m empfohlen</strong><br>
+    Größere Fahrzeuge können nicht zur Takakkaw Falls (Yoho) und nicht auf die Edith Cavell Road (Jasper). Moraine Lake ist generell für alle Fahrzeuge gesperrt (Shuttlebus).
+  </div>
+
+  <div class="warning-box">
+    <strong>🐻 Bärensicherheit</strong><br>
+    Bear Spray kaufen (40–50 CAD in Jasper oder Banff). Alles Essen im Wohnmobil aufbewahren. Auf Trails laut sein. Nie einem Bären den Rücken zudrehen.
+  </div>
+
+  <div class="warning-box">
+    <strong>📱 Kein Handyempfang</strong><br>
+    Auf dem Icefields Parkway und in Teilen von Yoho gibt es keinen Empfang. Offline-Karten vorher in Google Maps oder Maps.me herunterladen!
+  </div>
+</section>
+
+<!-- BUCHUNGSFRISTEN -->
+<section>
+  <h2>Buchungsfristen</h2>
+  <ul class="booking-list">
+    <li><span class="b-when">Okt–Dez 2025</span> Wohnmobil buchen (Frühbucher-Rabatt bei Fraserway, CanaDream, Cruise Canada)</li>
+    <li><span class="b-when">Dez 2025</span> Flüge buchen (Condor, Lufthansa, oder Icelandair via Reykjavik als günstige Alternative)</li>
+    <li><span class="b-when">Jan 2026</span> Parks Canada Campingplätze reservieren (Jasper, Banff, Lake Louise, Yoho) – Opening Day abpassen auf reservation.pc.gc.ca!</li>
+    <li><span class="b-when">Frühjahr 2026</span> BC Parks Campingplätze reservieren (Whistler, Mt. Robson, Okanagan) via DiscoverCamping.ca</li>
+    <li><span class="b-when">Frühjahr 2026</span> Lake O'Hara Bus-Lotterie (reservation.pc.gc.ca) – Versuch wert!</li>
+    <li><span class="b-when">Frühjahr 2026</span> Joffre Lakes Tagespass (BC Parks), Moraine Lake Shuttle, Columbia Icefield Tour buchen</li>
+  </ul>
+</section>
+
+<!-- PACKLISTE -->
+<section>
+  <h2>Packliste &amp; Praktisches</h2>
+  <ul class="checklist">
+    <li>Internationaler Führerschein (oder beglaubigte Übersetzung)</li>
+    <li>Reisepass (gültig mind. 6 Monate)</li>
+    <li>eTA Kanada (elektronische Reisegenehmigung, online beantragen)</li>
+    <li>Wise-Karte + Backup-Kreditkarte</li>
+    <li>Bear Spray (vor Ort kaufen, nicht im Flugzeug!)</li>
+    <li>Wanderschuhe (knöchelhoch, eingelaufen)</li>
+    <li>Regenjacke + warme Schichten (Berge: 0–5°C nachts!)</li>
+    <li>Sonnencreme + Sonnenbrille + Hut</li>
+    <li>Mückenspray (August!)</li>
+    <li>Fernglas (Wildtiere beobachten)</li>
+    <li>Offline-Karten herunterladen (Google Maps / Maps.me)</li>
+    <li>Adapter Typ A/B (Nordamerika-Stecker)</li>
+    <li>Kühlbox / Einkaufstaschen für Großeinkauf</li>
+    <li>Campingstuhl + Decke für Abende draußen</li>
+    <li>Stirnlampe</li>
+    <li>Erste-Hilfe-Set</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Erstellt im April 2026 · Preise und Verfügbarkeiten können sich ändern – alle Angaben ohne Gewähr.<br>
+  Buchungslinks: <a href="https://reservation.pc.gc.ca" target="_blank">Parks Canada</a> · <a href="https://www.discovercamping.ca" target="_blank">BC Parks</a><br>
+  Gute Reise! 🍁</p>
+</footer>
+
+</div>
+</body>
+</html>
