@@ -253,6 +253,7 @@ footer a{color:var(--accent);text-decoration:none}
     <div class="map-legend">
       <span><span class="ldot" style="background:#5ba4c9"></span> &Uuml;bernachtung</span>
       <span><span class="ldot" style="background:#ff6b6b"></span> Transit</span>
+      <span style="border-bottom:2px dashed #5ba4c9;padding-bottom:2px">--- F&auml;hre</span>
     </div>
   </div>
 </section>
@@ -699,22 +700,55 @@ footer a{color:var(--accent);text-decoration:none}
     {lat:50.1109,lng:8.6821,name:'Frankfurt',nights:'R\u00fcckkehr',type:'end',desc:'Zur\u00fcck via Oslo/Kiel oder Flug'}
   ];
 
-  var coords=stops.map(function(s){return s.lng+','+s.lat}).join(';');
-  fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson')
-    .then(function(r){return r.json()})
-    .then(function(d){
-      if(d.code==='Ok'&&d.routes.length){
-        var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
-        L.polyline(ll,{color:'#5ba4c9',weight:4,opacity:.85}).addTo(map);
-        map.fitBounds(ll,{padding:[50,50]});
-      }else{fb()}
-    }).catch(fb);
+  // Route in Segmente aufteilen: Straße vs. Fähre
+  // Segment 1: Frankfurt → Kiel (Straße)
+  // Segment 2: Kiel → Oslo (FÄHRE - gestrichelt)
+  // Segment 3: Oslo → Bodø/Trondheim (Straße - Norwegen Hauptroute)
+  // Segment 4: Bodø → Lofoten (FÄHRE - gestrichelt)
+  // Segment 5: Lofoten → Bodø (FÄHRE zurück - gestrichelt)
+  // Rückreise: gestrichelte Linie Lofoten → Frankfurt
 
-  function fb(){
-    var ll=stops.map(function(s){return[s.lat,s.lng]});
-    L.polyline(ll,{color:'#5ba4c9',weight:3,opacity:.8,dashArray:'8,8'}).addTo(map);
-    map.fitBounds(ll,{padding:[40,40]});
-  }
+  var roadSegments = [
+    // Frankfurt → Kiel
+    {coords: '8.6821,50.1109;10.1228,54.3233', color: '#5ba4c9', ferry: false},
+    // Kiel → Oslo (FÄHRE)
+    {coords: '10.1228,54.3233;10.7522,59.9139', color: '#5ba4c9', ferry: true},
+    // Oslo → alle Norwegen-Stops bis Trondheim
+    {coords: '10.7522,59.9139;5.7331,58.9700;6.5413,60.0733;5.3221,60.3913;7.0940,61.2272;7.2055,62.1048;7.3543,63.0172;10.3951,63.4305', color: '#5ba4c9', ferry: false},
+    // Trondheim → Bodø (Straße E6 nord)
+    {coords: '10.3951,63.4305;14.4049,67.2804', color: '#5ba4c9', ferry: false},
+    // Bodø → Lofoten (FÄHRE)
+    {coords: '14.4049,67.2804;13.6150,68.0990', color: '#5ba4c9', ferry: true},
+    // Rückreise Lofoten → Frankfurt (gestrichelt, vereinfacht)
+    {coords: '13.6150,68.0990;14.4049,67.2804', color: '#5ba4c9', ferry: true}
+  ];
+
+  var loaded = 0;
+  var allBounds = stops.map(function(s){return[s.lat,s.lng]});
+
+  roadSegments.forEach(function(seg) {
+    if (seg.ferry) {
+      // Fähre: gestrichelte gerade Linie
+      var pts = seg.coords.split(';').map(function(c){var p=c.split(',');return[parseFloat(p[1]),parseFloat(p[0])]});
+      L.polyline(pts, {color: seg.color, weight: 3, opacity: .6, dashArray: '10,8'}).addTo(map);
+      loaded++;
+      if(loaded===roadSegments.length) map.fitBounds(allBounds,{padding:[50,50]});
+    } else {
+      // Straße: OSRM routing
+      fetch('https://router.project-osrm.org/route/v1/driving/'+seg.coords+'?overview=full&geometries=geojson')
+        .then(function(r){return r.json()})
+        .then(function(d){
+          if(d.code==='Ok'&&d.routes.length){
+            var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
+            L.polyline(ll,{color:seg.color,weight:4,opacity:.85}).addTo(map);
+          }
+        }).catch(function(){})
+        .finally(function(){
+          loaded++;
+          if(loaded===roadSegments.length) map.fitBounds(allBounds,{padding:[50,50]});
+        });
+    }
+  });
 
   stops.forEach(function(s,i){
     var c=(s.type==='transit')?'#ff6b6b':'#5ba4c9';

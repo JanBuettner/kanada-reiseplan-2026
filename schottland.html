@@ -635,22 +635,46 @@ footer a{color:var(--accent);text-decoration:none}
     {lat:50.1109,lng:8.6821,name:'Frankfurt',nights:'R\u00fcckkehr',type:'end',desc:'Via Eurotunnel/F\u00e4hre zur\u00fcck'}
   ];
 
-  var coords=stops.map(function(s){return s.lng+','+s.lat}).join(';');
-  fetch('https://router.project-osrm.org/route/v1/driving/'+coords+'?overview=full&geometries=geojson')
-    .then(function(r){return r.json()})
-    .then(function(d){
-      if(d.code==='Ok'&&d.routes.length){
-        var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
-        L.polyline(ll,{color:'#7a9e6d',weight:4,opacity:.85}).addTo(map);
-        map.fitBounds(ll,{padding:[50,50]});
-      }else{fb()}
-    }).catch(fb);
+  // Route in Segmente: Straße vs. Eurotunnel/Fähre
+  var segments = [
+    // Frankfurt → Calais (Straße durch DE/BE/FR)
+    {coords: '8.6821,50.1109;1.8587,50.9513', ferry: false},
+    // Calais → Folkestone (Eurotunnel/Fähre)
+    {coords: '1.8587,50.9513;1.1664,51.0946', ferry: true},
+    // Folkestone → Edinburgh → alle Schottland-Stops → Glasgow/Loch Lomond
+    {coords: '1.1664,51.0946;-3.1883,55.9533;-3.5990,57.0479;-4.2247,57.4778;-4.7400,58.5670;-5.1612,57.8951;-6.2560,57.3340;-5.1024,56.6825;-5.4714,56.4120;-4.5830,56.0907', ferry: false},
+    // Glasgow → Folkestone (Rückreise Straße)
+    {coords: '-4.5830,56.0907;1.1664,51.0946', ferry: false},
+    // Folkestone → Calais (Eurotunnel zurück)
+    {coords: '1.1664,51.0946;1.8587,50.9513', ferry: true},
+    // Calais → Frankfurt (Straße)
+    {coords: '1.8587,50.9513;8.6821,50.1109', ferry: false}
+  ];
 
-  function fb(){
-    var ll=stops.map(function(s){return[s.lat,s.lng]});
-    L.polyline(ll,{color:'#7a9e6d',weight:3,opacity:.8,dashArray:'8,8'}).addTo(map);
-    map.fitBounds(ll,{padding:[40,40]});
-  }
+  var allBounds = stops.map(function(s){return[s.lat,s.lng]});
+  var loaded = 0;
+
+  segments.forEach(function(seg) {
+    if (seg.ferry) {
+      var pts = seg.coords.split(';').map(function(c){var p=c.split(',');return[parseFloat(p[1]),parseFloat(p[0])]});
+      L.polyline(pts, {color: '#7a9e6d', weight: 3, opacity: .6, dashArray: '10,8'}).addTo(map);
+      loaded++;
+      if(loaded===segments.length) map.fitBounds(allBounds,{padding:[50,50]});
+    } else {
+      fetch('https://router.project-osrm.org/route/v1/driving/'+seg.coords+'?overview=full&geometries=geojson')
+        .then(function(r){return r.json()})
+        .then(function(d){
+          if(d.code==='Ok'&&d.routes.length){
+            var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
+            L.polyline(ll,{color:'#7a9e6d',weight:4,opacity:.85}).addTo(map);
+          }
+        }).catch(function(){})
+        .finally(function(){
+          loaded++;
+          if(loaded===segments.length) map.fitBounds(allBounds,{padding:[50,50]});
+        });
+    }
+  });
 
   stops.forEach(function(s,i){
     var c=(s.type==='transit')?'#ff6b6b':'#7a9e6d';
