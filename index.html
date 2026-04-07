@@ -105,6 +105,22 @@ section{padding:100px 0}
 
 .warn{background:rgba(245,158,11,.1);border-left:3px solid #f59e0b;padding:8px 12px;border-radius:0 8px 8px 0;font-size:.8rem;margin-top:8px;color:#fbbf24}
 
+details.stop-details{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px}
+details.stop-details summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--accent);padding:8px 0;list-style:none;display:flex;align-items:center;gap:6px;user-select:none}
+details.stop-details summary::before{content:'\25B6';font-size:.6rem;transition:transform .2s}
+details.stop-details[open] summary::before{transform:rotate(90deg)}
+details.stop-details summary:hover{opacity:.8}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.detail-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;font-size:.8rem}
+.detail-card h5{color:#e0e0e0;font-size:.85rem;margin-bottom:4px}
+.detail-card .dc-rating{color:var(--star);font-size:.75rem}
+.detail-card .dc-price{color:var(--accent);font-size:.75rem;font-weight:600}
+.detail-card p{color:var(--muted);font-size:.78rem;line-height:1.5;margin-top:4px}
+.detail-card .dc-quote{font-style:italic;color:rgba(255,255,255,.5);font-size:.75rem;margin-top:6px;padding-left:8px;border-left:2px solid rgba(255,255,255,.1)}
+.detail-photos{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px;border-radius:8px;overflow:hidden}
+.detail-photos img{width:100%;height:160px;object-fit:cover;display:block}
+@media(max-width:768px){.detail-grid{grid-template-columns:1fr}}
+
 a.hl,a.camp,a.resto{text-decoration:none;display:block;transition:transform .15s,box-shadow .15s;position:relative}
 a.hl{display:flex}
 a.hl:hover,a.camp:hover,a.resto:hover{transform:translateX(4px);box-shadow:-3px 0 0 var(--accent)}
@@ -285,6 +301,14 @@ footer a{color:var(--accent);text-decoration:none}
           <p>Ankommen, durchatmen. Wohnmobil &uuml;bernehmen, im Supermarkt f&uuml;r die ersten Tage eindecken. Den Abend einfach genie&szlig;en.</p>
           <a class="camp" href="https://www.google.com/maps/place/Capilano+River+RV+Park/" target="_blank"><strong>Capilano River RV Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">North Vancouver &middot; 55&ndash;75 CAD &middot; Full Hookups</div></a>
           <a class="resto" href="https://www.theacornrestaurant.ca/" target="_blank"><strong>The Acorn</strong> &ndash; <span>Eines der besten vegetarischen Restaurants Kanadas. Main Street. Reservierung empfohlen.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+          <details class="stop-details">
+            <summary>Mehr entdecken in Vancouver</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127795; Stanley Park Seawall</h5><span class="dc-rating">5/5</span> <span class="dc-price">KOSTENLOS (Fahrrad ~15 CAD/Std.)</span><p>9,8 km Rundweg. Gegen den Uhrzeigersinn! Totempf&auml;hle bei Brockton Point, Lions Gate Bridge Aussicht, Third Beach. <strong>Fahrrad leihen!</strong></p><div class="dc-quote">&bdquo;Best $15 you'll spend in Vancouver. Rent a bike. Seriously.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127860; The Acorn &ndash; was bestellen?</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">70&ndash;100 CAD p.P.</span><p>Beer-battered Halloumi (Signature!), saisonales Pilzgericht, Tasting-Men&uuml; (~65&ndash;75 CAD). Klein, intim, Kerzenlicht.</p><div class="dc-quote">&bdquo;We're not even vegetarian and this was one of our best meals in Vancouver.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127961; Granville Island</h5><span class="dc-rating">3.5/5</span> <span class="dc-price">Aquabus 4 CAD</span><p>Public Market lohnt sich (Lee's Donuts!). Shops eher touristisch. Wochentags morgens gehen. <strong>Aquabus nehmen, nicht Auto.</strong></p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -307,6 +331,15 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="camp" href="https://bcparks.ca/nairn-falls-park/" target="_blank"><strong>Nairn Falls Provincial Park</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;&frac12;</span><div class="cd">22&ndash;35 CAD &middot; Waldlage mit Wasserfall &middot; DiscoverCamping.ca</div></a>
           <a class="hl" href="https://www.alltrails.com/trail/canada/british-columbia/joffre-lakes" target="_blank"><span class="ic">&#128142;</span><div><strong>Joffre Lakes</strong><br><span>10 km, mittel &middot; Drei unw&uuml;rklich t&uuml;rkise Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Freier Tag &ndash; See, Dorf, einfach sein</span>
+          <details class="stop-details">
+            <summary>Mehr entdecken rund um Whistler</summary>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128142; Joffre Lakes &ndash; Tipps</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">Tagespass ~10 CAD (Pflicht!)</span><p>3 Seen, alle t&uuml;rkis. Unterer See: 5 Min. Oberer See: das Highlight! <strong>Wochentag + vor 8:30 Uhr.</strong> Instagram-viral = voll an Wochenenden.</p><div class="dc-quote">&bdquo;The colour is not photoshopped. It really is that blue-green.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#127754; Sea-to-Sky: Pflicht-Stops</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">KOSTENLOS</span><p><strong>Shannon Falls</strong> (5 Min. vom Parkplatz, 335 m hoch) + <strong>Brandywine Falls</strong> (10 Min., weniger Leute). Beide gratis, beide spektakul&auml;r.</p></div>
+              <div class="detail-card"><h5>&#9968; Garibaldi Lake (Alternative)</h5><span class="dc-rating">5/5</span> <span class="dc-price">Tagespass ~10 CAD</span><p>18 km, 5&ndash;7 Std., anspruchsvoll. Wenn Joffre zu voll: Garibaldi ist genauso sch&ouml;n, viel weniger Menschen. Ganzer Tag n&ouml;tig.</p></div>
+              <div class="detail-card"><h5>&#9978; Nairn Falls Camp &ndash; ehrlich</h5><span class="dc-rating">4/5</span> <span class="dc-price">~35 CAD</span><p>Sch&ouml;ne Waldlage, aber: <strong>keine Duschen!</strong> Wasserfall-Trail direkt vom Camp (3 km, lohnt sich). Pl&auml;tze am Fluss anfragen.</p><div class="dc-quote">&bdquo;Beautiful but no showers is a dealbreaker for some.&ldquo;</div></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -381,6 +414,21 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.alltrails.com/trail/canada/alberta/valley-of-the-five-lakes" target="_blank"><span class="ic">&#129420;</span><div><strong>Tag 2: Valley of the Five Lakes</strong><br><span>4,6 km, leicht &middot; F&uuml;nf juwelenbunte Seen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 3: Ruhetag &ndash; Pyramid Lake, Miette Hot Springs, einfach Jasper</span>
           <a class="resto" href="https://www.google.com/maps/place/Syrahs+of+Jasper/" target="_blank"><strong>Syrahs of Jasper</strong> &ndash; <span>Wild-Lachs, Arctic Char, vegetarische Optionen. Saisonal &amp; lokal.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+          <details class="stop-details">
+            <summary>Mehr entdecken in Jasper</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/14342048/pexels-photo-14342048.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Elch im Morgennebel Jasper" loading="lazy">
+              <img src="https://images.pexels.com/photos/29476877/pexels-photo-29476877.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Elch in Jasper" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128674; Spirit Island &ndash; lohnt es sich?</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">~80 CAD p.P.</span><p>Ja, einmal im Leben. Maligne Lake + Spirit Island = DAS Kanada-Bild. Unterwegs an Maligne Canyon stoppen (von unten starten, nicht oben &ndash; weniger Leute!).</p><div class="dc-quote">&bdquo;Teuer, aber man versteht warum wenn man Spirit Island sieht.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#129420; Valley of Five Lakes</h5><span class="dc-rating">4.5/5 &ndash; bester Easy-Trail</span> <span class="dc-price">KOSTENLOS</span><p>4,6 km, flach, 5 verschiedenfarbige Seen. Perfekt f&uuml;r einen entspannten Nachmittag. Wenig Leute.</p></div>
+              <div class="detail-card"><h5>&#9832; Miette Hot Springs</h5><span class="dc-rating">4/5</span> <span class="dc-price">9,50 CAD</span><p>Hei&szlig;este Quellen der kanadischen Rockies. Auf dem Weg: Wildtiere am Hwy 16 fr&uuml;hmorgens (Elche, B&auml;ren!). 45 Min. Fahrt von Jasper.</p></div>
+              <div class="detail-card"><h5>&#128752; SkyTram &ndash; lohnt es sich?</h5><span class="dc-rating">3.5/5</span> <span class="dc-price">~60 CAD</span><p><strong>Nur bei klarem Wetter!</strong> Bei Wolken sieht man nichts. Oben weiterwandern zum Gipfel (30 Min.) lohnt sich. An bew&ouml;lkten Tagen: Geld sparen.</p></div>
+              <div class="detail-card"><h5>&#128059; Wildtiere &ndash; wo genau?</h5><span class="dc-rating">Jasper = Wildtier-Hotspot</span> <span class="dc-price">KOSTENLOS</span><p>Elche: oft direkt in Jasper Town. B&auml;ren: Hwy 16 Ost + Maligne Lake Road, Morgen-/Abendd&auml;mmerung. Dickhornschafe: Medicine Lake. Langsam fahren!</p></div>
+              <div class="detail-card"><h5>&#9978; Whistlers Campground Tipp</h5><span class="dc-rating">4/5</span> <span class="dc-price">40&ndash;50 CAD</span><p>700er Loops anfragen &ndash; mehr Privatsph&auml;re, weiter von der Stra&szlig;e. Duschen vorhanden. Monate vorher buchen!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -403,6 +451,19 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="camp" href="https://parks.canada.ca/pn-np/ab/jasper/activ/camping" target="_blank"><strong>Wilcox Creek Campground</strong><span class="stars"> &#9733;&#9733;&#9733;&#9733;</span><div class="cd">22&ndash;28 CAD &middot; First Come First Served &middot; Vor 13 Uhr!</div></a>
           <a class="hl" href="https://www.banffjaspercollection.com/attractions/columbia-icefield/" target="_blank"><span class="ic">&#129482;</span><div><strong>Columbia Icefield</strong><br><span>Gletscher-Tour ~95 CAD &middot; Skywalk ~40 CAD</span> <span class="st">&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <div class="warn"><strong>Tanken in Jasper!</strong> Nur eine Tankstelle auf der gesamten Strecke.</div>
+          <details class="stop-details">
+            <summary>Mehr entdecken am Icefields Parkway</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/31812639/pexels-photo-31812639.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Columbia Icefield Tour Bus" loading="lazy">
+              <img src="https://images.pexels.com/photos/29602699/pexels-photo-29602699.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Peyto Lake von oben" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#129482; Ice Explorer vs. Skywalk?</h5><span class="dc-rating">Explorer: 4/5 / Skywalk: 3/5</span> <span class="dc-price">Explorer 95 CAD / Skywalk 40 CAD</span><p><strong>Explorer lohnt sich</strong> (auf dem Gletscher stehen!). <strong>Skywalk eher &uuml;berspringen</strong> &ndash; kurzer Glassteg, teuer f&uuml;r 15 Min.</p><div class="dc-quote">&bdquo;The Skywalk is overpriced for what it is. The Ice Explorer is the real experience.&ldquo;</div></div>
+              <div class="detail-card"><h5>&#9968; Wilcox Pass &ndash; BESSER als die Tour!</h5><span class="dc-rating">5/5</span> <span class="dc-price">KOSTENLOS</span><p>8 km, mittel. Startet am Campground. Panorama &uuml;ber das gesamte Columbia Icefield von oben. <strong>Lohnt sich mehr als die bezahlten Touren!</strong></p></div>
+              <div class="detail-card"><h5>&#127756; Peyto Lake</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">KOSTENLOS</span><p>Der ber&uuml;hmte &bdquo;Fuchskopf&ldquo;-See. <strong>Fr&uuml;hmorgens gehen!</strong> Mittags Parkplatz-Chaos. 10&ndash;15 Min. Spaziergang zur Aussicht.</p></div>
+              <div class="detail-card"><h5>&#9978; Wilcox Creek &ndash; FCFS Tipp</h5><span class="dc-rating">4/5</span> <span class="dc-price">22&ndash;28 CAD</span><p>Keine Reservierung! <strong>Vor 12 Uhr da sein</strong> im August. 46 Pl&auml;tze. Einige zu klein f&uuml;r gro&szlig;e WoMos &ndash; vorher schauen.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -445,6 +506,18 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.alltrails.com/trail/canada/alberta/lake-louise-lakeshore" target="_blank"><span class="ic">&#128142;</span><div><strong>Tag 1: Lakeshore Trail</strong><br><span>4 km, leicht &middot; Der ikonische t&uuml;rkise See</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="hl" href="https://parks.canada.ca/pn-np/ab/banff/visit/parkbus/moraine" target="_blank"><span class="ic">&#128247;</span><div><strong>Tag 2: Moraine Lake</strong><br><span>Shuttlebus (WoMo nicht erlaubt!) &middot; Am See sitzen, staunen</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <div class="warn"><strong>Moraine Lake:</strong> Shuttle-Reservierung n&ouml;tig. Keine Privatfahrzeuge seit 2023.</div>
+          <details class="stop-details">
+            <summary>Mehr entdecken in Lake Louise</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/18065182/pexels-photo-18065182.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kanus am See" loading="lazy">
+              <img src="https://images.pexels.com/photos/11281099/pexels-photo-11281099.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Steg mit Kanus Bergsee" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127861; Zwei Teah&auml;user &ndash; welches?</h5><span class="dc-rating">Beide 4.5/5</span> <span class="dc-price">Nur Bargeld!</span><p><strong>Plain of Six Glaciers</strong> (14 km, anspruchsvoll): dramatischer, Gletscherblick, selbstgebacken. <strong>Lake Agnes</strong> (7 km, mittel): k&uuml;rzer, gem&uuml;tlicher, historisch. Beide Cash-only!</p></div>
+              <div class="detail-card"><h5>&#128247; Moraine Lake Shuttle</h5><span class="dc-rating">Pflicht seit 2023</span> <span class="dc-price">KOSTENLOS (mit Pass)</span><p>Parks Canada Shuttle reservieren (reservation.pc.gc.ca). Fr&uuml;hester Slot nehmen! Der See am fr&uuml;hen Morgen = Spiegelung = das Foto.</p></div>
+              <div class="detail-card"><h5>&#9978; Campground &ndash; Buchungstipp</h5><span class="dc-rating">4/5</span> <span class="dc-price">40&ndash;50 CAD</span><p>Parks Canada Opening Day (Januar!) im Kalender markieren. Geht in Minuten weg. Backup: Mosquito Creek oder Rampart Creek (FCFS, einfacher).</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -469,6 +542,19 @@ footer a{color:var(--accent);text-decoration:none}
           <span class="chill">Tag 2: Hot Springs (10 CAD), Vermilion Lakes bei Sonnenuntergang, bummeln</span>
           <a class="resto" href="https://www.nourishbistro.com/" target="_blank"><strong>Nourish Bistro</strong> &ndash; <span>100% vegetarisch/vegan. Kreative Bowls.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
           <a class="resto" href="https://www.thebison.ca/" target="_blank"><strong>The Bison</strong> &ndash; <span>Wild-Lachs &amp; Farm-to-Table. Bear Street.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&frac12;</span></a>
+          <details class="stop-details">
+            <summary>Mehr entdecken in Banff</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/32371673/pexels-photo-32371673.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Johnston Canyon Wanderer" loading="lazy">
+              <img src="https://images.pexels.com/photos/2916818/pexels-photo-2916818.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mann am Bergsee" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127754; Johnston Canyon &ndash; ehrlich</h5><span class="dc-rating">4/5 (fr&uuml;h) / 2/5 (mittags)</span> <span class="dc-price">KOSTENLOS</span><p><strong>Vor 8 Uhr oder gar nicht.</strong> Ab 10 Uhr Menschenmassen auf engem Steg. Fr&uuml;hmorgens: magisch, Nebel, fast allein. Lower Falls: 2,4 km. Upper Falls: 5,4 km (lohnt sich!).</p></div>
+              <div class="detail-card"><h5>&#9832; Banff Hot Springs</h5><span class="dc-rating">3.5/5</span> <span class="dc-price">9,25 CAD</span><p>Hei&szlig;es Becken mit Bergblick. Nett, nicht spektakul&auml;r. Eher Entspannung als Erlebnis. Am besten abends bei Sonnenuntergang.</p></div>
+              <div class="detail-card"><h5>&#127749; Vermilion Lakes Sonnenuntergang</h5><span class="dc-rating">5/5</span> <span class="dc-price">KOSTENLOS</span><p><strong>DER beste kostenlose Spot in Banff.</strong> Mt. Rundle spiegelt sich im See. Elche oft am Ufer. 10 Min. vom Zentrum. Nicht verpassen!</p></div>
+              <div class="detail-card"><h5>&#127860; Nourish vs. The Bison?</h5><span class="dc-rating">Beide 4.5/5</span> <span class="dc-price">Nourish 15&ndash;20 / Bison 20&ndash;35 CAD</span><p><strong>Nourish</strong>: 100% vegetarisch, kreative Bowls, g&uuml;nstiger. <strong>The Bison</strong>: Wild-Lachs, Farm-to-Table, gehobener. Beide hervorragend &ndash; abwechselnd hingehen!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -488,6 +574,18 @@ footer a{color:var(--accent);text-decoration:none}
           <a class="hl" href="https://www.alltrails.com/trail/canada/british-columbia/emerald-lake-loop" target="_blank"><span class="ic">&#128758;</span><div><strong>Tag 1: Emerald Lake</strong><br><span>5,2 km Rundweg, leicht &middot; Kanu mieten oder Stille genie&szlig;en</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <span class="chill">Tag 2: Wapta Falls (4,4 km), dann Camp, Buch, Ruhe</span>
           <div class="warn"><strong>Takakkaw Falls:</strong> Enge Serpentinen &ndash; WoMo &uuml;ber 7&ndash;8 m kommen nicht durch!</div>
+          <details class="stop-details">
+            <summary>Mehr entdecken in Yoho</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/26800118/pexels-photo-26800118.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kanu auf Emerald Lake" loading="lazy">
+              <img src="https://images.pexels.com/photos/26800112/pexels-photo-26800112.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Emerald Lake Boot" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#128758; Emerald Lake Kanu</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">80&ndash;100 CAD/Std.</span><p>Teuer aber magisch. Smaragdgr&uuml;nes Wasser, Berge rundherum, absolute Stille auf dem See. Fr&uuml;hmorgens das beste Licht + weniger Leute.</p></div>
+              <div class="detail-card"><h5>&#127754; Takakkaw Falls &ndash; RV-Warnung</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">KOSTENLOS</span><p>Zweitgr&ouml;&szlig;ter Wasserfall Kanadas (373 m). <strong>Max. WoMo-L&auml;nge ~7 m!</strong> Scharfe Spitzkehren. Gr&ouml;&szlig;ere WoMos: am Camp stehen lassen, mit Fahrrad/zu Fu&szlig;.</p></div>
+              <div class="detail-card"><h5>&#9978; Kicking Horse Camp &ndash; Warnung</h5><span class="dc-rating">3.5/5</span> <span class="dc-price">28&ndash;33 CAD</span><p>Sch&ouml;ne Lage bei Field, aber: <strong>Zugger&auml;usche nachts!</strong> Die Bahnlinie l&auml;uft direkt vorbei. Ohropax mitnehmen.</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -544,6 +642,19 @@ footer a{color:var(--accent);text-decoration:none}
           <span class="chill">Tag 2: Freier Tag &ndash; Strand, Schwimmen, Eis, Sonnenuntergang</span>
           <a class="hl" href="https://www.alltrails.com/parks/canada/british-columbia/kalamalka-lake-provincial-park" target="_blank"><span class="ic">&#127964;&#65039;</span><div><strong>Tag 3: Kalamalka Lake</strong><br><span>Der &bdquo;See der tausend Farben&ldquo; bei Vernon</span> <span class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div></a>
           <a class="resto" href="https://www.rfrg.ca/raudz/" target="_blank"><strong>Raudz Regional Table</strong> &ndash; <span>Kelowna. Okanagan-Forelle, Pazifik-Lachs, vegetarische Teller.</span> <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></a>
+          <details class="stop-details">
+            <summary>Mehr entdecken im Okanagan</summary>
+            <div class="detail-photos">
+              <img src="https://images.pexels.com/photos/31909341/pexels-photo-31909341.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Okanagan Weinberg am See" loading="lazy">
+              <img src="https://images.pexels.com/photos/29241298/pexels-photo-29241298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Okanagan Herbstweinberg" loading="lazy">
+            </div>
+            <div class="detail-grid">
+              <div class="detail-card"><h5>&#127863; Mission Hill Winery</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">Tasting 15&ndash;60 CAD</span><p>Architektur wie in der Toskana, Blick &uuml;ber den See. Standard-Tasting gut, Premium lohnt sich f&uuml;r Weinliebhaber. Reservierung empfohlen.</p></div>
+              <div class="detail-card"><h5>&#127756; Kalamalka Lake</h5><span class="dc-rating">4.5/5 &ndash; am sch&ouml;nsten!</span> <span class="dc-price">KOSTENLOS</span><p>&bdquo;See der tausend Farben&ldquo; bei Vernon. Cosens Bay Trail zum Strand wandern. Wasser &auml;ndert die Farbe je nach Licht. Schoner als Okanagan Lake!</p></div>
+              <div class="detail-card"><h5>&#128692; Myra Canyon Trestles</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">KOSTENLOS</span><p>Historische Eisenbahnbr&uuml;cken &uuml;ber einer Schlucht. Am besten per Fahrrad (12 km eine Richtung). 18 Trestles + 2 Tunnel. Spektakul&auml;r!</p></div>
+              <div class="detail-card"><h5>&#127860; Raudz &ndash; das Beste im Okanagan</h5><span class="dc-rating">4.5/5</span> <span class="dc-price">25&ndash;45 CAD Hauptgericht</span><p>Kelownas bestes Restaurant. Okanagan-Forelle, Pazifik-Lachs, saisonale vegetarische Teller. Lokale Weine. Reservierung Pflicht!</p></div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
