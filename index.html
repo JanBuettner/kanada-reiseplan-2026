@@ -1192,8 +1192,8 @@
   var map = L.map('map', { scrollWheelZoom: false }).setView([51.5, -118.5], 6);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
-    maxZoom: 13
+    attribution: '&copy; OpenStreetMap contributors | Routing: OSRM',
+    maxZoom: 15
   }).addTo(map);
 
   var stops = [
@@ -1211,16 +1211,50 @@
     { lat: 49.2827, lng: -123.1207, name: 'Vancouver', nights: 'R\u00fcckgabe', type: 'end', desc: 'Wohnmobil zur\u00fcckgeben' }
   ];
 
-  // Route line
-  var routeCoords = stops.map(function(s) { return [s.lat, s.lng]; });
-  L.polyline(routeCoords, {
-    color: '#e2b04a',
-    weight: 3,
-    opacity: 0.8,
-    dashArray: '8, 8'
-  }).addTo(map);
+  // Build OSRM waypoints string: lng,lat;lng,lat;...
+  var coords = stops.map(function(s) { return s.lng + ',' + s.lat; }).join(';');
+  var osrmUrl = 'https://router.project-osrm.org/route/v1/driving/' + coords + '?overview=full&geometries=geojson';
 
-  // Markers
+  // Fetch real driving route from OSRM
+  fetch(osrmUrl)
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+        var geojson = data.routes[0].geometry;
+        // OSRM returns [lng, lat], Leaflet needs [lat, lng]
+        var routeLatLngs = geojson.coordinates.map(function(c) { return [c[1], c[0]]; });
+
+        // Draw the actual road route
+        L.polyline(routeLatLngs, {
+          color: '#e2b04a',
+          weight: 4,
+          opacity: 0.85,
+          smoothFactor: 1
+        }).addTo(map);
+
+        // Fit map to the route
+        map.fitBounds(routeLatLngs, { padding: [50, 50] });
+      } else {
+        // Fallback: straight lines if OSRM fails
+        drawFallbackLine();
+      }
+    })
+    .catch(function() {
+      drawFallbackLine();
+    });
+
+  function drawFallbackLine() {
+    var routeCoords = stops.map(function(s) { return [s.lat, s.lng]; });
+    L.polyline(routeCoords, {
+      color: '#e2b04a',
+      weight: 3,
+      opacity: 0.8,
+      dashArray: '8, 8'
+    }).addTo(map);
+    map.fitBounds(routeCoords, { padding: [40, 40] });
+  }
+
+  // Markers (on top of route)
   stops.forEach(function(s, i) {
     var color = (s.type === 'transit') ? '#ff6b6b' : '#e2b04a';
     var radius = (s.type === 'start' || s.type === 'end') ? 10 : 7;
@@ -1258,8 +1292,9 @@
     }
   });
 
-  // Fit bounds with padding
-  map.fitBounds(routeCoords, { padding: [40, 40] });
+  // Fit bounds initially (before route loads)
+  var initCoords = stops.map(function(s) { return [s.lat, s.lng]; });
+  map.fitBounds(initCoords, { padding: [40, 40] });
 
   // Enable scroll zoom on click
   map.on('click', function() { map.scrollWheelZoom.enable(); });
