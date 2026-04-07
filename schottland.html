@@ -241,9 +241,9 @@ footer a{color:var(--accent);text-decoration:none}
     <h2 class="sec-title" style="color:#fff">Die Strecke</h2>
     <div class="map-wrap"><div id="map"></div></div>
     <div class="map-legend">
-      <span><span class="ldot" style="background:#7a9e6d"></span> &Uuml;bernachtung</span>
-      <span><span class="ldot" style="background:#ff6b6b"></span> Transit</span>
-      <span style="opacity:.3">Wild Camping = &#9733;</span>
+      <span><span class="ldot" style="background:#7a9e6d"></span> Hinweg (Ostk&uuml;ste England)</span>
+      <span><span class="ldot" style="background:#e8925a"></span> R&uuml;ckweg (Westk&uuml;ste / Lake District)</span>
+      <span style="border-bottom:2px dashed #7a9e6d;padding-bottom:2px">--- Eurotunnel</span>
     </div>
   </div>
 </section>
@@ -637,18 +637,23 @@ footer a{color:var(--accent);text-decoration:none}
 
   // Route in Segmente: Straße vs. Eurotunnel/Fähre
   var segments = [
-    // Frankfurt → Calais (Straße durch DE/BE/FR)
-    {coords: '8.6821,50.1109;1.8587,50.9513', ferry: false},
-    // Calais → Folkestone (Eurotunnel/Fähre)
-    {coords: '1.8587,50.9513;1.1664,51.0946', ferry: true},
-    // Folkestone → Edinburgh → alle Schottland-Stops → Glasgow/Loch Lomond
-    {coords: '1.1664,51.0946;-3.1883,55.9533;-3.5990,57.0479;-4.2247,57.4778;-4.7400,58.5670;-5.1612,57.8951;-6.2560,57.3340;-5.1024,56.6825;-5.4714,56.4120;-4.5830,56.0907', ferry: false},
-    // Glasgow → Folkestone (Rückreise Straße)
-    {coords: '-4.5830,56.0907;1.1664,51.0946', ferry: false},
-    // Folkestone → Calais (Eurotunnel zurück)
-    {coords: '1.1664,51.0946;1.8587,50.9513', ferry: true},
-    // Calais → Frankfurt (Straße)
-    {coords: '1.8587,50.9513;8.6821,50.1109', ferry: false}
+    // === HINWEG (grün) ===
+    // Frankfurt → Calais (Straße)
+    {coords: '8.6821,50.1109;1.8587,50.9513', color: '#7a9e6d', ferry: false},
+    // Calais → Folkestone (Eurotunnel)
+    {coords: '1.8587,50.9513;1.1664,51.0946', color: '#7a9e6d', ferry: true},
+    // Folkestone → Edinburgh (Ostküste M1/A1)
+    {coords: '1.1664,51.0946;-3.1883,55.9533', color: '#7a9e6d', ferry: false},
+    // Schottland-Rundkurs
+    {coords: '-3.1883,55.9533;-3.5990,57.0479;-4.2247,57.4778;-4.7400,58.5670;-5.1612,57.8951;-6.2560,57.3340;-5.1024,56.6825;-5.4714,56.4120;-4.5830,56.0907', color: '#7a9e6d', ferry: false},
+
+    // === RÜCKWEG (orange, andere Route durch England!) ===
+    // Glasgow → Folkestone (Westküste M6, Lake District)
+    {coords: '-4.2590,55.8642;-2.7781,54.4609;-2.4870,53.4084;1.1664,51.0946', color: '#e8925a', ferry: false},
+    // Folkestone → Calais (Eurotunnel)
+    {coords: '1.1664,51.0946;1.8587,50.9513', color: '#e8925a', ferry: true},
+    // Calais → Frankfurt
+    {coords: '1.8587,50.9513;8.6821,50.1109', color: '#e8925a', ferry: false}
   ];
 
   var allBounds = stops.map(function(s){return[s.lat,s.lng]});
@@ -657,7 +662,7 @@ footer a{color:var(--accent);text-decoration:none}
   segments.forEach(function(seg) {
     if (seg.ferry) {
       var pts = seg.coords.split(';').map(function(c){var p=c.split(',');return[parseFloat(p[1]),parseFloat(p[0])]});
-      L.polyline(pts, {color: '#7a9e6d', weight: 3, opacity: .6, dashArray: '10,8'}).addTo(map);
+      L.polyline(pts, {color: seg.color, weight: 3, opacity: .6, dashArray: '10,8'}).addTo(map);
       loaded++;
       if(loaded===segments.length) map.fitBounds(allBounds,{padding:[50,50]});
     } else {
@@ -666,7 +671,7 @@ footer a{color:var(--accent);text-decoration:none}
         .then(function(d){
           if(d.code==='Ok'&&d.routes.length){
             var ll=d.routes[0].geometry.coordinates.map(function(c){return[c[1],c[0]]});
-            L.polyline(ll,{color:'#7a9e6d',weight:4,opacity:.85}).addTo(map);
+            L.polyline(ll,{color:seg.color,weight:4,opacity:.85}).addTo(map);
           }
         }).catch(function(){})
         .finally(function(){

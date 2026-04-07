@@ -251,8 +251,8 @@ footer a{color:var(--accent);text-decoration:none}
     <h2 class="sec-title" style="color:#fff">Die Strecke im &Uuml;berblick</h2>
     <div class="map-wrap"><div id="map"></div></div>
     <div class="map-legend">
-      <span><span class="ldot" style="background:#5ba4c9"></span> &Uuml;bernachtung</span>
-      <span><span class="ldot" style="background:#ff6b6b"></span> Transit</span>
+      <span><span class="ldot" style="background:#5ba4c9"></span> Hinweg (Fjord-Route)</span>
+      <span><span class="ldot" style="background:#e8925a"></span> R&uuml;ckweg (E6 Inland)</span>
       <span style="border-bottom:2px dashed #5ba4c9;padding-bottom:2px">--- F&auml;hre</span>
     </div>
   </div>
@@ -709,18 +709,27 @@ footer a{color:var(--accent);text-decoration:none}
   // Rückreise: gestrichelte Linie Lofoten → Frankfurt
 
   var roadSegments = [
-    // Frankfurt → Kiel
+    // === HINWEG (blau) ===
+    // Frankfurt → Kiel (A5/A7)
     {coords: '8.6821,50.1109;10.1228,54.3233', color: '#5ba4c9', ferry: false},
-    // Kiel → Oslo (FÄHRE)
+    // Kiel → Oslo (FÄHRE Color Line)
     {coords: '10.1228,54.3233;10.7522,59.9139', color: '#5ba4c9', ferry: true},
-    // Oslo → alle Norwegen-Stops bis Trondheim
+    // Oslo → Fjord-Route Westküste → Trondheim
     {coords: '10.7522,59.9139;5.7331,58.9700;6.5413,60.0733;5.3221,60.3913;7.0940,61.2272;7.2055,62.1048;7.3543,63.0172;10.3951,63.4305', color: '#5ba4c9', ferry: false},
-    // Trondheim → Bodø (Straße E6 nord)
+    // Trondheim → Bodø (E6 nord)
     {coords: '10.3951,63.4305;14.4049,67.2804', color: '#5ba4c9', ferry: false},
     // Bodø → Lofoten (FÄHRE)
     {coords: '14.4049,67.2804;13.6150,68.0990', color: '#5ba4c9', ferry: true},
-    // Rückreise Lofoten → Frankfurt (gestrichelt, vereinfacht)
-    {coords: '13.6150,68.0990;14.4049,67.2804', color: '#5ba4c9', ferry: true}
+
+    // === RÜCKWEG (orange, andere Route!) ===
+    // Lofoten → Bodø (FÄHRE zurück)
+    {coords: '13.6150,68.0990;14.4049,67.2804', color: '#e8925a', ferry: true},
+    // Bodø → Trondheim → Oslo (E6 Inland - ANDERER Weg als hin!)
+    {coords: '14.4049,67.2804;10.3951,63.4305;10.7522,59.9139', color: '#e8925a', ferry: false},
+    // Oslo → Kiel (FÄHRE zurück)
+    {coords: '10.7522,59.9139;10.1228,54.3233', color: '#e8925a', ferry: true},
+    // Kiel → Frankfurt (Straße)
+    {coords: '10.1228,54.3233;8.6821,50.1109', color: '#e8925a', ferry: false}
   ];
 
   var loaded = 0;
