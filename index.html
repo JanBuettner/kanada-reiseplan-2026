@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Westkanada Roadtrip 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root {
     --dark: #1a1a2e;
@@ -509,6 +511,43 @@
   }
   footer a { color: var(--accent); text-decoration: none; }
 
+  /* ---- MAP ---- */
+  .map-section {
+    background: var(--dark);
+    padding: 60px 0 0;
+  }
+  .map-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-top: 30px;
+  }
+  #map {
+    height: 550px;
+    width: 100%;
+    z-index: 0;
+  }
+  .map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 16px 0 40px;
+  }
+  .map-legend span {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     .stop { grid-template-columns: 1fr; }
@@ -559,6 +598,22 @@
       <div class="route-dot"><span class="dot">10</span><span class="r-name">Revelstoke</span><span class="r-nights">1 Nacht</span></div>
       <div class="route-dot"><span class="dot">11</span><span class="r-name">Okanagan</span><span class="r-nights">3 N&auml;chte</span></div>
       <div class="route-dot"><span class="dot">12</span><span class="r-name">Vancouver</span><span class="r-nights">R&uuml;ckgabe</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MAP ==================== -->
+<section class="map-section">
+  <div class="container">
+    <p class="section-label" style="color: var(--accent);">Karte</p>
+    <h2 class="section-title" style="color: white;">Wo geht's hin?</h2>
+    <div class="map-wrap">
+      <div id="map"></div>
+    </div>
+    <div class="map-legend">
+      <span><span class="legend-dot" style="background:#e2b04a;"></span> Stops mit &Uuml;bernachtung</span>
+      <span><span class="legend-dot" style="background:#ff6b6b;"></span> Transit-Stops</span>
+      <span style="color:rgba(255,255,255,0.4);">Klick auf Marker f&uuml;r Details</span>
     </div>
   </div>
 </section>
@@ -1131,6 +1186,86 @@
   </p>
   <p style="margin-top: 20px; opacity: 0.4;">Gute Reise!</p>
 </footer>
+
+<script>
+(function() {
+  var map = L.map('map', { scrollWheelZoom: false }).setView([51.5, -118.5], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 13
+  }).addTo(map);
+
+  var stops = [
+    { lat: 49.2827, lng: -123.1207, name: 'Vancouver', nights: '1 Nacht', type: 'start', desc: 'Wohnmobil-\u00dcbernahme & Gro\u00dfeinkauf' },
+    { lat: 50.1163, lng: -122.9574, name: 'Whistler', nights: '2 N\u00e4chte', type: 'stop', desc: 'Sea-to-Sky Highway, Joffre Lakes' },
+    { lat: 50.6745, lng: -120.3273, name: 'Kamloops', nights: '1 Nacht', type: 'transit', desc: 'Paul Lake \u2013 Schwimmen & Grillen' },
+    { lat: 53.1122, lng: -119.2330, name: 'Mount Robson', nights: '1 Nacht', type: 'stop', desc: 'H\u00f6chster Berg der Rockies, Kinney Lake' },
+    { lat: 52.8737, lng: -117.8054, name: 'Jasper', nights: '3 N\u00e4chte', type: 'stop', desc: 'Spirit Island, Valley of Five Lakes, Hot Springs' },
+    { lat: 52.2197, lng: -117.2244, name: 'Columbia Icefield', nights: '1 Nacht', type: 'stop', desc: 'Icefields Parkway, Gletscher-Tour, Wilcox Pass' },
+    { lat: 51.4254, lng: -116.1773, name: 'Lake Louise', nights: '2 N\u00e4chte', type: 'stop', desc: 'Lakeshore Trail, Moraine Lake' },
+    { lat: 51.1784, lng: -115.5708, name: 'Banff', nights: '2 N\u00e4chte', type: 'stop', desc: 'Johnston Canyon, Hot Springs, Nourish Bistro' },
+    { lat: 51.3984, lng: -116.5114, name: 'Yoho NP (Field)', nights: '2 N\u00e4chte', type: 'stop', desc: 'Emerald Lake, Wapta Falls' },
+    { lat: 51.0000, lng: -118.1957, name: 'Revelstoke', nights: '1 Nacht', type: 'transit', desc: 'Giant Cedars Boardwalk' },
+    { lat: 49.8863, lng: -119.4966, name: 'Okanagan (Kelowna)', nights: '3 N\u00e4chte', type: 'stop', desc: 'Weing\u00fcter, Kalamalka Lake, Raudz Regional Table' },
+    { lat: 49.2827, lng: -123.1207, name: 'Vancouver', nights: 'R\u00fcckgabe', type: 'end', desc: 'Wohnmobil zur\u00fcckgeben' }
+  ];
+
+  // Route line
+  var routeCoords = stops.map(function(s) { return [s.lat, s.lng]; });
+  L.polyline(routeCoords, {
+    color: '#e2b04a',
+    weight: 3,
+    opacity: 0.8,
+    dashArray: '8, 8'
+  }).addTo(map);
+
+  // Markers
+  stops.forEach(function(s, i) {
+    var color = (s.type === 'transit') ? '#ff6b6b' : '#e2b04a';
+    var radius = (s.type === 'start' || s.type === 'end') ? 10 : 7;
+
+    var marker = L.circleMarker([s.lat, s.lng], {
+      radius: radius,
+      fillColor: color,
+      color: '#fff',
+      weight: 2,
+      fillOpacity: 0.9
+    }).addTo(map);
+
+    var num = (i < 10) ? '0' + (i + 1) : '' + (i + 1);
+    if (i === 11) num = '12';
+
+    marker.bindPopup(
+      '<div style="font-family:Inter,sans-serif;min-width:160px;">' +
+      '<div style="font-size:0.7rem;color:#e2b04a;font-weight:600;">STOP ' + num + '</div>' +
+      '<div style="font-size:1rem;font-weight:600;margin:2px 0;">' + s.name + '</div>' +
+      '<div style="font-size:0.8rem;color:#6b6b6b;">' + s.nights + '</div>' +
+      '<div style="font-size:0.8rem;color:#888;margin-top:4px;">' + s.desc + '</div>' +
+      '</div>'
+    );
+
+    // Number labels
+    if (i < 11) {
+      L.marker([s.lat, s.lng], {
+        icon: L.divIcon({
+          className: '',
+          html: '<div style="background:' + color + ';color:#1a1a2e;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;font-family:Inter,sans-serif;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3);">' + (i+1) + '</div>',
+          iconSize: [20, 20],
+          iconAnchor: [10, -5]
+        })
+      }).addTo(map);
+    }
+  });
+
+  // Fit bounds with padding
+  map.fitBounds(routeCoords, { padding: [40, 40] });
+
+  // Enable scroll zoom on click
+  map.on('click', function() { map.scrollWheelZoom.enable(); });
+  map.on('mouseout', function() { map.scrollWheelZoom.disable(); });
+})();
+</script>
 
 </body>
 </html>
