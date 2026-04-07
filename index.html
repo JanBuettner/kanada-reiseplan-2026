@@ -115,6 +115,13 @@ a.hl:hover::after,a.camp:hover::after,a.resto:hover::after{opacity:1}
 a.hl strong,a.camp strong,a.resto strong{border-bottom:1px dotted var(--accent)}
 a.hl:hover strong,a.camp:hover strong,a.resto:hover strong{border-bottom-style:solid}
 
+/* === TRIP SWITCHER === */
+.trip-switch{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(17,17,17,.92);backdrop-filter:blur(12px);display:flex;justify-content:center;align-items:center;gap:4px;padding:10px 20px}
+.trip-switch a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:6px 18px;border-radius:20px;transition:all .2s}
+.trip-switch a:hover{color:#fff}
+.trip-switch a.active{background:var(--accent);color:var(--dark);font-weight:600}
+.trip-switch .sep{color:rgba(255,255,255,.2);font-size:.7rem}
+
 /* === QUOTE BREAK === */
 .quote-break{background:var(--dark);padding:80px 40px;text-align:center;color:#fff}
 .quote-break blockquote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-style:italic;max-width:700px;margin:0 auto;line-height:1.5;opacity:.9}
@@ -182,6 +189,13 @@ footer a{color:var(--accent);text-decoration:none}
 </style>
 </head>
 <body>
+
+<!-- === TRIP SWITCHER === -->
+<div class="trip-switch">
+  <a href="index.html" class="active">Kanada West</a>
+  <span class="sep">|</span>
+  <a href="norwegen.html">Norwegen</a>
+</div>
 
 <!-- ===================== HERO ===================== -->
 <div class="hero">
